@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人生藍圖測驗｜你的人生，準備好了嗎？｜方元財務管理顧問</title>
+<meta name="description" content="用 3～5 分鐘，看看現在的你，距離理想中的生活還有多遠。沒有標準答案，只有現在最真實的你。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --navy:#1B3A6B; --navy-dark:#12294E; --gold:#B08D57; --gold-light:#C9A46B; --cream:#FAF6EE; --grey-bg:#F2F5F9; --ink:#2A2F38; --muted:#5A6472; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans TC',sans-serif;color:var(--ink);font-size:18px;line-height:1.85;background:linear-gradient(160deg,#F7F9FC,#EEF2F8);min-height:100vh}
+a{text-decoration:none;color:inherit}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;max-width:760px;margin:0 auto}
+.tb-brand{display:flex;align-items:center;gap:10px}
+.tb-mark{width:34px;height:34px;position:relative}
+.tb-mark .sq{position:absolute;inset:0;border:2px solid var(--navy);border-radius:5px}
+.tb-mark .ci{position:absolute;inset:6px;border:2px solid var(--gold);border-radius:50%}
+.tb-brand .zh{font-family:'Noto Serif TC',serif;font-weight:700;font-size:17px;color:var(--navy);letter-spacing:.06em}
+.leave{font-size:14.5px;color:var(--muted);border:1px solid #D5DCE6;border-radius:100px;padding:7px 18px;transition:.2s}
+.leave:hover{border-color:var(--gold);color:var(--gold)}
+.wrap{max-width:640px;margin:0 auto;padding:8px 22px 80px}
+.progress{display:flex;align-items:center;gap:8px;justify-content:center;margin:10px 0 30px}
+.pstep{width:38px;height:6px;border-radius:100px;background:#D9E0EA;transition:background .4s}
+.pstep.on{background:var(--gold)}
+.plabel{font-size:13px;color:var(--muted);letter-spacing:.15em;margin-left:10px}
+.card{background:#fff;border-radius:20px;box-shadow:0 14px 44px rgba(18,41,78,0.1);padding:44px 38px;animation:pop .45s ease}
+@keyframes pop{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.eyebrow{color:var(--gold);font-size:13px;letter-spacing:.28em;font-weight:700;text-align:center;margin-bottom:14px}
+h1,.qtitle{font-family:'Noto Serif TC',serif;color:var(--navy);text-align:center;font-weight:700;letter-spacing:.05em}
+h1{font-size:clamp(28px,6vw,38px);line-height:1.5;margin-bottom:16px}
+.qtitle{font-size:clamp(22px,4.6vw,27px);line-height:1.65;margin-bottom:28px}
+.sub{text-align:center;color:var(--muted);font-size:16.5px;margin-bottom:8px}
+.note{text-align:center;color:#98A2B0;font-size:14px;margin-top:18px}
+.opts{display:flex;flex-direction:column;gap:13px;margin-top:6px}
+.opt{border:1.5px solid #E0E6EE;border-radius:14px;padding:17px 22px;font-size:17px;cursor:pointer;display:flex;align-items:center;gap:14px;background:#fff;transition:border-color .15s, background .15s, transform .1s;text-align:left;width:100%;font-family:inherit;color:inherit;line-height:1.7}
+.opt:hover{border-color:var(--gold-light);transform:translateY(-1px)}
+.opt.sel{border-color:var(--gold);background:var(--cream)}
+.opt .ico{font-size:24px;flex-shrink:0}
+.opt .t b{display:block;font-weight:700;color:var(--navy)}
+.opt .t span{font-size:15px;color:var(--muted)}
+.actions{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.btn{border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;padding:15px 40px;border-radius:100px;font-size:17px;font-weight:700;letter-spacing:.08em;transition:transform .15s, background .2s, opacity .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-gold:hover:not(:disabled){background:#9a7a48}
+.btn-plain{background:none;color:var(--muted);text-decoration:underline;font-weight:500;padding:15px 10px}
+.center{text-align:center}
+.analysis-block{background:var(--cream);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 26px;margin-bottom:16px}
+.analysis-block .k{font-size:13.5px;color:var(--gold);font-weight:700;letter-spacing:.15em;margin-bottom:4px}
+.analysis-block .v{font-size:17px;color:var(--ink)}
+.story-title{font-family:'Noto Serif TC',serif;font-size:23px;color:var(--navy);text-align:center;margin-bottom:22px;letter-spacing:.08em}
+.story-body{font-size:17px;color:var(--ink);text-align:justify;margin-bottom:24px}
+.story-body p{margin-bottom:12px}
+.remind{background:var(--navy);color:#fff;border-radius:14px;padding:22px 28px;font-size:16.5px}
+.remind .rk{color:var(--gold-light);font-size:13px;letter-spacing:.2em;font-weight:700;margin-bottom:6px}
+.score-wrap{text-align:center;margin:10px 0 24px}
+.score-num{font-size:88px;font-weight:900;color:var(--gold);line-height:1.1}
+.score-num small{font-size:28px;font-weight:700}
+.score-tag{display:inline-block;background:var(--navy);color:#fff;border-radius:100px;padding:8px 26px;font-size:18px;letter-spacing:.1em;margin-top:8px}
+.result-desc{background:var(--grey-bg);border-radius:14px;padding:24px 28px;font-size:16.5px;text-align:justify}
+input.future{width:100%;border:1.5px solid #E0E6EE;border-radius:14px;padding:16px 20px;font-size:17px;font-family:inherit;margin-top:6px}
+input.future:focus{outline:none;border-color:var(--gold)}
+.promise{font-family:'Noto Serif TC',serif;font-size:22px;color:var(--navy);text-align:center;line-height:1.9;padding:8px 0}
+.contact-final .line-btn{display:block;text-align:center;background:#06C755;color:#fff;border-radius:12px;padding:16px;font-size:18px;font-weight:700;letter-spacing:.08em;margin-bottom:12px;transition:filter .2s}
+.contact-final .line-btn:hover{filter:brightness(.93)}
+.contact-final .tel-btn{display:block;text-align:center;background:#fff;border:1.5px solid var(--navy);color:var(--navy);border-radius:12px;padding:15px;font-size:17px;font-weight:700;margin-bottom:12px}
+.copybar{display:flex;gap:10px;margin-top:18px}
+.copybar input{flex:1;border:1.5px dashed #C9D2DE;border-radius:10px;padding:12px 14px;font-size:14px;color:var(--muted);font-family:inherit;background:#FAFBFD}
+.copybar button{flex-shrink:0}
+.small-note{font-size:13.5px;color:#98A2B0;text-align:center;margin-top:14px}
+@media (max-width:520px){ .card{padding:34px 24px} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="tb-brand" href="index.html">
+    <div class="tb-mark"><div class="sq"></div><div class="ci"></div></div>
+    <span class="zh">方元財務管理顧問</span>
+  </a>
+  <a class="leave" href="index.html">先逛逛網站 ›</a>
+</div>
+
+<div class="wrap">
+  <div class="progress" id="progress"></div>
+  <div id="stage"></div>
+</div>
+
+<script>
+// ================= 資料 =================
+const FACETS = {
+  income:       { ico:"💰", name:"收入",  card:"我希望收入更穩定、更有保障。" },
+  relationship: { ico:"❤️", name:"感情",  card:"我希望擁有穩定、安心的感情關係。" },
+  family:       { ico:"👨‍👩‍👧", name:"親子", card:"我希望家人之間更理解、更和諧。" },
+  career:       { ico:"💼", name:"工作",  card:"我希望工作有發展、有機會晉升。" },
+  health:       { ico:"🏃", name:"健康",  card:"我希望擁有良好的健康與生活習慣。" }
+};
+
+const BRANCH = {
+  income: {
+    q2t:"如果你希望擁有更穩定的收入，你覺得自己準備好了嗎？",
+    q2:["我完全不用擔心錢","基本生活沒有問題","收入穩定，但還需要努力","目前有一些經濟壓力","我其實不確定未來的財務狀況"],
+    q3t:"如果目前收入還沒有達到理想狀態，你會怎麼做？",
+    q3:[["繼續努力增加收入",3],["學習新的技能",4],["發展第二收入",4],["尋找新的工作機會",4],["找專業人士一起規劃",5]],
+    story:{ t:"《窮和尚與富和尚》",
+      b:["有兩個和尚，都想去很遠的地方。","一個和尚很有錢，卻一直告訴自己：「等準備好了再去。」","另一個和尚雖然沒有很多錢，卻一步一步開始準備。","最後真正走出去的人，不一定是資源最多的人，而是願意開始的人。"],
+      r:"收入的重要性，不只是「現在有多少」，更重要的是：你是否正在建立未來的收入能力？" },
+    acts:["檢視目前的收入與支出","思考第二收入的可能性","找專業人士一起檢視財務目標"]
+  },
+  relationship: {
+    q2t:"如果你希望擁有一段穩定安心的感情，你準備好了嗎？",
+    q2:["我和另一半的關係穩定而安心","關係大致穩定，偶有磨合","我正在經營或尋找一段感情","目前的感情狀態讓我有些不安","我還不確定自己真正想要什麼"],
+    q3t:"如果感情還沒有達到理想狀態，你會怎麼做？",
+    q3:[["主動認識更多朋友",4],["為彼此安排相處的時間",4],["請身邊的人給些建議",3],["學習經營感情的方法",4],["尋找專業協助",5]],
+    story:{ t:"《有人陪你吃飯，更要有人懂你》",
+      b:["有一個人一直希望找到理想的另一半。他列了很多條件，卻始終找不到。","後來他開始改變自己，不再只問：「對方是不是我想要的人？」","而開始問：「我是不是一個值得被愛、也懂得愛別人的人？」","從那一天開始，他看待感情的方式完全不同。"],
+      r:"找到對的人很重要，讓自己成為對的人，也同樣重要。" },
+    acts:["練習傾聽與表達","為自己和重要的人安排相處時間","和信任的人聊聊你的想法"]
+  },
+  family: {
+    q2t:"如果你希望家庭和樂融融，你覺得現在準備好了嗎？",
+    q2:["我們家庭關係很好","大致相處融洽","偶爾會發生衝突","親子之間缺乏溝通","我很想改善，但不知道怎麼開始"],
+    q3t:"如果家庭關係還沒有達到理想狀態，你會怎麼做？",
+    q3:[["學習傾聽",3],["學習溝通技巧",4],["多花時間陪伴",4],["主動和家人談談",4],["尋找專業協助",5]],
+    story:{ t:"《爸爸，你可以先聽我說嗎？》",
+      b:["父親每天努力工作，希望給孩子最好的生活。","但是有一天孩子對爸爸說：「爸爸，我不要你一直告訴我答案。」","「我只是希望你先聽我說完。」","父親這才發現：孩子真正需要的，不一定是更多東西，而是被理解。"],
+      r:"家庭關係不是靠「說服」建立，而是靠傾聽、理解與溝通。" },
+    acts:["每週留一段專心陪伴家人的時間","練習先聽完、再回應","和家人談談未來的安排（包括資產與保障）"]
+  },
+  career: {
+    q2t:"如果你希望工作有所發展，你準備好了嗎？",
+    q2:["我很有希望晉升","工作目前很穩定","我正在學習新的能力","工作遇到了瓶頸","我已經開始考慮換工作"],
+    q3t:"如果目前工作還沒有達到你的期待，你會怎麼做？",
+    q3:[["繼續累積經驗",3],["學習新的知識",4],["參加課程或培訓",4],["爭取新的工作機會",4],["考慮轉換跑道",4]],
+    story:{ t:"《機會來之前，你準備好了嗎？》",
+      b:["有兩個人在等待升遷。","一個每天抱怨：「為什麼主管不是我？」","另一個人則每天學習新的知識、增加自己的能力。","當公司真正出現升遷機會時，老闆問：「誰可以馬上接下這個工作？」答案很自然就出現了。"],
+      r:"機會不是出現時才準備。真正的準備，是在機會出現之前。" },
+    acts:["找出下一個想學習的能力","報名一門課程","和主管或信任的前輩聊聊職涯方向"]
+  },
+  health: {
+    q2t:"如果你希望擁有良好的健康，你現在準備好了嗎？",
+    q2:["我有固定運動習慣","我每週固定運動","我偶爾會運動","我很少運動","我知道應該運動，但一直沒有開始"],
+    q3t:"如果目前健康習慣還沒有建立，你會怎麼做？",
+    q3:[["每天運動 30 分鐘",4],["每天安排 1～2 小時健康時間",4],["從飲食開始改善",4],["找朋友一起運動",4],["安排一次完整的健康檢查",5]],
+    story:{ t:"《有些東西，有錢也買不回來》",
+      b:["年輕的時候，我們常常說：「現在先努力工作，以後再休息。」「等有錢了，再好好照顧自己。」","但人生最殘酷的地方是：有些東西可以用錢買，健康卻不一定能買回來。","所以真正聰明的人，不是等生病才開始照顧自己，而是從今天開始。"],
+      r:"每天留一點時間給健康，是給未來自己的投資。" },
+    acts:["每天運動 30 分鐘","檢視飲食與作息","檢視醫療保障是否足夠"]
+  }
+};
+
+const LEVELS = [
+  { min:80, tag:"🌟 已經準備好了", desc:"你已經具備相當好的基礎，下一步是持續優化，讓好的狀態走得更遠。" },
+  { min:60, tag:"🚀 正在前進", desc:"方向已經很清楚，只差把行動持續下去。你已經知道自己需要什麼，現在真正需要的是：把想法變成具體行動。" },
+  { min:40, tag:"🌱 正在準備", desc:"你已經看見問題，現在是開始改變的最好時機。不用急著一步到位，先從一件小事開始。" },
+  { min:0,  tag:"🔎 重新整理", desc:"目前可能有一些事情需要重新思考。不必急著做決定，先找到對你真正重要的事情。" }
+];
+
+const STATUS = ["","對這個面向，你目前還有不少不確定感。","你目前感受到一些壓力與不確定。","你有基礎，但仍在努力的路上。","狀態大致穩定，還有可以強化的空間。","你在這個面向已經有相當穩固的基礎。"];
+
+// ================= 狀態 =================
+let S = { step:0, concern:null, q2:null, q3:null, act:null, future:"" };
+const stage = document.getElementById('stage');
+const progress = document.getElementById('progress');
+const TOTAL_STEPS = 4; // 問題進度：Q1 Q2 Q3 + 結果
+
+function renderProgress(qstep){
+  if(qstep === null){ progress.innerHTML = ""; return; }
+  let h = "";
+  for(let i=1;i<=TOTAL_STEPS;i++) h += `<div class="pstep ${i<=qstep?'on':''}"></div>`;
+  h += `<span class="plabel">STEP ${qstep} / ${TOTAL_STEPS}</span>`;
+  progress.innerHTML = h;
+}
+
+function score(){
+  const s2 = 6 - S.q2;                       // 選項1=最佳 → 5分
+  const s3 = BRANCH[S.concern].q3[S.q3-1][1]; // 各選項自帶權重
+  return Math.round((s2*0.6 + s3*0.4)/5*100);
+}
+function level(sc){ return LEVELS.find(l => sc >= l.min); }
+
+// ================= 畫面 =================
+const SCREENS = [
+
+// 0 開場
+() => { renderProgress(null); stage.innerHTML = `
+  <div class="card center">
+    <div class="eyebrow">LIFE READINESS TEST</div>
+    <h1>你的人生，<br>準備好了嗎？</h1>
+    <p class="sub">用 3～5 分鐘，看看現在的你，<br>距離理想中的生活還有多遠。</p>
+    <p class="sub" style="margin-top:14px">這不是考試，而是一次和自己的對話。<br>接下來幾個問題，請依照你「現在真正的想法」回答。</p>
+    <div class="actions"><button class="btn btn-gold" onclick="go(1)">開始探索我的人生</button></div>
+    <div class="note">約 3～5 分鐘完成・沒有標準答案，只有現在最真實的你</div>
+  </div>`; },
+
+// 1 Q1
+() => { renderProgress(1); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">QUESTION 1</div>
+    <div class="qtitle">現在的你，<br>最關心人生中的哪一件事？</div>
+    <div class="opts">${Object.entries(FACETS).map(([k,f]) => `
+      <button class="opt ${S.concern===k?'sel':''}" onclick="pick('concern','${k}')">
+        <span class="ico">${f.ico}</span>
+        <span class="t"><b>${f.name}</b><span>${f.card}</span></span>
+      </button>`).join('')}
+    </div>
+    <div class="actions">
+      <button class="btn btn-gold" id="next" ${S.concern?'':'disabled'} onclick="go(2)">下一步</button>
+    </div>
+  </div>`; },
+
+// 2 Q2
+() => { const B = BRANCH[S.concern]; renderProgress(2); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">QUESTION 2</div>
+    <div class="qtitle">${B.q2t}</div>
+    <div class="opts">${B.q2.map((o,i) => `
+      <button class="opt ${S.q2===i+1?'sel':''}" onclick="pick('q2',${i+1})"><span class="t">${o}</span></button>`).join('')}
+    </div>
+    <div class="actions">
+      <button class="btn btn-plain" onclick="go(1)">上一步</button>
+      <button class="btn btn-gold" id="next" ${S.q2?'':'disabled'} onclick="go(3)">下一步</button>
+    </div>
+  </div>`; },
+
+// 3 Q3
+() => { const B = BRANCH[S.concern]; renderProgress(3); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">QUESTION 3</div>
+    <div class="qtitle">${B.q3t}</div>
+    <div class="opts">${B.q3.map((o,i) => `
+      <button class="opt ${S.q3===i+1?'sel':''}" onclick="pick('q3',${i+1})"><span class="t">${o[0]}</span></button>`).join('')}
+    </div>
+    <div class="actions">
+      <button class="btn btn-plain" onclick="go(2)">上一步</button>
+      <button class="btn btn-gold" id="next" ${S.q3?'':'disabled'} onclick="go(4)">看我的分析</button>
+    </div>
+  </div>`; },
+
+// 4 個人化分析
+() => { const F = FACETS[S.concern], B = BRANCH[S.concern]; renderProgress(null); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">YOUR ANSWERS</div>
+    <div class="qtitle">你的答案，透露了一件事……</div>
+    <div class="analysis-block"><div class="k">你最關心的</div><div class="v">你目前最關心的是「${F.name}」。</div></div>
+    <div class="analysis-block"><div class="k">你目前的狀態</div><div class="v">${STATUS[6-S.q2]}</div></div>
+    <div class="analysis-block"><div class="k">你的行動傾向</div><div class="v">從你的回答來看，你傾向「${B.q3[S.q3-1][0]}」來改善目前的狀況。</div></div>
+    <div class="actions"><button class="btn btn-gold" onclick="go(5)">繼續</button></div>
+  </div>`; },
+
+// 5 故事
+() => { const B = BRANCH[S.concern]; renderProgress(null); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">A STORY FOR YOU</div>
+    <div class="story-title">${B.story.t}</div>
+    <div class="story-body">${B.story.b.map(p=>`<p>${p}</p>`).join('')}</div>
+    <div class="remind"><div class="rk">給你的提醒</div>${B.story.r}</div>
+    <div class="actions"><button class="btn btn-gold" onclick="go(6)">我的下一步</button></div>
+  </div>`; },
+
+// 6 下一步承諾
+() => { const B = BRANCH[S.concern]; renderProgress(null); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">MY NEXT STEP</div>
+    <div class="qtitle">如果只能先做一件事，<br>你願意先做什麼？</div>
+    <div class="opts">${B.acts.map((a,i) => `
+      <button class="opt ${S.act===i?'sel':''}" onclick="pick('act',${i})"><span class="t">${a}</span></button>`).join('')}
+    </div>
+    <div class="actions">
+      <button class="btn btn-gold" id="next" ${S.act!==null?'':'disabled'} onclick="go(7)">看我的人生準備度</button>
+    </div>
+  </div>`; },
+
+// 7 結果
+() => { const sc = score(), lv = level(sc), F = FACETS[S.concern]; renderProgress(4); stage.innerHTML = `
+  <div class="card center">
+    <div class="eyebrow">YOUR RESULT</div>
+    <div class="qtitle">這就是現在的你</div>
+    <p class="sub">你的主要人生關注：<b style="color:var(--navy)">${F.ico} ${F.name}</b></p>
+    <div class="score-wrap">
+      <div class="score-num"><span id="scnum">0</span><small> 分</small></div>
+      <div class="score-tag">${lv.tag}</div>
+    </div>
+    <div class="result-desc">${lv.desc}</div>
+    <div class="actions"><button class="btn btn-gold" onclick="go(8)">給未來的自己一句話</button></div>
+  </div>`;
+  const el = document.getElementById('scnum'); const t0 = performance.now();
+  (function tick(t){ const p = Math.min((t-t0)/1200,1); el.textContent = Math.round(sc*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(tick); })(t0);
+},
+
+// 8 Q4 給一年後的自己
+() => { renderProgress(null); stage.innerHTML = `
+  <div class="card">
+    <div class="eyebrow">ONE YEAR LATER</div>
+    <div class="qtitle">給一年後的自己一句話</div>
+    <p class="sub">例如：「一年後，我希望自己不用再為錢煩惱。」</p>
+    <input class="future" id="future" placeholder="一年後，我希望自己……" value="${S.future.replace(/"/g,'&quot;')}">
+    <div class="actions">
+      <button class="btn btn-gold" onclick="S.future=document.getElementById('future').value;go(9)">完成測驗</button>
+    </div>
+  </div>`; },
+
+// 9 完成＋導流
+() => { const sc = score(), lv = level(sc), F = FACETS[S.concern];
+  const summary = `我完成了方元的人生藍圖測驗：最在乎「${F.name}」，人生準備度 ${sc} 分（${lv.tag.replace(/^[^ ]+ /,'')}）。想和你們聊聊。`;
+  renderProgress(null); stage.innerHTML = `
+  <div class="card">
+    ${S.future.trim() ? `<div class="promise">「${S.future.trim()}」</div>
+    <p class="sub">這是你今天給未來自己的承諾。<br>一年後，再回來看看，你走了多遠。</p><hr style="border:none;border-top:1px solid #EEF1F6;margin:26px 0">` : ""}
+    <div class="qtitle">想知道下一步怎麼走嗎？</div>
+    <p class="sub" style="margin-bottom:26px">這份測驗沒有標準答案。它只是幫你看見：你現在在哪裡、你想去哪裡。<br>如果想找人聊聊「${F.name}」，歡迎和我們聊聊——<b style="color:var(--navy)">第一次聊聊，不需要做任何決定。</b></p>
+    <div class="contact-final">
+      <a class="line-btn" href="https://lin.ee/JG8I6pu" target="_blank">加入官方 LINE，和我們聊聊</a>
+      <a class="tel-btn" href="tel:0227403025">或直接來電 02-2740-3025</a>
+    </div>
+    <div class="copybar">
+      <input id="sumtext" readonly value="${summary.replace(/"/g,'&quot;')}">
+      <button class="btn btn-gold" style="padding:12px 22px;font-size:15px" onclick="copySum(this)">複製結果</button>
+    </div>
+    <div class="small-note">按「複製結果」後，貼到 LINE 對話中，我們就知道從哪裡開始聊。</div>
+    <div class="actions" style="margin-top:26px">
+      <a class="btn btn-plain" href="index.html">回到方元首頁</a>
+      <button class="btn btn-plain" onclick="restart()">再測一次</button>
+    </div>
+  </div>`; }
+];
+
+// ================= 控制 =================
+function go(n){ S.step = n; SCREENS[n](); window.scrollTo({top:0,behavior:'smooth'}); }
+function pick(key,val){
+  S[key] = val;
+  if(key==='concern'){ S.q2 = null; S.q3 = null; S.act = null; }
+  SCREENS[S.step]();
+}
+function copySum(btn){
+  const el = document.getElementById('sumtext');
+  el.select(); el.setSelectionRange(0,300);
+  try { navigator.clipboard.writeText(el.value); } catch(e){ document.execCommand('copy'); }
+  btn.textContent = "已複製！";
+  setTimeout(()=>btn.textContent="複製結果",1800);
+}
+function restart(){ S = { step:0, concern:null, q2:null, q3:null, act:null, future:"" }; go(0); }
+go(0);
+</script>
+
+</body>
+</html>

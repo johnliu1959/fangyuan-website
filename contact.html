@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聯絡我們｜方元財務管理顧問有限公司</title>
+<meta name="description" content="需要服務嗎？選一個你在乎的主題，直接和方元聊聊。第一次聊聊，不需要做任何決定。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --navy:#1B3A6B; --navy-dark:#12294E; --gold:#B08D57; --gold-light:#C9A46B; --cream:#FAF6EE; --grey-bg:#F2F5F9; --ink:#2A2F38; --muted:#5A6472; }
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:var(--ink);font-size:18px;line-height:1.85;background:#fff}
+a{text-decoration:none;color:inherit}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid #eee;backdrop-filter:blur(6px)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:44px;height:44px;position:relative;flex-shrink:0}
+.brand-mark .sq{position:absolute;inset:0;border:2.5px solid var(--navy);border-radius:6px}
+.brand-mark .ci{position:absolute;inset:8px;border:2.5px solid var(--gold);border-radius:50%}
+.brand-name{display:flex;flex-direction:column;line-height:1.3}
+.brand-name .zh{font-family:'Noto Serif TC',serif;font-weight:700;font-size:20px;color:var(--navy);letter-spacing:.08em}
+.brand-name .sub{font-size:11px;color:var(--muted);letter-spacing:.12em}
+nav{display:flex;align-items:center;gap:28px}
+nav a.nav-link{font-size:16px;font-weight:500;color:var(--ink);padding:6px 2px;border-bottom:2px solid transparent;transition:.2s}
+nav a.nav-link:hover,nav a.nav-link.on{color:var(--navy);border-color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff;padding:10px 22px;border-radius:6px;font-weight:700;font-size:16px;letter-spacing:.05em;transition:background .2s}
+.nav-cta:hover{background:#9a7a48}
+section{padding:88px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:18px}
+.section-title .en{color:var(--gold);font-size:14px;letter-spacing:.3em;font-weight:700;display:block;margin-bottom:10px}
+.section-title h2{font-family:'Noto Serif TC',serif;font-size:clamp(28px,3.6vw,40px);color:var(--navy);font-weight:700;letter-spacing:.06em}
+.section-sub{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 56px;font-size:17px}
+.page-banner{background:linear-gradient(135deg,var(--navy-dark),var(--navy) 70%,#27508D);color:#fff;padding:72px 24px;text-align:center}
+.page-banner h1{font-family:'Noto Serif TC',serif;font-size:clamp(30px,4vw,44px);letter-spacing:.1em;margin-bottom:10px}
+.page-banner p{color:rgba(255,255,255,0.8);font-size:17px}
+footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24px 40px}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.footer-brand .zh{font-family:'Noto Serif TC',serif;color:#fff;font-size:20px;letter-spacing:.1em;margin-bottom:8px}
+.footer-brand p,.footer-col p{font-size:14.5px;line-height:2}
+.footer-col .t{color:var(--gold-light);font-weight:700;margin-bottom:8px;font-size:15px}
+.copyright{max-width:1100px;margin:40px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,0.15);font-size:13px;color:rgba(255,255,255,0.5);text-align:center}
+
+/* ---- 聯絡頁專用 ---- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.talk-title{font-family:'Noto Serif TC',serif;font-size:26px;color:var(--navy);margin-bottom:10px}
+.talk-sub{color:var(--muted);font-size:16px;margin-bottom:28px}
+.topics{display:flex;flex-direction:column;gap:12px}
+.topic-btn{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #E0E6EE;border-radius:10px;padding:16px 24px;font-size:17px;font-weight:500;transition:.2s}
+.topic-btn:hover{border-color:var(--gold);box-shadow:0 6px 18px rgba(18,41,78,0.08)}
+.topic-btn .arrow{color:var(--gold);font-weight:700}
+.contact-info{background:var(--grey-bg);border-radius:14px;padding:40px}
+.contact-info h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:22px;margin-bottom:24px}
+.info-row{display:flex;gap:14px;margin-bottom:18px;font-size:16.5px}
+.info-row .k{color:var(--gold);font-weight:700;flex-shrink:0;width:74px}
+.line-btn{display:block;text-align:center;margin-top:28px;background:#06C755;color:#fff;border-radius:8px;padding:15px;font-size:18px;font-weight:700;letter-spacing:.08em;transition:filter .2s}
+.line-btn:hover{filter:brightness(0.93)}
+@media (max-width:900px){ nav .nav-link{display:none} .contact-grid{grid-template-columns:1fr;gap:40px} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark"><div class="sq"></div><div class="ci"></div></div>
+      <div class="brand-name">
+        <span class="zh">方元財務管理顧問</span>
+        <span class="sub">FANG YUAN FINANCIAL ADVISORY</span>
+      </div>
+    </a>
+    <nav>
+      <a class="nav-link" href="about.html">關於我們</a>
+      <a class="nav-link" href="articles.html">文章專欄</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-banner">
+  <h1>需要服務嗎？</h1>
+  <p>第一次聊聊，不需要做任何決定。</p>
+</div>
+
+<section>
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="talk-title">你想聊的是？</div>
+        <div class="talk-sub">選一個你現在最在乎的主題，直接跟我們聊。</div>
+        <div class="topics">
+          <a class="topic-btn" href="https://lin.ee/JG8I6pu" target="_blank">我想聊收入與財務 <span class="arrow">→</span></a>
+          <a class="topic-btn" href="https://lin.ee/JG8I6pu" target="_blank">我想聊保障與保單 <span class="arrow">→</span></a>
+          <a class="topic-btn" href="https://lin.ee/JG8I6pu" target="_blank">我想聊家庭與傳承 <span class="arrow">→</span></a>
+          <a class="topic-btn" href="https://lin.ee/JG8I6pu" target="_blank">我想聊創業與工作 <span class="arrow">→</span></a>
+          <a class="topic-btn" href="https://lin.ee/JG8I6pu" target="_blank">我想聊法律與稅務 <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="contact-info">
+        <h3>聯絡方式</h3>
+        <div class="info-row"><span class="k">電話</span><span>02-2740-3025</span></div>
+        <div class="info-row"><span class="k">行動電話</span><span>0932-126-742（劉先生）</span></div>
+        <div class="info-row"><span class="k">地址</span><span>105 台北市松山區復興北路</span></div>
+        <div class="info-row"><span class="k">Email</span><span>aetnaliu@ms26.hinet.net</span></div>
+        <div class="info-row"><span class="k">服務時間</span><span>週一至週五 09:00–17:00</span></div>
+        <a class="line-btn" href="https://lin.ee/JG8I6pu" target="_blank">加入官方 LINE，和我們聊聊</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="zh">方元財務管理顧問有限公司</div>
+      <p>正直・專業・利人<br>信守承諾 協助客戶 實現所託 達成夢想</p>
+    </div>
+    <div class="footer-col">
+      <div class="t">網站導覽</div>
+      <p><a href="about.html">關於我們</a><br><a href="articles.html">文章專欄</a><br><a href="contact.html">聯絡我們</a></p>
+    </div>
+    <div class="footer-col">
+      <div class="t">聯絡資訊</div>
+      <p>電話：02-2740-3025<br>地址：105 台北市松山區復興北路<br>Email：aetnaliu@ms26.hinet.net</p>
+    </div>
+    <div class="footer-col">
+      <div class="t">追蹤我們</div>
+      <p><a href="https://lin.ee/JG8I6pu" target="_blank">LINE 官方帳號</a><br>Instagram：@funyuan_</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 方元財務管理顧問有限公司｜統一編號 28845389</div>
+</footer>
+
+</body>
+</html>

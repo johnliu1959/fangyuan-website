@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方元財務管理顧問有限公司｜正直・專業・利人</title>
+<meta name="description" content="方元財務管理顧問有限公司——四十年金融專業，結合法律、稅務、勞基法顧問，提供全方位財務規劃服務。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --navy:#1B3A6B; --navy-dark:#12294E; --gold:#B08D57; --gold-light:#C9A46B; --cream:#FAF6EE; --grey-bg:#F2F5F9; --ink:#2A2F38; --muted:#5A6472; }
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:var(--ink);font-size:18px;line-height:1.85;background:#fff}
+a{text-decoration:none;color:inherit}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid #eee;backdrop-filter:blur(6px)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:44px;height:44px;position:relative;flex-shrink:0}
+.brand-mark .sq{position:absolute;inset:0;border:2.5px solid var(--navy);border-radius:6px}
+.brand-mark .ci{position:absolute;inset:8px;border:2.5px solid var(--gold);border-radius:50%}
+.brand-name{display:flex;flex-direction:column;line-height:1.3}
+.brand-name .zh{font-family:'Noto Serif TC',serif;font-weight:700;font-size:20px;color:var(--navy);letter-spacing:.08em}
+.brand-name .sub{font-size:11px;color:var(--muted);letter-spacing:.12em}
+nav{display:flex;align-items:center;gap:28px}
+nav a.nav-link{font-size:16px;font-weight:500;color:var(--ink);padding:6px 2px;border-bottom:2px solid transparent;transition:.2s}
+nav a.nav-link:hover,nav a.nav-link.on{color:var(--navy);border-color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff;padding:10px 22px;border-radius:6px;font-weight:700;font-size:16px;letter-spacing:.05em;transition:background .2s}
+.nav-cta:hover{background:#9a7a48}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;border-radius:6px;font-size:17px;font-weight:700;letter-spacing:.06em;transition:transform .15s,background .2s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#9a7a48}
+.btn-ghost{border:1.5px solid rgba(255,255,255,0.7);color:#fff}.btn-ghost:hover{background:rgba(255,255,255,0.1)}
+.badge-soon{font-size:12px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.4);padding:2px 10px;border-radius:100px;font-weight:500}
+section{padding:96px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:18px}
+.section-title .en{color:var(--gold);font-size:14px;letter-spacing:.3em;font-weight:700;display:block;margin-bottom:10px}
+.section-title h2{font-family:'Noto Serif TC',serif;font-size:clamp(28px,3.6vw,40px);color:var(--navy);font-weight:700;letter-spacing:.06em}
+.section-sub{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 56px;font-size:17px}
+footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24px 40px}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.footer-brand .zh{font-family:'Noto Serif TC',serif;color:#fff;font-size:20px;letter-spacing:.1em;margin-bottom:8px}
+.footer-brand p,.footer-col p{font-size:14.5px;line-height:2}
+.footer-col .t{color:var(--gold-light);font-weight:700;margin-bottom:8px;font-size:15px}
+.copyright{max-width:1100px;margin:40px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,0.15);font-size:13px;color:rgba(255,255,255,0.5);text-align:center}
+.float-cta{position:fixed;right:22px;bottom:26px;z-index:200;background:var(--gold);color:#fff;border-radius:100px;padding:14px 24px;font-size:16px;font-weight:700;letter-spacing:.05em;box-shadow:0 8px 24px rgba(18,41,78,0.3);transition:transform .15s}
+.float-cta:hover{transform:translateY(-3px)}
+
+/* ---- 首頁專用 ---- */
+.hero{position:relative;background:radial-gradient(ellipse 900px 500px at 85% 20%,rgba(176,141,87,0.28),transparent 60%),linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 55%,#27508D 100%);color:#fff;padding:110px 24px 130px;overflow:hidden}
+.hero::after{content:"方";position:absolute;right:-40px;bottom:-110px;font-family:'Noto Serif TC',serif;font-weight:900;font-size:420px;color:rgba(255,255,255,0.045);line-height:1;pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative}
+.hero .overline{color:var(--gold-light);font-size:15px;letter-spacing:.35em;font-weight:700;margin-bottom:22px}
+.hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(34px,5vw,58px);font-weight:700;line-height:1.4;margin-bottom:24px;letter-spacing:.04em}
+.hero p.lead{font-size:19px;color:rgba(255,255,255,0.88);max-width:560px;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.entries{max-width:1100px;margin:-70px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 24px}
+.entry-card{background:#fff;border-radius:10px;box-shadow:0 10px 34px rgba(18,41,78,0.12);padding:34px 30px;text-align:center;border-top:3px solid var(--gold);transition:transform .2s,box-shadow .2s}
+.entry-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(18,41,78,0.16)}
+.entry-card h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:23px;margin-bottom:6px;letter-spacing:.1em}
+.entry-card .en{color:var(--gold);font-size:12px;letter-spacing:.25em;font-weight:700;margin-bottom:14px}
+.entry-card p{font-size:15.5px;color:var(--muted);margin-bottom:18px}
+.entry-card .go{display:inline-block;border:1.5px solid var(--navy);color:var(--navy);border-radius:6px;padding:8px 26px;font-size:15px;font-weight:700;transition:.2s}
+.entry-card .go:hover{background:var(--navy);color:#fff}
+.stats{background:var(--navy);color:#fff;padding:72px 24px;margin-top:96px}
+.stats-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.stat .num{font-size:52px;font-weight:900;color:var(--gold-light);line-height:1.15}
+.stat .num span{font-size:22px;font-weight:700}
+.stat .label{font-size:16px;color:rgba(255,255,255,0.85);margin-top:6px}
+.quiz{background:radial-gradient(ellipse 700px 400px at 15% 80%,rgba(176,141,87,0.25),transparent 60%),linear-gradient(120deg,var(--navy-dark),var(--navy));color:#fff;text-align:center}
+.quiz .section-title h2{color:#fff}
+.quiz p.desc{color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto 36px}
+.facets{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.facet{border:1.5px solid rgba(255,255,255,0.45);border-radius:100px;padding:10px 26px;font-size:17px;letter-spacing:.1em;background:rgba(255,255,255,0.06)}
+.quiz .note{margin-top:18px;font-size:14px;color:rgba(255,255,255,0.6)}
+@media (max-width:900px){
+  nav .nav-link{display:none}
+  .entries{grid-template-columns:1fr;margin-top:-50px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:80px 24px 110px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark"><div class="sq"></div><div class="ci"></div></div>
+      <div class="brand-name">
+        <span class="zh">方元財務管理顧問</span>
+        <span class="sub">FANG YUAN FINANCIAL ADVISORY</span>
+      </div>
+    </a>
+    <nav>
+      <a class="nav-link" href="about.html">關於我們</a>
+      <a class="nav-link" href="articles.html">文章專欄</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="overline">INTEGRITY · PROFESSION · ALTRUISM</div>
+    <!-- ⬇️ 首頁主標語：要換標語改下面這兩行 -->
+    <h1>信守承諾，實現所託<br>您人生每個階段的財務夥伴</h1>
+    <p class="lead">四十年金融歷練，結合法律、稅務與勞基法專業，我們把複雜的問題化繁為簡，陪您把身邊的每一份資源，做最有效的規劃與安排。</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="contact.html">預約諮詢</a>
+      <a class="btn btn-ghost" href="quiz.html">開始人生藍圖測驗</a>
+    </div>
+  </div>
+</div>
+
+<!-- 三大導覽入口（依網站架構圖） -->
+<div class="entries">
+  <a class="entry-card" href="about.html">
+    <h3>關於我們</h3>
+    <div class="en">ABOUT US</div>
+    <p>關於方元、名稱由來、使命、服務項目、我們的團隊與加入我們。</p>
+    <span class="go">深入了解</span>
+  </a>
+  <a class="entry-card" href="articles.html">
+    <h3>文章專欄</h3>
+    <div class="en">ARTICLES</div>
+    <p>客戶好康分享，以及法律、會計等各項專業部落格。</p>
+    <span class="go">前往閱讀</span>
+  </a>
+  <a class="entry-card" href="quiz.html">
+    <h3>人生藍圖測驗</h3>
+    <div class="en">LIFE READINESS TEST</div>
+    <p>用 3～5 分鐘，看看現在的你，距離理想中的生活還有多遠。</p>
+    <span class="go">搶先了解</span>
+  </a>
+</div>
+
+<!-- 數字 -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat"><!-- ⬇️ 數字區：改數字直接改下面各行 --><div class="num">40<span>年</span></div><div class="label">金融專業經驗</div></div>
+    <div class="stat"><div class="num">2<span>大</span></div><div class="label">專業支柱：金融 × 法律</div></div>
+    <div class="stat"><div class="num">4<span>大</span></div><div class="label">服務領域：金融・法律・稅務・勞基法</div></div>
+    <div class="stat"><div class="num">1<span>個</span></div><div class="label">承諾：信守承諾，實現所託</div></div>
+  </div>
+</div>
+
+<!-- 人生藍圖測驗（未來的網站主入口） -->
+<section class="quiz" id="quiz">
+  <div class="section-inner">
+    <div class="section-title">
+      <span class="en">LIFE READINESS TEST</span>
+      <h2>你的人生，準備好了嗎？</h2>
+    </div>
+    <p class="desc">用 3～5 分鐘，看看現在的你，距離理想中的生活還有多遠。沒有標準答案，只有現在最真實的你。</p>
+    <div class="facets">
+      <div class="facet">收入</div>
+      <div class="facet">感情</div>
+      <div class="facet">親子</div>
+      <div class="facet">工作</div>
+      <div class="facet">健康</div>
+    </div>
+    <a class="btn btn-gold" href="quiz.html">開始測驗</a>
+    <div class="note">約 3～5 分鐘完成・不需留下任何個人資料</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="zh">方元財務管理顧問有限公司</div>
+      <p>正直・專業・利人<br>信守承諾 協助客戶 實現所託 達成夢想</p>
+    </div>
+    <div class="footer-col">
+      <div class="t">網站導覽</div>
+      <p><a href="about.html">關於我們</a><br><a href="articles.html">文章專欄</a><br><a href="contact.html">聯絡我們</a></p>
+    </div>
+    <div class="footer-col">
+      <div class="t">聯絡資訊</div>
+      <p>電話：02-2740-3025<br>地址：105 台北市松山區復興北路<br>Email：aetnaliu@ms26.hinet.net</p>
+    </div>
+    <div class="footer-col">
+      <div class="t">追蹤我們</div>
+      <p><a href="https://lin.ee/JG8I6pu" target="_blank">LINE 官方帳號</a><br>Instagram：@funyuan_</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 方元財務管理顧問有限公司｜統一編號 28845389</div>
+</footer>
+
+<a class="float-cta" href="https://lin.ee/JG8I6pu" target="_blank">需要服務嗎？</a>
+
+</body>
+</html>
