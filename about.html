@@ -76,13 +76,19 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24p
 .team{background:var(--grey-bg)}
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .member{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(18,41,78,0.07);text-align:center}
-.member .photo{aspect-ratio:1;background:linear-gradient(160deg,#E8EDF5,#D5DEEA);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:15px;flex-direction:column;gap:6px}
-.member .photo .ph-ic{font-size:44px;color:#B8C4D4}
-.member .info{padding:24px 22px 28px}
-.member h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:22px;letter-spacing:.08em;margin-bottom:4px}
-.member .role{color:var(--gold);font-size:14.5px;font-weight:700;margin-bottom:12px}
+.member .photo{aspect-ratio:1;background:#E8EDF5;overflow:hidden}
+.member .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.member .info{padding:24px 22px 28px;text-align:left}
+.member h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:22px;letter-spacing:.08em;margin-bottom:4px;text-align:center}
+.member .role{color:var(--gold);font-size:14.5px;font-weight:700;margin-bottom:16px;text-align:center}
 .member p{font-size:15px;color:var(--muted)}
-.member.future{border:1.5px dashed #C4CEDA;box-shadow:none;background:transparent;display:flex;align-items:center;justify-content:center;min-height:280px}
+.m-lbl{font-size:12.5px;letter-spacing:.18em;font-weight:700;color:var(--navy);border-top:1px solid #ECEFF4;padding-top:12px;margin-bottom:6px}
+.m-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.m-tags span{background:var(--cream);color:#8A6B3F;border-radius:100px;padding:3px 12px;font-size:13.5px}
+.m-list{list-style:none;font-size:14.5px;color:var(--muted);line-height:1.75}
+.m-list li{padding-left:14px;position:relative;margin-bottom:4px}
+.m-list li::before{content:"・";position:absolute;left:0;color:var(--gold)}
+.member.future{grid-column:1/-1;border:1.5px dashed #C4CEDA;box-shadow:none;background:transparent;display:flex;align-items:center;justify-content:center;min-height:auto;padding:26px}
 .member.future .inner{color:var(--muted);font-size:16px;padding:24px}
 .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
 .join-card{border-radius:14px;padding:40px 36px;color:#fff}
@@ -241,30 +247,57 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24p
     <div class="team-grid">
       <!-- ================================================
            ⬇️ 團隊成員區：改名字改 <h3>、改職稱改 class="role" 那行、
-           改介紹改 <p>。換照片：把 photo 區塊換成 <img src="圖片檔名.jpg" style="width:100%;aspect-ratio:1;object-fit:cover">
+           改專長改 m-tags 裡的 <span>、改資歷改 m-list 裡的 <li>
+           換照片：把 <img src="檔名.jpg"> 的檔名換成新照片的檔名（照片要先上傳到儲存庫）
            ================================================ -->
       <div class="member">
-        <div class="photo"><span class="ph-ic">👤</span><span>照片待提供</span></div>
-        <div class="info">
-          <h3>劉祖恩</h3>
-          <div class="role">職稱待補</div>
-          <p>專長細項待補——請提供資歷與專長，我會補上。</p>
-        </div>
-      </div>
-      <div class="member">
-        <div class="photo"><span class="ph-ic">👤</span><span>照片待提供</span></div>
+        <div class="photo"><img src="liuchuan.jpg" alt="劉竹安 顧問"></div>
         <div class="info">
           <h3>劉竹安</h3>
-          <div class="role">職稱待補</div>
-          <p>專長細項待補——請提供資歷與專長，我會補上。</p>
+          <div class="role">執行長</div>
+          <div class="m-lbl">專長</div>
+          <div class="m-tags"><span>基金</span><span>保險</span><span>信託</span><span>企業保險</span><span>股票</span><span>稅務</span></div>
+          <div class="m-lbl">經歷</div>
+          <ul class="m-list">
+            <li>方元財務管理顧問｜執行長</li>
+            <li>北京金融培訓中心 CFP／AFP｜資格認證講師</li>
+            <li>瑞士蘇黎世國際同盟銀行｜私人投資銀行顧問</li>
+            <li>台灣證券與期貨發展中心｜財富管理講師</li>
+            <li>怡富（上投摩根）證券基金｜投資顧問</li>
+          </ul>
         </div>
       </div>
       <div class="member">
-        <div class="photo"><span class="ph-ic">👤</span><span>照片待提供</span></div>
+        <div class="photo"><img src="chenzhicheng.jpg" alt="陳志誠 律師"></div>
         <div class="info">
           <h3>陳志誠</h3>
-          <div class="role">職稱待補</div>
-          <p>專長細項待補——請提供資歷與專長，我會補上。</p>
+          <div class="role">合作律師・專利師</div>
+          <div class="m-lbl">專長</div>
+          <div class="m-tags"><span>商標</span><span>專利</span><span>著作權</span><span>不動產</span><span>行政救濟</span><span>契約擬約</span></div>
+          <div class="m-lbl">經歷</div>
+          <ul class="m-list">
+            <li>有誠智權不動產法律事務所｜所長</li>
+            <li>經濟部訴願審議委員會｜專員、科長</li>
+            <li>振道法律事務所｜律師</li>
+            <li>中國政法大學國際經濟法博士</li>
+            <li>律師證號：89 台檢證字第 4598 號</li>
+          </ul>
+        </div>
+      </div>
+      <div class="member">
+        <div class="photo"><img src="liutsuen.jpg" alt="劉祖恩 行銷顧問"></div>
+        <div class="info">
+          <h3>劉祖恩</h3>
+          <div class="role">行銷顧問</div>
+          <div class="m-lbl">專長</div>
+          <div class="m-tags"><span>平面設計</span><span>文案撰寫</span><span>多媒體影音</span></div>
+          <div class="m-lbl">經歷</div>
+          <ul class="m-list">
+            <li>國立中興大學圖書資訊學碩士</li>
+            <li>國立海洋大學文創設計系學士</li>
+            <li>第八屆大專盃青攝獎－新視角 佳作</li>
+            <li>國軍第 55 屆文藝金象獎 形象廣告銅像獎</li>
+          </ul>
         </div>
       </div>
       <div class="member future">
