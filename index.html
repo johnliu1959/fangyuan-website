@@ -55,10 +55,10 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24p
 .hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(34px,5vw,58px);font-weight:700;line-height:1.4;margin-bottom:24px;letter-spacing:.04em}
 .hero p.lead{font-size:19px;color:rgba(255,255,255,0.88);max-width:560px;margin-bottom:40px}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-.entries{max-width:1100px;margin:-70px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 24px}
-.entry-card{background:#fff;border-radius:10px;box-shadow:0 10px 34px rgba(18,41,78,0.12);padding:34px 30px;text-align:center;border-top:3px solid var(--gold);transition:transform .2s,box-shadow .2s}
+.entries{max-width:1180px;margin:-70px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:0 24px}
+.entry-card{background:#fff;border-radius:10px;box-shadow:0 10px 34px rgba(18,41,78,0.12);padding:32px 24px;text-align:center;border-top:3px solid var(--gold);transition:transform .2s,box-shadow .2s}
 .entry-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(18,41,78,0.16)}
-.entry-card h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:23px;margin-bottom:6px;letter-spacing:.1em}
+.entry-card h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:21px;margin-bottom:6px;letter-spacing:.1em}
 .entry-card .en{color:var(--gold);font-size:12px;letter-spacing:.25em;font-weight:700;margin-bottom:14px}
 .entry-card p{font-size:15.5px;color:var(--muted);margin-bottom:18px}
 .entry-card .go{display:inline-block;border:1.5px solid var(--navy);color:var(--navy);border-radius:6px;padding:8px 26px;font-size:15px;font-weight:700;transition:.2s}
@@ -74,6 +74,9 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24p
 .facets{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
 .facet{border:1.5px solid rgba(255,255,255,0.45);border-radius:100px;padding:10px 26px;font-size:17px;letter-spacing:.1em;background:rgba(255,255,255,0.06)}
 .quiz .note{margin-top:18px;font-size:14px;color:rgba(255,255,255,0.6)}
+@media (max-width:1080px){
+  .entries{grid-template-columns:repeat(2,1fr)}
+}
 @media (max-width:900px){
   nav .nav-link{display:none}
   .entries{grid-template-columns:1fr;margin-top:-50px}
@@ -133,6 +136,12 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:56px 24p
     <div class="en">LIFE READINESS TEST</div>
     <p>用 3～5 分鐘，看看現在的你，距離理想中的生活還有多遠。</p>
     <span class="go">搶先了解</span>
+  </a>
+  <a class="entry-card" href="planning.html">
+    <h3>理財規劃</h3>
+    <div class="en">FINANCIAL PLANNING</div>
+    <p>填入你的收支與目標，一頁看懂風險輪廓、財務缺口與可討論的工具。</p>
+    <span class="go">開始試算</span>
   </a>
 </div>
 

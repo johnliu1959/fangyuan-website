@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>理財規劃｜方元財務管理顧問</title>
+<meta name="description" content="填入你的收支、資產與目標，一頁看懂自己的風險輪廓、財務體質與缺口，再談有哪些工具可以討論。方元財務管理顧問。" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+/* ============ tokens：light 為基準，dark 只覆寫變數 ============ */
+:root{
+  /* 方元品牌色：深藍 #1B3A6B／#12294E　金 #B08D57／#C9A46B　米白 #FAF6EE */
+  --navy:#1B3A6B; --navy-dark:#12294E; --gold:#B08D57; --gold-light:#C9A46B;
+
+  --paper:#FAF6EE; --rule:#EBE1CD; --card:#FFFFFF; --card-2:#F2F5F9;
+  --ink:#2A2F38; --ink-soft:#5A6472; --ink-faint:#98A2B0;
+  --brass:#B08D57; --stamp:#1B3A6B; --edge:#E3E8EF;
+
+  /* 風險階梯：序數用，深藍單一色系由淺至深 */
+  --t1:#8FA9CC; --t2:#5A7FB0; --t3:#2E5892; --t4:#1B3A6B;
+  /* 資產類別：類別用，明度差夠大，色盲仍可辨 */
+  --a-stock:#B08D57; --a-bond:#1B3A6B; --a-ins:#2E7D55; --a-cash:#7D4F9C;
+  /* 體質燈號 */
+  --ok:#2E7D55; --mid:#B08D57; --bad:#A5453A;
+
+  --shadow:0 1px 2px rgba(18,41,78,.08), 0 10px 26px rgba(18,41,78,.10);
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --serif:"Noto Serif TC",serif;
+  --sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111C2E; --rule:#1D2C44; --card:#17253A; --card-2:#1E2F49;
+    --ink:#E6EBF3; --ink-soft:#A8B6CB; --ink-faint:#7C8CA5;
+    --brass:#C9A46B; --stamp:#C9A46B; --edge:#2A3B57;
+    --t1:#3F638F; --t2:#5F86BC; --t3:#89A9D5; --t4:#B8CDE9;
+    --a-stock:#D0AB70; --a-bond:#6E9BD1; --a-ins:#4FA377; --a-cash:#A87FCB;
+    --ok:#4FA377; --mid:#C9A46B; --bad:#D0776A;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px rgba(0,0,0,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111C2E; --rule:#1D2C44; --card:#17253A; --card-2:#1E2F49;
+  --ink:#E6EBF3; --ink-soft:#A8B6CB; --ink-faint:#7C8CA5;
+  --brass:#C9A46B; --stamp:#C9A46B; --edge:#2A3B57;
+  --t1:#3F638F; --t2:#5F86BC; --t3:#89A9D5; --t4:#B8CDE9;
+  --a-stock:#D0AB70; --a-bond:#6E9BD1; --a-ins:#4FA377; --a-cash:#A87FCB;
+  --ok:#4FA377; --mid:#C9A46B; --bad:#D0776A;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px rgba(0,0,0,.38);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent,transparent 33px,var(--rule) 34px);
+  font-size:15px; line-height:1.75;
+}
+h1,h2,h3{text-wrap:balance;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:2px;border-radius:3px}
+
+/* ============ 導覽軌 ============ */
+.rail{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--edge);backdrop-filter:blur(8px)}
+.rail-top{max-width:1000px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
+.railnav{margin-left:auto}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;flex:none}
+.brand-mark{width:38px;height:38px;flex:none}
+.brand-mark svg{width:100%;height:100%;display:block}
+.brand .zh{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--stamp);letter-spacing:.08em;display:block;line-height:1.35}
+.brand .en{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--brass);display:block}
+.railnav{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.railnav a{font-size:13px;color:var(--ink-soft);text-decoration:none;padding:6px 10px;border-radius:4px;white-space:nowrap}
+.railnav a:hover{color:var(--stamp);background:var(--card-2)}
+.railnav a.on{color:var(--stamp);font-weight:700;box-shadow:inset 0 -2px 0 var(--brass)}
+.rail-in{max-width:1000px;margin:0 auto;padding:0 20px 8px;display:flex;align-items:center;gap:14px;border-top:1px solid var(--edge)}
+.steps{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none;padding-top:7px}
+.steps::-webkit-scrollbar{display:none}
+.step{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;white-space:nowrap;padding:5px 9px;border-radius:3px;color:var(--ink-faint);text-decoration:none;border:1px solid transparent}
+.step:hover{color:var(--ink);background:var(--card-2)}
+.step.on{color:var(--ink);border-color:var(--brass);background:var(--card)}
+.step b{color:var(--brass);font-weight:700;margin-right:5px}
+@media (max-width:780px){
+  .rail-top{flex-wrap:wrap;padding:9px 14px 4px;row-gap:2px}
+  .brand{flex:1 1 auto}
+  .themebtn{order:2;margin-left:auto}
+  .railnav{order:3;flex:1 0 100%;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .railnav::-webkit-scrollbar{display:none}
+  .rail-in{padding:0 14px 8px}
+  .brand .en{display:none}
+  .brand-mark{width:32px;height:32px}
+  .brand .zh{font-size:15px}
+  .railnav a{font-size:13px;padding:5px 8px}
+}
+.themebtn{border:1px solid var(--edge);background:var(--card);border-radius:100px;padding:6px 12px;font-family:var(--mono);font-size:10.5px;cursor:pointer;color:var(--ink-soft);margin-left:6px}
+.themebtn:hover{border-color:var(--brass);color:var(--brass)}
+
+/* ============ 版面 ============ */
+main{max-width:1000px;margin:0 auto;padding:0 20px 90px}
+section{padding:52px 0 8px;scroll-margin-top:64px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--brass);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--brass),transparent)}
+h2.sec{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.4vw,30px);margin:10px 0 6px;letter-spacing:.01em}
+.lede{color:var(--ink-soft);max-width:62ch;font-size:14px;margin:0 0 8px}
+
+.card{background:var(--card);border:1px solid var(--edge);border-radius:6px;padding:20px 22px;box-shadow:var(--shadow);margin-top:18px}
+.grid{display:grid;gap:14px 20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+
+.field label{display:block;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:3px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--mono);font-size:15px;font-weight:500;border:none;
+  border-bottom:2px solid var(--edge);background:transparent;padding:4px 2px 6px;outline:none;
+}
+.field textarea{font-family:var(--sans);font-size:13.5px;resize:vertical;min-height:44px;line-height:1.6}
+.field select{cursor:pointer}
+.field input:focus,.field select:focus,.field textarea:focus{border-bottom-color:var(--stamp)}
+.field .hint{font-size:10.5px;color:var(--ink-faint);margin-top:2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.subhead{font-family:var(--serif);font-weight:600;font-size:14.5px;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid var(--edge);display:flex;align-items:baseline;gap:9px}
+.subhead small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-faint);font-weight:400;margin-left:auto}
+
+/* 多選 chip */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{padding:5px 11px;border-radius:14px;border:1.5px solid var(--edge);background:var(--card-2);font-size:12.5px;cursor:pointer;color:var(--ink-soft)}
+.chip:hover{border-color:var(--brass)}
+.chip[aria-pressed="true"]{border-color:var(--stamp);background:var(--stamp);color:#fff;font-weight:700}
+
+/* ============ 首頁 ============ */
+.hero{padding:56px 0 10px}
+.hero .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--brass)}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,6.2vw,52px);line-height:1.24;margin:14px 0 0;letter-spacing:.01em}
+.hero h1 em{font-style:normal;color:var(--brass)}
+.hero p{max-width:52ch;color:var(--ink-soft);margin:16px 0 0;font-size:15px}
+.flowline{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0}
+.flowline i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-soft);border:1px solid var(--edge);background:var(--card);border-radius:3px;padding:4px 9px}
+.flowline u{text-decoration:none;color:var(--ink-faint);align-self:center}
+.cta{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:var(--stamp);color:#fff;border:1px solid var(--stamp);border-radius:100px;padding:12px 26px;font-family:var(--sans);font-weight:700;letter-spacing:.06em;font-size:14px;cursor:pointer;text-decoration:none}
+.cta:hover{background:var(--brass);border-color:var(--brass);color:#fff}
+
+/* ============ 問卷 ============ */
+.q{border-top:1px solid var(--edge);padding:14px 0}
+.q:first-of-type{border-top:none}
+.q h4{font-family:var(--serif);font-weight:600;font-size:14.5px;margin:0 0 9px;display:flex;gap:9px}
+.q h4 b{color:var(--brass);font-family:var(--mono);font-weight:700;font-size:12px;padding-top:2px}
+.opts{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.opt{text-align:left;padding:9px 12px;border-radius:4px;border:1.5px solid var(--edge);background:var(--card-2);font-size:13px;cursor:pointer;line-height:1.5}
+.opt:hover{border-color:var(--brass)}
+.opt[aria-pressed="true"]{border-color:var(--stamp);background:color-mix(in srgb,var(--stamp) 12%,var(--card));font-weight:700}
+
+/* ============ tier ============ */
+.tierrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:14px}
+.tierchip{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:4px;border:1.5px solid var(--edge);background:var(--card-2);cursor:pointer;font-size:12.5px;text-align:left}
+.tierchip .dot{width:11px;height:11px;border-radius:2px;flex:none}
+.tierchip .rt{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-left:auto}
+.tierchip[aria-pressed="true"]{border-color:var(--stamp);background:var(--card);font-weight:700;box-shadow:inset 0 0 0 1px var(--stamp)}
+
+.stamp{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:96px;height:96px;border:3px double var(--stamp);color:var(--stamp);border-radius:50%;transform:rotate(-7deg);font-family:var(--serif);font-weight:900;flex:none}
+.stamp .n{font-size:19px;line-height:1.1}
+.stamp .r{font-family:var(--mono);font-size:12px;font-weight:700;margin-top:2px}
+
+.note{font-size:11.5px;line-height:1.7;color:var(--ink-soft);background:color-mix(in srgb,var(--brass) 11%,var(--card));border-left:3px solid var(--brass);padding:9px 12px;border-radius:0 4px 4px 0;margin-top:12px}
+.note b{color:var(--ink)}
+.warn{border-left-color:var(--stamp);background:color-mix(in srgb,var(--stamp) 9%,var(--card))}
+
+/* ============ 統計數字 ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+.stat{border:1px solid var(--edge);border-radius:5px;padding:12px 14px;background:var(--card-2)}
+.stat .k{font-size:11px;color:var(--ink-soft);letter-spacing:.05em}
+.stat .v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:20px;font-weight:700;margin-top:3px;line-height:1.2}
+.stat .s{font-size:11px;color:var(--ink-faint);margin-top:2px}
+.stat.hero-stat{background:var(--stamp);color:#fff;border-color:var(--stamp)}
+.stat.hero-stat .k,.stat.hero-stat .s{color:color-mix(in srgb,var(--paper) 72%,transparent)}
+
+/* ============ 體質量表 ============ */
+.meters{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:6px}
+.meter{border:1px solid var(--edge);border-radius:5px;padding:13px 15px;background:var(--card-2)}
+.meter .mh{display:flex;align-items:baseline;gap:8px}
+.meter .mt{font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+.meter .mv{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:19px;font-weight:700;margin-left:auto}
+.meter .track{height:8px;border-radius:4px;background:color-mix(in srgb,var(--ink) 10%,transparent);margin:9px 0 6px;position:relative;overflow:hidden}
+.meter .track i{display:block;height:100%;border-radius:4px;transition:width .3s}
+.meter .track u{position:absolute;top:-2px;width:1.5px;height:12px;background:var(--ink-faint);opacity:.55}
+.meter .md{font-size:11.5px;color:var(--ink-faint);line-height:1.6}
+.badge{font-family:var(--mono);font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.06em}
+
+/* ============ 堆疊條 ============ */
+.stackbar{display:flex;height:34px;border-radius:4px;overflow:hidden;border:1px solid var(--edge);margin-top:8px}
+.stackbar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10.5px;color:#fff;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap;transition:width .3s}
+
+/* ============ 瀑布圖 ============ */
+.wf{display:grid;gap:7px;margin-top:6px}
+.wf-row{display:grid;grid-template-columns:132px 1fr auto;align-items:center;gap:12px;font-size:12.5px}
+.wf-bar{height:22px;border-radius:0 3px 3px 0;position:relative;background:var(--card-2);overflow:hidden}
+.wf-bar i{display:block;height:100%;border-radius:0 3px 3px 0;transition:width .35s}
+.wf-val{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;white-space:nowrap}
+
+/* ============ 時間軸 ============ */
+.tl{position:relative;margin-top:10px;padding-left:26px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--edge)}
+.tlitem{position:relative;padding:0 0 20px}
+.tlitem:last-child{padding-bottom:0}
+.tlitem::before{content:"";position:absolute;left:-22px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2.5px solid var(--brass)}
+.tlitem .th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--brass)}
+.tlitem .tt{font-family:var(--serif);font-weight:600;font-size:15.5px;margin:3px 0 4px}
+.tlitem .td{font-size:13px;color:var(--ink-soft);line-height:1.7;max-width:60ch}
+.tlitem .tnum{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700}
+
+/* ============ 問題旗標 ============ */
+.flags{display:grid;gap:9px;margin-top:6px}
+.flag{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;border:1px solid var(--edge);border-radius:5px;padding:12px 14px;background:var(--card-2)}
+.flag .fi{font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:2px;color:#fff;white-space:nowrap;margin-top:2px}
+.flag .ft{font-family:var(--serif);font-weight:600;font-size:14.5px;margin:0 0 3px}
+.flag .fd{font-size:12.5px;color:var(--ink-soft);line-height:1.7}
+.flag.sev-3{border-left:3px solid var(--bad)}
+.flag.sev-2{border-left:3px solid var(--mid)}
+.flag.sev-1{border-left:3px solid var(--ok)}
+
+/* ============ 圖表 ============ */
+figure{margin:0}
+figcaption{font-size:11.5px;color:var(--ink-faint);margin-top:8px}
+.chartwrap{position:relative;overflow-x:auto}
+svg{display:block;max-width:100%}
+.tip{position:absolute;pointer-events:none;background:var(--stamp);color:#fff;font-family:var(--mono);font-size:11px;padding:6px 9px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .12s;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12px}
+.legend span{display:flex;align-items:center;gap:6px;color:var(--ink-soft)}
+.legend i{width:10px;height:10px;border-radius:2px;display:block;flex:none}
+.legend b{font-family:var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* ============ 表格 ============ */
+.tablewrap{overflow-x:auto;margin-top:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+th{text-align:right;font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);font-weight:700;padding:6px 10px;border-bottom:2px solid var(--stamp);white-space:nowrap}
+th:first-child,th:nth-child(2){text-align:left}
+td{padding:6px 10px;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--edge);white-space:nowrap}
+td:first-child,td:nth-child(2){text-align:left;font-family:var(--sans)}
+tr.hit td{background:color-mix(in srgb,var(--stamp) 10%,transparent);font-weight:700;color:var(--stamp)}
+.tag{display:inline-block;margin-left:6px;font-size:10px;border:1px solid var(--stamp);color:var(--stamp);border-radius:2px;padding:0 4px}
+
+/* ============ 工具 tabs ============ */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px}
+.tab{padding:7px 14px;border-radius:3px;border:1px solid var(--edge);background:var(--card-2);font-family:var(--mono);font-size:12px;cursor:pointer;color:var(--ink-soft)}
+.tab[aria-selected="true"]{background:var(--stamp);color:#fff;border-color:var(--stamp)}
+.empty{border:1.5px dashed var(--edge);border-radius:5px;padding:22px;text-align:center;color:var(--ink-soft);font-size:13px}
+.empty h4{font-family:var(--serif);font-size:15px;color:var(--ink);margin:0 0 8px}
+.empty ul{text-align:left;max-width:44ch;margin:12px auto 0;padding-left:18px;font-size:12.5px;line-height:1.9}
+.prod{border:1px solid var(--edge);border-radius:5px;padding:16px 18px;background:var(--card-2);margin-bottom:12px}
+.prod h4{font-family:var(--serif);font-size:15.5px;margin:0}
+.prod .meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:4px 0 12px}
+.dl{display:grid;grid-template-columns:96px 1fr;gap:5px 14px;font-size:12.5px;line-height:1.7}
+.dl dt{color:var(--ink-soft);font-size:11.5px}
+.dl dd{margin:0}
+.risklist{margin:12px 0 0;padding-left:16px;font-size:12px;color:var(--ink-soft);line-height:1.8}
+
+
+/* ── 工具區補充 ── */
+table td.num, table th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+table td:not(.num){text-align:left;font-family:var(--sans)}
+table th:not(.num){text-align:left}
+.prodhd{margin-top:14px;font-size:11.5px;letter-spacing:.06em;color:var(--stamp);font-family:var(--mono)}
+.srcline{font-size:11.5px;color:var(--ink-faint);margin:8px 0 0;line-height:1.75}
+.brief{border:1px solid var(--edge);border-left:3px solid var(--brass);border-radius:0 5px 5px 0;padding:16px 18px;background:var(--card-2)}
+.brief h4{font-family:var(--serif);font-size:15.5px;margin:0 0 8px}
+.brief p{margin:0 0 8px;font-size:13px;line-height:1.75}
+.metaline{font-family:var(--mono);font-size:11px;color:var(--ink-faint);line-height:1.7}
+.screengrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 18px;margin-top:10px}
+.screen{display:grid;grid-template-columns:auto 1fr;gap:9px;font-size:12.5px;line-height:1.65;color:var(--ink-soft)}
+.screen b{font-family:var(--mono);font-size:10.5px;color:var(--brass);padding-top:2px}
+.chipsrow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.caveats{margin:6px 0 0;padding-left:20px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
+.caveats li{margin-bottom:8px}
+.caveats b{color:var(--ink)}
+.tr-track{display:block;position:relative;width:120px;height:12px;background:var(--card-2);border-radius:2px}
+.tr-track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ink-faint);opacity:.5}
+.tr-track i{position:absolute;top:2px;height:8px;border-radius:1px}
+.dotk{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:0}
+.calcbox{border:1px solid var(--edge);border-radius:5px;padding:16px 18px;background:var(--card-2)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 22px;margin-top:8px}
+.slider label{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-soft);margin-bottom:4px}
+.slider label i{width:10px;height:10px;border-radius:2px;flex:none}
+.slider label em{font-style:normal;font-size:11px;color:var(--ink-faint)}
+.slider label b{margin-left:auto;font-family:var(--mono);color:var(--ink)}
+.slider input[type="range"]{width:100%;accent-color:var(--brass);cursor:pointer}
+.divchart{display:flex;align-items:flex-end;gap:5px;height:140px;margin-top:10px;padding-bottom:2px;overflow-x:auto}
+.divbar{flex:1;min-width:34px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.divbar i{display:block;width:100%;border-radius:2px 2px 0 0;min-height:2px}
+.divbar .dv{font-family:var(--mono);font-size:10px;color:var(--ink);order:-1;margin-bottom:3px;font-variant-numeric:tabular-nums}
+.divbar .dl2{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint);margin-top:4px;white-space:nowrap}
+
+.disclaimer{max-width:1000px;margin:0 auto;padding:26px 20px 40px;border-top:1px solid var(--edge);font-size:11.5px;color:var(--ink-faint);line-height:1.85}
+.sitefoot{background:var(--navy-dark);color:rgba(255,255,255,0.75);padding:52px 24px 36px;margin-top:20px}
+.sitefoot-in{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.sitefoot a{color:rgba(255,255,255,0.75);text-decoration:none}
+.sitefoot a:hover{color:var(--gold-light)}
+.sitefoot .fzh{font-family:var(--serif);color:#fff;font-size:20px;letter-spacing:.1em;margin-bottom:8px}
+.sitefoot p{font-size:14.5px;line-height:2;margin:0}
+.sitefoot .t{color:var(--gold-light);font-weight:700;margin-bottom:8px;font-size:15px}
+.copyright{max-width:1100px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.15);font-size:13px;color:rgba(255,255,255,0.5);text-align:center}
+.float-cta{position:fixed;right:22px;bottom:26px;z-index:200;background:var(--gold);color:#fff;border-radius:100px;padding:14px 24px;font-size:16px;font-weight:700;letter-spacing:.05em;text-decoration:none;box-shadow:0 8px 24px rgba(18,41,78,0.3);transition:transform .15s}
+.float-cta:hover{transform:translateY(-3px);color:#fff}
+
+@media (max-width:600px){
+  .wf-row{grid-template-columns:96px 1fr;grid-template-areas:"k b" "k v"}
+  .wf-row .wf-val{grid-area:v;text-align:left}
+  .dl{grid-template-columns:1fr}
+  .dl dt{margin-top:6px}
+}
+</style>
+</head>
+<body data-palette="#c85a12,#2b6ca8,#2e7d55,#7d4f9c">
+
+<header class="rail">
+  <div class="rail-top">
+    <a class="brand" href="index.html">
+      <div class="brand-mark"><svg viewBox="0 0 100 100" aria-label="方元財務管理顧問"><path fill-rule="evenodd" fill="#23262B" d="M50 2 A48 48 0 1 1 49.99 2 Z M40 40 H60 V60 H40 Z"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#C9A46B" stroke-width="4"/><rect x="38" y="38" width="24" height="24" fill="none" stroke="#C9A46B" stroke-width="3.6"/><circle cx="50" cy="50" r="41" fill="none" stroke="#8A6B3F" stroke-width="0.85"/><rect x="35.6" y="35.6" width="28.8" height="28.8" fill="none" stroke="#8A6B3F" stroke-width="0.85"/><circle cx="22" cy="50" r="3.1" fill="#8A6B3F"/><path d="M78 43.2 A7.8 7.8 0 1 0 78 56.8 A6.1 6.1 0 1 1 78 43.2 Z" fill="#8A6B3F"/><g transform="translate(36.00,7.00) scale(0.2800)" fill="#C9A46B" stroke="#C9A46B" stroke-width="2.80" stroke-linejoin="round" stroke-linecap="round"><path d="M 50.95 1.76 L 51.03 2.01 L 51.12 2.26 L 51.21 2.51 L 51.30 2.76 L 51.40 3.01 L 51.49 3.26 L 51.58 3.51 L 51.68 3.75 L 51.77 3.99 L 51.87 4.23 L 51.96 4.47 L 52.05 4.71 L 52.14 4.95 L 52.23 5.19 L 52.32 5.42 L 52.41 5.66 L 52.49 5.89 L 52.57 6.12 L 52.65 6.35 L 52.73 6.57 L 52.80 6.80 L 52.87 7.03 L 52.93 7.25 L 53.00 7.47 L 53.06 7.69 L 53.11 7.91 L 53.16 8.12 L 53.21 8.34 L 53.25 8.55 L 53.29 8.76 L 53.32 8.97 L 53.47 9.11 L 53.63 9.25 L 53.78 9.39 L 53.92 9.54 L 54.07 9.69 L 54.22 9.86 L 54.37 10.03 L 54.52 10.21 L 54.67 10.39 L 54.82 10.58 L 54.96 10.78 L 55.11 10.99 L 55.26 11.19 L 55.40 11.41 L 55.55 11.63 L 55.69 11.85 L 55.83 12.08 L 55.98 12.32 L 56.12 12.55 L 56.26 12.79 L 56.40 13.04 L 56.54 13.28 L 56.68 13.53 L 56.83 13.78 L 56.97 14.04 L 57.11 14.29 L 57.25 14.55 L 57.39 14.80 L 57.53 15.06 L 57.68 15.32 L 57.82 15.58 L 57.97 15.84 L 58.11 16.10 L 58.26 16.36 L 58.41 16.61 L 58.56 16.87 L 58.71 17.13 L 58.86 17.38 L 61.14 16.62 L 61.12 16.34 L 61.10 16.06 L 61.08 15.78 L 61.06 15.50 L 61.04 15.22 L 61.03 14.93 L 61.01 14.65 L 61.00 14.36 L 60.98 14.07 L 60.97 13.78 L 60.95 13.49 L 60.94 13.20 L 60.92 12.90 L 60.90 12.61 L 60.89 12.31 L 60.87 12.01 L 60.85 11.71 L 60.83 11.41 L 60.80 11.11 L 60.78 10.81 L 60.75 10.51 L 60.72 10.20 L 60.69 9.90 L 60.66 9.59 L 60.62 9.28 L 60.58 8.97 L 60.53 8.66 L 60.48 8.35 L 60.43 8.04 L 60.37 7.73 L 60.30 7.41 L 60.23 7.10 L 60.16 6.78 L 60.08 6.46 L 59.99 6.15 L 59.91 5.85 L 59.81 5.55 L 59.71 5.25 L 59.49 5.03 L 59.27 4.81 L 59.05 4.61 L 58.82 4.40 L 58.60 4.21 L 58.38 4.02 L 58.16 3.84 L 57.93 3.66 L 57.71 3.48 L 57.49 3.31 L 57.27 3.15 L 57.05 2.98 L 56.83 2.82 L 56.61 2.67 L 56.39 2.52 L 56.18 2.37 L 55.96 2.22 L 55.74 2.07 L 55.53 1.93 L 55.32 1.79 L 55.11 1.65 L 54.90 1.51 L 54.69 1.37 L 54.48 1.23 L 54.27 1.09 L 54.07 0.95 L 53.86 0.81 L 53.66 0.67 L 53.46 0.53 L 53.26 0.39 L 53.05 0.24 Z"/><path d="M 1.26 30.29 L 3.07 30.01 L 4.88 29.72 L 6.67 29.43 L 8.46 29.14 L 10.25 28.84 L 12.03 28.55 L 13.81 28.26 L 15.59 27.97 L 17.39 27.72 L 19.19 27.59 L 21.00 27.46 L 22.82 27.33 L 24.65 27.20 L 26.49 27.08 L 28.35 26.97 L 30.23 26.86 L 32.12 26.75 L 34.05 26.65 L 36.02 26.55 L 38.03 26.45 L 40.07 26.35 L 42.12 26.26 L 44.20 26.17 L 46.28 26.08 L 48.36 25.99 L 50.43 25.91 L 52.50 25.83 L 54.54 25.76 L 56.56 25.70 L 58.55 25.64 L 60.49 25.58 L 62.39 25.54 L 64.24 25.50 L 66.03 25.46 L 67.79 25.44 L 69.55 25.42 L 71.30 25.41 L 73.04 25.40 L 74.77 25.41 L 76.47 25.41 L 78.15 25.43 L 79.78 25.44 L 81.38 25.47 L 82.93 25.49 L 84.42 25.52 L 85.85 25.63 L 87.21 25.84 L 88.49 26.05 L 89.70 26.26 L 90.82 26.48 L 91.83 26.69 L 92.77 26.91 L 93.56 27.14 L 94.23 27.37 L 94.77 27.60 L 95.20 27.83 L 95.53 28.06 L 95.79 28.29 L 96.08 28.22 L 96.39 28.05 L 96.73 27.89 L 97.11 27.74 L 97.53 27.61 L 98.00 27.48 L 98.51 27.35 L 99.06 27.21 L 99.61 27.06 L 100.39 22.94 L 100.01 22.61 L 99.73 22.29 L 99.51 21.97 L 99.31 21.65 L 99.10 21.32 L 98.85 20.98 L 98.55 20.62 L 98.17 20.25 L 97.70 20.00 L 97.10 20.04 L 96.46 20.09 L 95.77 20.16 L 95.00 20.23 L 94.16 20.31 L 93.22 20.41 L 92.17 20.51 L 91.09 20.62 L 89.93 20.73 L 88.69 20.85 L 87.37 20.97 L 85.98 21.09 L 84.53 21.12 L 83.02 21.08 L 81.46 21.04 L 79.85 21.01 L 78.20 20.98 L 76.51 20.95 L 74.80 20.93 L 73.05 20.92 L 71.29 20.92 L 69.52 20.92 L 67.75 20.92 L 65.97 20.94 L 64.16 20.96 L 62.30 20.99 L 60.39 21.03 L 58.43 21.07 L 56.43 21.12 L 54.40 21.17 L 52.34 21.24 L 50.27 21.30 L 48.18 21.37 L 46.09 21.45 L 44.01 21.52 L 41.93 21.61 L 39.86 21.69 L 37.82 21.78 L 35.80 21.87 L 33.82 21.96 L 31.88 22.05 L 29.97 22.14 L 28.08 22.24 L 26.21 22.35 L 24.35 22.46 L 22.51 22.57 L 20.67 22.69 L 18.85 22.81 L 17.04 22.94 L 15.23 22.95 L 13.42 22.92 L 11.61 22.89 L 9.81 22.87 L 8.00 22.84 L 6.19 22.81 L 4.38 22.78 L 2.57 22.74 L 0.74 22.71 Z"/><path d="M 43.13 25.99 L 42.89 27.09 L 42.66 28.20 L 42.45 29.30 L 42.24 30.38 L 42.04 31.45 L 41.83 32.51 L 41.63 33.57 L 41.42 34.62 L 41.20 35.66 L 40.97 36.70 L 40.73 37.75 L 40.46 38.79 L 40.17 39.83 L 39.84 40.89 L 39.49 41.98 L 39.13 43.07 L 38.76 44.16 L 38.38 45.25 L 37.99 46.34 L 37.58 47.43 L 37.15 48.53 L 36.71 49.64 L 36.24 50.76 L 35.75 51.90 L 35.23 53.05 L 34.68 54.22 L 34.11 55.42 L 33.49 56.64 L 32.84 57.91 L 32.15 59.21 L 31.43 60.54 L 30.69 61.90 L 29.91 63.27 L 29.11 64.66 L 28.29 66.06 L 27.45 67.46 L 26.59 68.85 L 25.72 70.24 L 24.85 71.63 L 23.97 72.99 L 23.08 74.33 L 22.19 75.64 L 21.27 76.95 L 20.28 78.29 L 19.25 79.66 L 18.18 81.03 L 17.09 82.41 L 15.98 83.77 L 14.87 85.11 L 13.77 86.42 L 12.69 87.69 L 11.65 88.89 L 10.64 90.04 L 9.69 91.11 L 8.81 92.09 L 8.00 92.97 L 7.23 93.79 L 6.56 94.50 L 5.94 95.11 L 5.38 95.64 L 4.85 96.09 L 4.36 96.50 L 3.87 96.87 L 3.40 97.23 L 2.91 97.58 L 2.41 97.94 L 1.90 98.32 L 1.36 98.74 L 0.81 99.21 L 1.19 99.79 L 1.83 99.48 L 2.42 99.22 L 2.99 99.00 L 3.55 98.79 L 4.12 98.59 L 4.71 98.37 L 5.32 98.12 L 5.97 97.81 L 6.67 97.45 L 7.41 97.00 L 8.21 96.46 L 9.08 95.81 L 10.00 95.03 L 10.92 94.20 L 11.91 93.28 L 12.97 92.27 L 14.08 91.18 L 15.23 90.03 L 16.42 88.83 L 17.63 87.57 L 18.85 86.29 L 20.07 84.97 L 21.28 83.64 L 22.47 82.31 L 23.63 80.97 L 24.74 79.65 L 25.81 78.36 L 26.84 77.06 L 27.86 75.74 L 28.87 74.39 L 29.87 73.02 L 30.83 71.62 L 31.78 70.22 L 32.71 68.82 L 33.62 67.41 L 34.50 66.02 L 35.36 64.64 L 36.19 63.28 L 37.00 61.94 L 37.77 60.63 L 38.51 59.36 L 39.22 58.11 L 39.89 56.87 L 40.54 55.66 L 41.15 54.46 L 41.74 53.29 L 42.31 52.12 L 42.85 50.97 L 43.37 49.83 L 43.87 48.70 L 44.35 47.58 L 44.82 46.46 L 45.27 45.34 L 45.72 44.23 L 46.16 43.11 L 46.59 41.96 L 46.99 40.82 L 47.38 39.69 L 47.75 38.58 L 48.10 37.48 L 48.43 36.39 L 48.74 35.31 L 49.05 34.24 L 49.35 33.18 L 49.65 32.13 L 49.95 31.10 L 50.24 30.07 L 50.55 29.05 L 50.87 28.01 Z"/><path d="M 49.23 51.99 L 51.34 51.65 L 53.46 51.30 L 55.57 50.95 L 57.68 50.60 L 59.79 50.25 L 61.89 49.91 L 64.01 49.71 L 66.13 49.58 L 68.31 49.45 L 70.58 49.32 L 72.89 49.18 L 75.17 49.05 L 77.38 48.93 L 79.46 48.84 L 81.36 48.77 L 83.03 48.73 L 84.49 48.71 L 85.76 48.68 L 86.84 48.67 L 87.74 48.68 L 88.47 49.04 L 89.00 49.48 L 89.37 49.94 L 89.69 50.45 L 89.98 50.98 L 90.08 51.44 L 90.11 51.52 L 90.22 51.34 L 90.40 51.23 L 90.68 51.32 L 91.04 51.67 L 91.44 52.30 L 91.81 53.21 L 92.01 54.39 L 92.18 55.75 L 92.31 57.26 L 92.40 58.87 L 92.45 60.53 L 92.47 62.22 L 92.45 63.91 L 92.40 65.67 L 92.33 67.54 L 92.24 69.46 L 92.10 71.38 L 91.91 73.26 L 91.66 75.04 L 91.34 76.68 L 90.95 78.13 L 90.52 79.52 L 90.00 80.88 L 89.40 82.19 L 88.75 83.42 L 88.03 84.56 L 87.28 85.60 L 86.50 86.50 L 85.75 87.24 L 84.87 87.92 L 83.87 88.55 L 82.66 89.07 L 81.29 89.52 L 79.82 89.94 L 78.32 90.38 L 76.88 90.91 L 77.12 92.09 L 78.60 92.04 L 80.09 92.07 L 81.64 92.12 L 83.24 92.12 L 84.91 91.97 L 86.63 91.58 L 88.25 90.76 L 89.54 89.78 L 90.72 88.69 L 91.83 87.47 L 92.88 86.14 L 93.85 84.70 L 94.74 83.17 L 95.54 81.56 L 96.25 79.87 L 96.81 78.02 L 97.24 76.05 L 97.57 74.01 L 97.83 71.93 L 98.02 69.87 L 98.16 67.85 L 98.27 65.91 L 98.35 64.09 L 98.42 62.30 L 98.44 60.48 L 98.43 58.67 L 98.37 56.90 L 98.26 55.20 L 98.11 53.59 L 97.90 52.09 L 97.76 50.70 L 97.59 49.41 L 97.32 48.20 L 96.90 47.01 L 96.28 45.87 L 95.48 44.84 L 94.47 44.20 L 93.38 44.03 L 92.31 43.95 L 91.17 43.93 L 90.04 44.03 L 88.97 44.25 L 87.93 44.48 L 86.87 44.45 L 85.72 44.45 L 84.43 44.46 L 82.97 44.47 L 81.25 44.49 L 79.30 44.55 L 77.19 44.63 L 74.95 44.74 L 72.65 44.85 L 70.34 44.98 L 68.06 45.10 L 65.87 45.22 L 63.74 45.33 L 61.61 45.40 L 59.46 45.33 L 57.32 45.26 L 55.18 45.20 L 53.04 45.14 L 50.91 45.07 L 48.77 45.01 Z"/></g><g transform="translate(36.00,65.00) scale(0.2800)" fill="#C9A46B" stroke="#C9A46B" stroke-width="2.80" stroke-linejoin="round" stroke-linecap="round"><path d="M 14.17 7.10 L 15.03 6.98 L 15.88 6.85 L 16.74 6.73 L 17.60 6.61 L 18.45 6.48 L 19.30 6.35 L 20.16 6.22 L 21.01 6.09 L 21.86 5.96 L 22.71 5.83 L 23.55 5.70 L 24.40 5.57 L 25.25 5.50 L 26.11 5.48 L 26.96 5.45 L 27.81 5.43 L 28.67 5.41 L 29.52 5.39 L 30.37 5.37 L 31.22 5.35 L 32.08 5.34 L 32.93 5.32 L 33.78 5.31 L 34.63 5.30 L 35.48 5.29 L 36.34 5.29 L 37.19 5.29 L 38.04 5.29 L 38.89 5.29 L 39.75 5.30 L 40.60 5.31 L 41.45 5.32 L 42.31 5.34 L 43.16 5.37 L 44.02 5.39 L 44.90 5.42 L 45.79 5.46 L 46.67 5.50 L 47.56 5.55 L 48.45 5.60 L 49.34 5.65 L 50.24 5.70 L 51.13 5.76 L 52.03 5.83 L 52.93 5.89 L 53.83 5.96 L 54.73 6.03 L 55.63 6.10 L 56.54 6.18 L 57.44 6.25 L 58.35 6.33 L 59.26 6.41 L 60.17 6.49 L 61.08 6.57 L 61.99 6.66 L 62.90 6.74 L 63.82 6.82 L 64.73 6.90 L 65.66 6.77 L 66.59 6.64 L 67.52 6.50 L 68.44 6.37 L 69.37 6.24 L 70.30 6.10 L 71.23 5.96 L 72.15 5.83 L 73.08 5.69 L 74.01 5.54 L 74.93 5.40 L 75.07 1.80 L 74.17 1.58 L 73.27 1.36 L 72.37 1.14 L 71.47 0.92 L 70.56 0.70 L 69.66 0.47 L 68.76 0.24 L 67.85 0.01 L 66.95 -0.22 L 66.04 -0.44 L 65.14 -0.67 L 64.22 -0.70 L 63.30 -0.71 L 62.38 -0.72 L 61.46 -0.74 L 60.54 -0.75 L 59.62 -0.76 L 58.69 -0.77 L 57.77 -0.78 L 56.85 -0.79 L 55.93 -0.79 L 55.01 -0.80 L 54.08 -0.80 L 53.16 -0.79 L 52.24 -0.79 L 51.32 -0.78 L 50.40 -0.77 L 49.48 -0.76 L 48.56 -0.74 L 47.64 -0.72 L 46.72 -0.70 L 45.81 -0.67 L 44.89 -0.63 L 43.98 -0.59 L 43.09 -0.55 L 42.21 -0.50 L 41.33 -0.45 L 40.45 -0.39 L 39.58 -0.33 L 38.70 -0.27 L 37.83 -0.20 L 36.96 -0.13 L 36.09 -0.06 L 35.23 0.01 L 34.36 0.09 L 33.50 0.17 L 32.64 0.26 L 31.78 0.34 L 30.92 0.43 L 30.07 0.52 L 29.21 0.61 L 28.36 0.70 L 27.50 0.79 L 26.65 0.88 L 25.80 0.98 L 24.95 1.07 L 24.09 1.12 L 23.24 1.10 L 22.38 1.09 L 21.52 1.08 L 20.67 1.06 L 19.81 1.05 L 18.96 1.03 L 18.10 1.01 L 17.25 1.00 L 16.39 0.98 L 15.54 0.95 L 14.69 0.93 L 13.83 0.90 Z"/><path d="M 1.22 32.79 L 3.09 32.53 L 4.96 32.26 L 6.83 31.98 L 8.70 31.71 L 10.56 31.43 L 12.43 31.16 L 14.29 30.88 L 16.15 30.61 L 18.02 30.38 L 19.89 30.27 L 21.77 30.15 L 23.65 30.04 L 25.53 29.94 L 27.41 29.83 L 29.30 29.73 L 31.20 29.64 L 33.10 29.55 L 35.02 29.47 L 36.97 29.39 L 38.94 29.31 L 40.93 29.23 L 42.93 29.16 L 44.93 29.08 L 46.94 29.01 L 48.94 28.95 L 50.94 28.89 L 52.92 28.83 L 54.88 28.78 L 56.82 28.73 L 58.74 28.68 L 60.62 28.65 L 62.46 28.61 L 64.26 28.59 L 66.02 28.57 L 67.75 28.55 L 69.49 28.55 L 71.23 28.55 L 72.96 28.55 L 74.68 28.56 L 76.39 28.58 L 78.06 28.60 L 79.71 28.63 L 81.31 28.66 L 82.87 28.69 L 84.37 28.72 L 85.82 28.76 L 87.19 28.82 L 88.49 29.05 L 89.70 29.28 L 90.83 29.51 L 91.85 29.74 L 92.80 29.98 L 93.60 30.22 L 94.28 30.46 L 94.84 30.70 L 95.29 30.95 L 95.65 31.19 L 95.94 31.42 L 96.17 31.64 L 96.49 31.42 L 96.84 31.21 L 97.21 31.02 L 97.63 30.83 L 98.09 30.65 L 98.59 30.46 L 99.12 30.27 L 99.66 30.07 L 100.34 25.93 L 99.95 25.57 L 99.66 25.23 L 99.42 24.88 L 99.21 24.54 L 98.99 24.19 L 98.75 23.82 L 98.44 23.45 L 98.08 23.07 L 97.56 23.13 L 96.99 23.21 L 96.37 23.30 L 95.69 23.40 L 94.95 23.50 L 94.12 23.61 L 93.19 23.73 L 92.15 23.86 L 91.08 23.99 L 89.92 24.12 L 88.67 24.25 L 87.35 24.39 L 85.95 24.36 L 84.50 24.31 L 82.98 24.26 L 81.41 24.22 L 79.80 24.18 L 78.14 24.14 L 76.45 24.11 L 74.73 24.08 L 73.00 24.06 L 71.25 24.04 L 69.49 24.03 L 67.73 24.03 L 65.98 24.03 L 64.22 24.04 L 62.40 24.06 L 60.55 24.08 L 58.65 24.11 L 56.73 24.14 L 54.78 24.18 L 52.80 24.22 L 50.81 24.27 L 48.81 24.32 L 46.79 24.38 L 44.78 24.44 L 42.77 24.50 L 40.76 24.56 L 38.77 24.63 L 36.79 24.70 L 34.83 24.77 L 32.90 24.85 L 30.99 24.92 L 29.08 25.01 L 27.17 25.09 L 25.28 25.19 L 23.38 25.28 L 21.50 25.38 L 19.61 25.49 L 17.73 25.59 L 15.85 25.59 L 13.96 25.54 L 12.08 25.50 L 10.20 25.45 L 8.32 25.41 L 6.44 25.36 L 4.55 25.31 L 2.67 25.26 L 0.78 25.21 Z"/><path d="M 28.33 29.03 L 28.08 30.12 L 27.85 31.21 L 27.62 32.28 L 27.40 33.35 L 27.18 34.41 L 26.96 35.46 L 26.74 36.51 L 26.51 37.57 L 26.28 38.62 L 26.04 39.69 L 25.79 40.76 L 25.53 41.84 L 25.25 42.93 L 24.95 44.06 L 24.63 45.21 L 24.29 46.37 L 23.96 47.55 L 23.61 48.74 L 23.26 49.94 L 22.89 51.14 L 22.52 52.35 L 22.13 53.57 L 21.73 54.79 L 21.32 56.02 L 20.89 57.24 L 20.45 58.47 L 19.99 59.70 L 19.51 60.93 L 19.00 62.18 L 18.47 63.45 L 17.91 64.74 L 17.33 66.04 L 16.72 67.36 L 16.11 68.68 L 15.48 70.01 L 14.85 71.33 L 14.21 72.64 L 13.56 73.94 L 12.92 75.23 L 12.29 76.49 L 11.67 77.73 L 11.08 78.95 L 10.47 80.15 L 9.85 81.36 L 9.21 82.58 L 8.56 83.81 L 7.91 85.03 L 7.25 86.22 L 6.60 87.40 L 5.97 88.54 L 5.35 89.64 L 4.76 90.69 L 4.21 91.68 L 3.69 92.61 L 3.21 93.46 L 2.79 94.22 L 2.39 94.92 L 2.06 95.51 L 1.79 96.01 L 1.58 96.45 L 1.41 96.81 L 1.26 97.13 L 1.13 97.42 L 1.00 97.70 L 0.87 97.97 L 0.73 98.26 L 0.58 98.56 L 0.41 98.90 L 0.23 99.28 L 0.77 99.72 L 1.10 99.46 L 1.39 99.26 L 1.66 99.10 L 1.92 98.95 L 2.19 98.80 L 2.47 98.63 L 2.77 98.42 L 3.10 98.18 L 3.45 97.87 L 3.84 97.50 L 4.26 97.03 L 4.71 96.46 L 5.21 95.78 L 5.74 95.06 L 6.31 94.26 L 6.92 93.39 L 7.58 92.44 L 8.26 91.44 L 8.98 90.39 L 9.71 89.29 L 10.46 88.15 L 11.22 86.99 L 11.98 85.81 L 12.73 84.62 L 13.48 83.42 L 14.21 82.23 L 14.92 81.05 L 15.63 79.87 L 16.34 78.67 L 17.04 77.42 L 17.76 76.15 L 18.47 74.86 L 19.18 73.56 L 19.89 72.24 L 20.60 70.92 L 21.29 69.59 L 21.97 68.27 L 22.63 66.95 L 23.28 65.64 L 23.90 64.35 L 24.49 63.07 L 25.06 61.80 L 25.62 60.53 L 26.15 59.27 L 26.66 58.01 L 27.16 56.75 L 27.64 55.51 L 28.11 54.27 L 28.56 53.04 L 29.00 51.83 L 29.43 50.62 L 29.84 49.43 L 30.25 48.26 L 30.65 47.10 L 31.05 45.94 L 31.44 44.80 L 31.82 43.67 L 32.19 42.55 L 32.54 41.45 L 32.87 40.37 L 33.20 39.30 L 33.51 38.24 L 33.82 37.19 L 34.13 36.15 L 34.43 35.11 L 34.74 34.08 L 35.04 33.05 L 35.35 32.01 L 35.67 30.97 Z"/><path d="M 62.30 29.87 L 62.31 31.51 L 62.31 33.15 L 62.31 34.81 L 62.31 36.48 L 62.30 38.15 L 62.30 39.82 L 62.31 41.49 L 62.33 43.14 L 62.35 44.78 L 62.39 46.40 L 62.45 47.99 L 62.50 49.53 L 62.50 51.04 L 62.51 52.55 L 62.52 54.04 L 62.54 55.53 L 62.58 57.02 L 62.64 58.50 L 62.74 59.98 L 62.86 61.46 L 63.02 62.94 L 63.23 64.40 L 63.46 65.85 L 63.72 67.29 L 64.00 68.75 L 64.32 70.21 L 64.66 71.65 L 65.04 73.09 L 65.46 74.50 L 65.92 75.88 L 66.43 77.22 L 67.00 78.52 L 67.61 79.76 L 68.28 80.95 L 68.99 82.08 L 69.76 83.17 L 70.58 84.21 L 71.43 85.20 L 72.32 86.13 L 73.23 87.01 L 74.17 87.83 L 75.14 88.58 L 76.12 89.27 L 77.12 89.90 L 78.18 90.47 L 79.28 90.96 L 80.41 91.39 L 81.56 91.75 L 82.72 92.04 L 83.89 92.22 L 85.06 92.31 L 86.21 92.33 L 87.33 92.28 L 88.42 92.15 L 89.52 91.92 L 90.70 91.53 L 91.80 90.96 L 92.77 90.30 L 93.63 89.59 L 94.37 88.81 L 94.92 87.91 L 95.43 87.02 L 95.91 86.16 L 96.40 85.34 L 96.93 84.55 L 96.07 83.45 L 95.13 83.83 L 94.18 84.28 L 93.26 84.75 L 92.37 85.21 L 91.51 85.62 L 90.81 86.09 L 90.17 86.50 L 89.58 86.80 L 89.04 86.98 L 88.48 87.08 L 87.88 87.11 L 87.16 87.10 L 86.39 87.04 L 85.58 86.92 L 84.74 86.76 L 83.89 86.57 L 83.04 86.37 L 82.19 86.11 L 81.38 85.82 L 80.61 85.48 L 79.88 85.10 L 79.15 84.66 L 78.41 84.14 L 77.66 83.57 L 76.91 82.94 L 76.18 82.25 L 75.46 81.51 L 74.77 80.73 L 74.12 79.91 L 73.49 79.05 L 72.92 78.15 L 72.39 77.24 L 71.91 76.27 L 71.47 75.21 L 71.06 74.08 L 70.68 72.89 L 70.33 71.64 L 70.01 70.35 L 69.71 69.02 L 69.44 67.67 L 69.20 66.31 L 68.97 64.94 L 68.77 63.60 L 68.60 62.28 L 68.48 60.95 L 68.38 59.61 L 68.32 58.25 L 68.28 56.86 L 68.26 55.45 L 68.26 54.01 L 68.26 52.55 L 68.28 51.06 L 68.29 49.54 L 68.35 48.01 L 68.43 46.47 L 68.52 44.91 L 68.63 43.33 L 68.75 41.71 L 68.88 40.08 L 69.01 38.44 L 69.15 36.78 L 69.30 35.11 L 69.43 33.45 L 69.57 31.78 L 69.70 30.13 Z"/></g></svg></div>
+      <div>
+        <span class="zh">方元財務管理顧問</span>
+        <span class="en">FANG YUAN FINANCIAL ADVISORY</span>
+      </div>
+    </a>
+    <nav class="railnav">
+      <a href="about.html">關於我們</a>
+      <a href="articles.html">文章專欄</a>
+      <a href="quiz.html">人生藍圖測驗</a>
+      <a class="on" href="planning.html">理財規劃</a>
+      <a href="contact.html">聯絡我們</a>
+    </nav>
+    <button class="themebtn" id="themebtn" type="button">☾ 深色</button>
+  </div>
+  <div class="rail-in">
+    <div class="steps" id="steps"></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════ 01 首頁 ══════════ -->
+<section id="s1" class="hero">
+  <div class="kicker">FANG YUAN · 一頁式理財規劃</div>
+  <h1>先看懂自己的錢，<br />再談<em>用什麼工具</em>。</h1>
+  <p>這份試算不從商品開始。它先問你現在站在哪裡、想去哪裡、能承受多少顛簸，把答案換成看得懂的數字與圖，最後才談有哪些工具可以討論。</p>
+  <div class="flowline">
+    <i>了解你</i><u>→</u><i>風險輪廓</i><u>→</u><i>財務現況</i><u>→</u><i>需求與缺口</i><u>→</u><i>工具認識</i><u>→</u><i>規劃結果</i>
+  </div>
+  <button class="cta" type="button" onclick="document.getElementById('s2').scrollIntoView()">開始規劃 ↓</button>
+</section>
+
+<!-- ══════════ 02 了解客戶 ══════════ -->
+<section id="s2">
+  <div class="eyebrow">01 · 了解客戶</div>
+  <h2 class="sec">你現在的財務狀況是什麼？</h2>
+  <p class="lede">欄位對應「理財需求評估表」六大節。下面每一節的圖表與試算都依這裡的數字即時重算；預設值僅為示範，請直接覆寫。標「＊」者為後續計算會用到的必填項。</p>
+
+  <div class="card">
+    <h3 class="subhead">一、基本資料 <small id="fillState">—</small></h3>
+    <div class="grid g3">
+      <div class="field"><label for="f_name">姓名／代號</label><input id="f_name" type="text" value="示範個案" /></div>
+      <div class="field"><label for="f_sex">性別</label><select id="f_sex"><option>女</option><option>男</option><option>不揭露</option></select></div>
+      <div class="field"><label for="f_age">目前年齡 ＊</label><input id="f_age" type="number" min="16" max="80" value="24" /></div>
+      <div class="field"><label for="f_marry">婚姻狀況</label><select id="f_marry"><option>未婚</option><option>已婚</option><option>其他</option></select></div>
+      <div class="field"><label for="f_job">職業</label><input id="f_job" type="text" value="一般受僱" /></div>
+      <div class="field"><label for="f_dep">扶養人數（含子女／父母）＊</label><input id="f_dep" type="number" min="0" max="10" value="0" /></div>
+      <div class="field"><label for="f_depyears">預計扶養年數</label><input id="f_depyears" type="number" min="0" max="40" value="0" /><div class="hint">無扶養對象可填 0</div></div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">二、收入與支出（每月）</h3>
+    <div class="grid g3">
+      <div class="field"><label for="f_inc">每月稅後收入 NT$ ＊</label><input id="f_inc" type="number" min="0" step="1000" value="55000" /></div>
+      <div class="field"><label for="f_exp">每月固定支出 NT$ ＊</label><input id="f_exp" type="number" min="0" step="1000" value="35000" /><div class="hint">不含下方的貸款月付</div></div>
+      <div class="field"><label for="f_bonus">年終／其他年收入 NT$</label><input id="f_bonus" type="number" min="0" step="10000" value="0" /></div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">三、資產與負債</h3>
+    <div class="grid g3">
+      <div class="field"><label for="f_asset">現有總資產 NT$ ＊</label><input id="f_asset" type="number" min="0" step="10000" value="300000" /></div>
+      <div class="field"><label for="f_liquid">其中可隨時動用 NT$</label><input id="f_liquid" type="number" min="0" step="10000" value="150000" /><div class="hint">活存／定存等，用於計算緊急預備金</div></div>
+      <div class="field"><label for="f_debt">負債總額 NT$</label><input id="f_debt" type="number" min="0" step="10000" value="0" /><div class="hint">房貸／車貸／卡債等</div></div>
+      <div class="field"><label for="f_debtpay">貸款每月還款 NT$</label><input id="f_debtpay" type="number" min="0" step="1000" value="0" /></div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">四、財務目標</h3>
+    <div class="grid g3">
+      <div class="field"><label for="f_goalname">主要目標名稱</label><input id="f_goalname" type="text" value="第一桶金" /></div>
+      <div class="field"><label for="f_goal">目標金額（萬元）＊</label><input id="f_goal" type="number" min="1" step="10" value="100" /></div>
+      <div class="field"><label for="f_years">預計達成年限（年）＊</label><input id="f_years" type="number" min="1" max="40" value="15" /></div>
+      <div class="field" style="grid-column:1/-1"><label for="f_goal2">次要目標（如有）</label><input id="f_goal2" type="text" value="" placeholder="例：購屋頭期款／子女教育金" /></div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">五、風險承受意願（KYC）</h3>
+    <div class="grid g3">
+      <div class="field"><label for="f_expyears">投資經驗年數</label><input id="f_expyears" type="number" min="0" max="50" value="0" /></div>
+      <div class="field"><label for="f_loss">過去是否經歷重大虧損</label><select id="f_loss"><option>否</option><option>是，能接受並續留市場</option><option>是，之後不敢再投資</option></select></div>
+      <div class="field"><label for="f_flex">資金動用彈性</label><select id="f_flex">
+        <option value="1">隨時可能動用</option>
+        <option value="2">3 年內可能動用</option>
+        <option value="3" selected>3～5 年內可能動用</option>
+        <option value="4">5 年以上不會動用</option>
+      </select></div>
+      <div class="field"><label for="f_self">自評風險承受等級</label><select id="f_self">
+        <option value="">尚未自評</option>
+        <option value="c">保守型</option>
+        <option value="s">穩健型</option>
+        <option value="a">積極型</option>
+        <option value="x">激進型</option>
+      </select><div class="hint">與問卷結果比對用</div></div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">六、商品需求與備註</h3>
+    <div class="field" style="margin-bottom:16px">
+      <label>偏好商品類型（可複選）</label>
+      <div class="chips" id="preferChips"></div>
+    </div>
+    <div class="grid g2">
+      <div class="field"><label for="f_limit">特別要求或限制</label><textarea id="f_limit" placeholder="例：需保本／需定期配息／排除特定產業"></textarea></div>
+      <div class="field"><label for="f_hold">現有已持有商品／保單</label><textarea id="f_hold" placeholder="簡述名稱、公司、金額"></textarea></div>
+      <div class="field"><label for="f_family">家族理財考量</label><textarea id="f_family" placeholder="例：遺產規劃／稅務／扶養責任"></textarea></div>
+      <div class="field"><label for="f_advisor">填寫人／顧問</label><input id="f_advisor" type="text" value="" /></div>
+    </div>
+    <div class="note">本表僅在你的瀏覽器中計算，不會上傳或儲存任何資料；關閉頁面後即消失。</div>
+  </div>
+</section>
+
+<!-- ══════════ 03 風險問卷 ══════════ -->
+<section id="s3">
+  <div class="eyebrow">02 · KYC 與投資風險問卷</div>
+  <h2 class="sec">你能承受多少顛簸？</h2>
+  <p class="lede">五題，以平均分判定風險等級。結果是後續說明與工具展示的<b>參考起點</b>，不等同於投資推薦。</p>
+
+  <div class="card" id="quiz"></div>
+
+  <div class="card" id="tierCard">
+    <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+      <div class="stamp"><span class="n" id="tierName">未作答</span><span class="r" id="tierRate">—</span></div>
+      <div style="flex:1;min-width:230px">
+        <h3 class="subhead">你的投資需求輪廓</h3>
+        <p style="margin:0;font-size:13.5px;color:var(--ink-soft)" id="tierDesc">完成上面五題後，這裡會顯示你的風險等級與對應的參考報酬率。你也可以直接點下面四格手動指定。</p>
+        <div class="tierrow" id="tierRow"></div>
+      </div>
+    </div>
+    <div id="consistency"></div>
+    <div class="note"><b>四級參考點：</b>保守 2%／穩健 4%／積極 6%／激進 10%。以五題平均分判定（&lt;1.75 保守、&lt;2.5 穩健、&lt;3.25 積極、其餘激進）；試算器自由輸入時，分界取相鄰錨點中點 3／5／8。報酬率為規劃討論用的假設值，非保證報酬。</div>
+  </div>
+</section>
+
+<!-- ══════════ 04 財務狀況分析 ══════════ -->
+<section id="s4">
+  <div class="eyebrow">03 · 財務狀況分析</div>
+  <h2 class="sec">錢從哪裡來，又留下多少</h2>
+  <p class="lede">先看三個體質指標，再把數字攤開成一條流水線：收入扣掉支出與還款剩下多少可投資，資產扣掉負債剩下多少可規劃。</p>
+
+  <div class="card">
+    <h3 class="subhead">財務體質三項檢查</h3>
+    <div class="meters" id="meters"></div>
+
+    <h3 class="subhead" style="margin-top:26px">每月收入的去向</h3>
+    <div class="stackbar" id="incomeBar"></div>
+    <div class="legend" id="incomeLegend"></div>
+
+    <h3 class="subhead" style="margin-top:26px">關鍵數字</h3>
+    <div class="stats" style="margin-bottom:20px">
+      <div class="stat"><div class="k">每月可投資餘裕</div><div class="v num" id="k_surplus">—</div><div class="s" id="k_rate">—</div></div>
+      <div class="stat"><div class="k">每年可投入</div><div class="v num" id="k_annual">—</div><div class="s">餘裕 ×12 ＋ 年度收入</div></div>
+      <div class="stat hero-stat"><div class="k">目前可規劃資金</div><div class="v num" id="k_net">—</div><div class="s">總資產 － 負債</div></div>
+    </div>
+
+    <h3 class="subhead">年度資金流</h3>
+    <figure>
+      <div class="wf" id="waterfall"></div>
+      <figcaption>單位 NT$／年。長度按各項對「年收入合計」的比例繪製；負債為存量非流量，以較淺色區隔。</figcaption>
+    </figure>
+    <div class="note" id="healthNote"></div>
+  </div>
+</section>
+
+<!-- ══════════ 05 需求發現 ══════════ -->
+<section id="s5">
+  <div class="eyebrow">04 · 理財需求與問題發現</div>
+  <h2 class="sec">你可能正面臨的問題</h2>
+  <p class="lede">這一節不推商品。它把你填的數字換算成三段時間軸上的缺口，再把不一致的地方列成清單，讓你先看見問題本身。</p>
+
+  <div class="card">
+    <h3 class="subhead">目標缺口怎麼被填滿</h3>
+    <div class="stackbar" id="gapBar"></div>
+    <div class="legend" id="gapLegend"></div>
+    <div class="note" id="gapNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="subhead">三段時間軸</h3>
+    <div class="tl" id="timeline"></div>
+  </div>
+
+  <div class="card">
+    <h3 class="subhead">依你的填答，這些地方值得先談 <small id="flagCount">—</small></h3>
+    <div class="flags" id="flags"></div>
+    <div class="note">以上為依填答自動產生的討論提示，不是診斷結論，也不對應任何特定商品。各項判斷標準（儲蓄率 20%、緊急預備金 3～6 個月、負債比 50%）為一般財務規劃教育性參考值，非法規或機構標準。</div>
+  </div>
+</section>
+
+<!-- ══════════ 06 工具認識 ══════════ -->
+<section id="s6">
+  <div class="eyebrow">05 · 投資工具認識</div>
+  <h2 class="sec">可以拿來討論的工具</h2>
+  <p class="lede">三類工具都用同一套結構說明：它是什麼 → 主要特性 → 運作方式或歷史資料 → 可能優點 → 風險與限制 → 適合討論什麼需求。保險 4 檔、股票 16 檔（上市公司平穩配息組合）、ETF 2 檔，全部依使用者提供或已查證的資料整理，查無資料處一律標明。</p>
+
+  <div class="card">
+    <div class="tabs" id="toolTabs"></div>
+    <div id="toolBody"></div>
+  </div>
+</section>
+
+<!-- ══════════ 07 規劃結果 ══════════ -->
+<section id="s7">
+  <div class="eyebrow">06 · 規劃結果與試算</div>
+  <h2 class="sec">如果照這個假設走下去</h2>
+  <p class="lede">用你的可規劃資金、年投入與風險等級對應的報酬率，推算資產成長路徑。採月複利、每月月初定期定額投入。</p>
+
+  <div class="card">
+    <div class="grid g3" style="margin-bottom:18px">
+      <div class="field"><label for="f_rate">假設年報酬率 %</label><input id="f_rate" type="number" min="0" max="30" step="0.1" value="4" /><div class="hint" id="rateHint">—</div></div>
+      <div class="field"><label for="f_start">起始資產 NT$</label><input id="f_start" type="number" min="0" step="10000" value="300000" /><div class="hint">預設帶入可規劃資金</div></div>
+      <div class="field"><label for="f_contrib">每年可投入 NT$</label><input id="f_contrib" type="number" min="0" step="10000" value="240000" /><div class="hint">預設帶入上一節計算值</div></div>
+    </div>
+
+    <div class="stats" style="margin-bottom:22px">
+      <div class="stat hero-stat"><div class="k" id="mileK">達成目標</div><div class="v num" id="mileV">—</div><div class="s" id="mileS">—</div></div>
+      <div class="stat"><div class="k">期末資產</div><div class="v num" id="endV">—</div><div class="s" id="endS">—</div></div>
+      <div class="stat"><div class="k">累計投入本金</div><div class="v num" id="pcpV">—</div><div class="s">起始資產＋歷年投入</div></div>
+      <div class="stat"><div class="k">累計投資收益</div><div class="v num" id="gainV">—</div><div class="s">期末資產 － 累計本金</div></div>
+    </div>
+
+    <h3 class="subhead">資產成長曲線</h3>
+    <figure>
+      <div class="chartwrap" id="growthWrap">
+        <svg id="growth" viewBox="0 0 720 260" role="img" aria-labelledby="growthTitle"><title id="growthTitle">資產成長曲線</title></svg>
+        <div class="tip" id="growthTip"></div>
+      </div>
+      <figcaption>單一序列：依假設報酬率推估的期末資產。虛線為目標金額。過去或推估績效皆不代表未來表現。</figcaption>
+    </figure>
+
+    <h3 class="subhead" style="margin-top:26px">資產配置（示意）</h3>
+    <figure style="display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+      <div class="chartwrap" style="flex:none">
+        <svg id="donut" viewBox="0 0 160 160" width="160" height="160" role="img" aria-labelledby="donutTitle"><title id="donutTitle">資產配置比例</title></svg>
+        <div class="tip" id="donutTip"></div>
+      </div>
+      <div style="flex:1;min-width:220px">
+        <div class="legend" id="donutLegend" style="flex-direction:column;gap:7px;max-width:260px"></div>
+      </div>
+    </figure>
+    <div class="note warn"><b>配置比例為暫定示意。</b>本階段只統一了四級報酬率參考點；各級的股／債／保險／現金比重尚未定案，須待股票、ETF 與債券的實際資料補齊後才會校正。請勿以目前比例對客戶作說明。</div>
+
+    <h3 class="subhead" style="margin-top:26px">現金流量試算表</h3>
+    <div class="tablewrap">
+      <table id="cashflow">
+        <thead><tr><th>年度</th><th>年齡</th><th>期初資產</th><th>當年投入</th><th>當年收益</th><th>期末資產</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="subhead">帶進建議書的摘要</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin:0 0 12px">以下內容對應「個人化財務規劃建議書」第二、四、五節，可直接複製。</p>
+    <div class="tablewrap"><table id="summary" style="min-width:420px"><tbody></tbody></table></div>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h3 class="subhead" style="margin-bottom:8px">想把這份試算變成真正的規劃？</h3>
+    <p style="font-size:14px;color:var(--ink-soft);max-width:52ch;margin:0 auto 18px">
+      以上都是你自己填的假設。真正的規劃還要看你的保單、稅務與家庭責任——四十年金融歷練，結合法律、稅務與勞基法專業，我們陪你把每一份資源做最有效的安排。
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="cta" href="contact.html" style="text-decoration:none">預約諮詢</a>
+      <a class="cta" href="quiz.html" style="text-decoration:none;background:transparent;color:var(--stamp);border:1px solid var(--stamp)">先做人生藍圖測驗</a>
+      <a class="cta" href="about.html" style="text-decoration:none;background:transparent;color:var(--stamp);border:1px solid var(--stamp)">認識我們的團隊</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="disclaimer">
+  本頁為理財規劃溝通與教育用的試算工具，非正式的個人化投資建議，製作者非持照理財顧問或保險經紀人。所有報酬率均為規劃討論用的假設值，非保證報酬；試算結果會隨市場波動改變，本金可能虧損。<br />
+  保險商品資料節錄自各公司提供之保單條款樣張與商品簡介，僅供比較參考；宣告利率、分紅與投資績效均非保證，實際給付、費用與條件請以正式保單條款為準，早期解約對保戶不利。<br />
+  第 04 節的問題提示與各項體質門檻為一般教育性參考值，非法規標準，也不構成對特定商品的推薦。<br />
+  過去績效不代表未來表現。正式決定前請檢視保單條款正本，並諮詢具備相關執照的專業人士。
+</div>
+
+<footer class="sitefoot">
+  <div class="sitefoot-in">
+    <div>
+      <div class="fzh">方元財務管理顧問有限公司</div>
+      <p>正直・專業・利人<br />信守承諾 協助客戶 實現所託 達成夢想</p>
+    </div>
+    <div>
+      <div class="t">網站導覽</div>
+      <p><a href="index.html">首頁</a><br /><a href="about.html">關於我們</a><br /><a href="articles.html">文章專欄</a><br /><a href="quiz.html">人生藍圖測驗</a><br /><a href="planning.html">理財規劃</a><br /><a href="contact.html">聯絡我們</a></p>
+    </div>
+    <div>
+      <div class="t">聯絡資訊</div>
+      <p>電話：02-2740-3025<br />地址：105 台北市松山區復興北路<br />Email：aetnaliu@ms26.hinet.net</p>
+    </div>
+    <div>
+      <div class="t">追蹤我們</div>
+      <p><a href="https://lin.ee/JG8I6pu" target="_blank" rel="noopener">LINE 官方帳號</a><br />Instagram：@funyuan_</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 方元財務管理顧問有限公司｜統一編號 28845389</div>
+</footer>
+
+<a class="float-cta" href="https://lin.ee/JG8I6pu" target="_blank" rel="noopener">需要服務嗎？</a>
+
+<script>
+"use strict";
+/* ═══════════════════════════════════════════════════
+   統一規範 v1.0 — 四級對照：保守2% 穩健4% 積極6% 激進10%
+   ═══════════════════════════════════════════════════ */
+const TIERS = [
+  { key:"c", name:"保守型", rate:2,  maxAvg:1.75, maxRate:3,        v:"--t1", alloc:{stock:10,ins:43,other:47},
+    desc:"本金安全優先。偏好可預期的現金流，不希望看到明顯的帳面虧損。" },
+  { key:"s", name:"穩健型", rate:4,  maxAvg:2.5,  maxRate:5,        v:"--t2", alloc:{stock:50,ins:5,other:45},
+    desc:"希望穩定成長，可以接受小幅波動，但不想承受劇烈起伏。" },
+  { key:"a", name:"積極型", rate:6,  maxAvg:3.25, maxRate:8,        v:"--t3", alloc:{stock:90,ins:0,other:10},
+    desc:"願意承擔中高波動換取較高報酬，資金有較長的不動用期間。" },
+  { key:"x", name:"激進型", rate:10, maxAvg:Infinity, maxRate:Infinity, v:"--t4", alloc:{stock:97,ins:0,other:3},
+    desc:"追求最大成長，能承受劇烈波動，並理解本金可能大幅虧損。" },
+];
+const tierIndex  = k => TIERS.findIndex(t=>t.key===k);
+const tierByAvg  = a => TIERS.find(t => a < t.maxAvg)  || TIERS[3];
+const tierByRate = r => TIERS.find(t => r < t.maxRate) || TIERS[3];
+const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const ASSETS = [
+  { k:"stock", label:"股票／ETF",       v:"--a-stock" },
+  { k:"ins",   label:"保險",            v:"--a-ins"   },
+  { k:"other", label:"其他（現金等）",   v:"--a-cash"  },
+];
+
+/* ── 格式化 ── */
+const nt   = n => "NT$" + Math.round(n).toLocaleString("en-US");
+const wan  = n => (Math.round(n/1000)/10).toLocaleString("en-US") + " 萬";
+const pct  = n => n.toFixed(0) + "%";
+const pct1 = n => n.toFixed(1) + "%";
+const esc  = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const $ = id => document.getElementById(id);
+const val = id => Number($(id).value) || 0;
+const txt = id => $(id).value.trim();
+
+/* ═══════════ 導覽 ═══════════ */
+const SECTIONS = [
+  ["s1","封面"],["s2","了解客戶"],["s3","風險問卷"],["s4","財務現況"],
+  ["s5","需求發現"],["s6","工具認識"],["s7","規劃結果"],
+];
+$("steps").innerHTML = SECTIONS.map(([id,label],i)=>
+  `<a class="step" href="#${id}" data-t="${id}"><b>${String(i).padStart(2,"0")}</b>${label}</a>`).join("");
+const stepEls = [...document.querySelectorAll(".step")];
+const secObserver = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    stepEls.forEach(s=>s.classList.toggle("on", s.dataset.t===e.target.id));
+  }});
+},{rootMargin:"-45% 0px -50% 0px"});
+SECTIONS.forEach(([id])=>secObserver.observe($(id)));
+
+/* ═══════════ 主題 ═══════════ */
+const themebtn = $("themebtn");
+themebtn.addEventListener("click",()=>{
+  const dark = matchMedia("(prefers-color-scheme:dark)").matches;
+  const cur  = document.documentElement.getAttribute("data-theme") || (dark?"dark":"light");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  themebtn.textContent = next === "dark" ? "☀ 淺色" : "☾ 深色";
+  renderAll();
+});
+
+/* ═══════════ 02 偏好商品 chips ═══════════ */
+const PREFER = ["保險","股票","ETF"];
+const prefer = new Set();
+$("preferChips").innerHTML = PREFER.map(p=>
+  `<button class="chip" type="button" aria-pressed="false" data-p="${p}">${p}</button>`).join("");
+$("preferChips").addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  const p = b.dataset.p;
+  if (prefer.has(p)) prefer.delete(p); else prefer.add(p);
+  b.setAttribute("aria-pressed", String(prefer.has(p)));
+  renderAll();
+});
+
+/* ═══════════ 03 問卷 ═══════════ */
+const QUESTIONS = [
+  { t:"如果你投資的部位單一年度虧損 20%，你的反應會是？",
+    o:["無法接受，會想立刻全部賣掉","會擔心，可能賣掉一部分","會觀察一陣子，暫不採取行動","認為是正常波動，甚至考慮加碼"] },
+  { t:"這筆錢預計什麼時候可能會用到？",
+    o:["隨時可能需要動用","3 年內可能會用到","3～5 年內可能會用到","5 年以上都不會動用"] },
+  { t:"你過去的投資經驗？",
+    o:["沒有經驗，或只有定存／儲蓄險","投資過債券型基金或保守型商品","投資過股票／ETF，經歷過帳面漲跌","投資經驗豐富，經歷過大幅漲跌仍持續投資"] },
+  { t:"你可以接受的最大單年虧損幅度？",
+    o:["5% 以內","10% 以內","20% 以內","20% 以上也能接受"] },
+  { t:"你希望這筆資金達到的年化報酬率大概是？",
+    o:["約 2%（本金安全優先）","約 4%（希望穩定成長）","約 6%（願意承擔波動追求成長）","10% 以上（追求高成長，能承受大幅波動）"] },
+];
+const answers = new Array(QUESTIONS.length).fill(null);
+let manualTier = null;
+
+$("quiz").innerHTML = QUESTIONS.map((q,i)=>`
+  <div class="q">
+    <h4><b>${String(i+1).padStart(2,"0")}</b><span>${q.t}</span></h4>
+    <div class="opts" role="group">${q.o.map((o,j)=>
+      `<button class="opt" type="button" aria-pressed="false" data-q="${i}" data-a="${j}">${o}</button>`).join("")}</div>
+  </div>`).join("");
+
+$("quiz").addEventListener("click", e=>{
+  const b = e.target.closest(".opt"); if(!b) return;
+  const qi = +b.dataset.q, ai = +b.dataset.a;
+  answers[qi] = ai; manualTier = null;
+  b.parentElement.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+  syncRateFromTier(); renderAll();
+});
+
+function currentTier(){
+  if (manualTier) return manualTier;
+  if (answers.includes(null)) return null;
+  return tierByAvg(answeredAvg());
+}
+function answeredAvg(){
+  if (answers.includes(null)) return null;
+  return answers.reduce((a,v)=>a+v+1,0) / answers.length;
+}
+
+$("tierRow").innerHTML = TIERS.map(t=>`
+  <button class="tierchip" type="button" aria-pressed="false" data-tier="${t.key}">
+    <span class="dot" style="background:var(${t.v})"></span>${t.name}<span class="rt">${t.rate}%</span>
+  </button>`).join("");
+$("tierRow").addEventListener("click", e=>{
+  const b = e.target.closest(".tierchip"); if(!b) return;
+  manualTier = TIERS.find(t=>t.key===b.dataset.tier);
+  syncRateFromTier(); renderAll();
+});
+function syncRateFromTier(){
+  const t = currentTier(); if(t) $("f_rate").value = t.rate;
+}
+
+/* ═══════════ 輸入綁定 ═══════════ */
+const KYC_IDS = ["f_name","f_sex","f_age","f_marry","f_job","f_dep","f_depyears",
+  "f_inc","f_exp","f_bonus","f_asset","f_liquid","f_debt","f_debtpay",
+  "f_goalname","f_goal","f_years","f_goal2",
+  "f_expyears","f_loss","f_flex","f_self","f_limit","f_hold","f_family","f_advisor"];
+KYC_IDS.forEach(id => $(id).addEventListener("input", ()=>{ syncDerived(); renderAll(); }));
+["f_sex","f_marry","f_loss","f_flex","f_self"].forEach(id => $(id).addEventListener("change", renderAll));
+
+["f_rate","f_start","f_contrib"].forEach(id => $(id).addEventListener("input", ()=>{
+  if(id==="f_rate") manualTier = tierByRate(val("f_rate"));
+  renderAll();
+}));
+let userTouchedPlan = false;
+["f_start","f_contrib"].forEach(id => $(id).addEventListener("input", ()=>{ userTouchedPlan = true; }));
+
+function derived(){
+  const debtpay = val("f_debtpay");
+  const surplus = val("f_inc") - val("f_exp") - debtpay;
+  const annual  = surplus*12 + val("f_bonus");
+  const net     = val("f_asset") - val("f_debt");
+  return {
+    surplus, annual, net, debtpay,
+    income : val("f_inc")*12 + val("f_bonus"),
+    savingRate : val("f_inc") > 0 ? surplus/val("f_inc") : 0,
+    debtRatio  : val("f_asset") > 0 ? val("f_debt")/val("f_asset") : (val("f_debt")>0 ? 1 : 0),
+    emMonths   : val("f_exp") > 0 ? val("f_liquid")/val("f_exp") : 0,
+    payRatio   : val("f_inc") > 0 ? debtpay/val("f_inc") : 0,
+  };
+}
+function syncDerived(){
+  if (userTouchedPlan) return;
+  const d = derived();
+  $("f_start").value   = Math.max(0, d.net);
+  $("f_contrib").value = Math.max(0, d.annual);
+}
+
+/* ═══════════ 02 填寫完成度 ═══════════ */
+function renderFillState(){
+  const req = ["f_age","f_dep","f_inc","f_exp","f_asset","f_goal","f_years"];
+  const done = req.filter(id => $(id).value !== "" && Number($(id).value) >= 0).length;
+  const q = answers.filter(a=>a!==null).length;
+  $("fillState").textContent = `必填 ${done}/${req.length}　問卷 ${q}/5`;
+}
+
+/* ═══════════ 03 一致性檢查 ═══════════ */
+function consistencyIssues(){
+  const out = [], t = currentTier();
+  const selfKey = $("f_self").value;
+  if (t && selfKey){
+    const gap = tierIndex(t.key) - tierIndex(selfKey);
+    if (gap !== 0){
+      const self = TIERS[tierIndex(selfKey)];
+      out.push({
+        sev: Math.abs(gap) >= 2 ? 3 : 2,
+        t: "問卷結果與自評不一致",
+        d: `問卷判定為<b>${t.name}（${t.rate}%）</b>，但你自評為<b>${self.name}（${self.rate}%）</b>，相差 ${Math.abs(gap)} 級。`
+           + (gap > 0
+              ? "問卷顯示的承受度高於你的自我認知 —— 通常代表填答時是理性作答，實際下跌時的反應可能更保守。建議以較保守的一方作為討論起點。"
+              : "自評高於問卷結果 —— 值得確認是對波動的想像不足，還是問卷中某一題的情境與你的實際狀況不符。"),
+      });
+    }
+  }
+  // 期望報酬 vs 可承受虧損
+  if (answers[3] !== null && answers[4] !== null && answers[4] >= 2 && answers[3] <= 1){
+    out.push({ sev:3, t:"期望報酬與可承受虧損不匹配",
+      d:`你希望的報酬率是「${QUESTIONS[4].o[answers[4]]}」，但可接受的最大單年虧損只到「${QUESTIONS[3].o[answers[3]]}」。歷史上能提供較高長期報酬的資產，單年下跌幅度通常明顯大於這個範圍。這兩件事需要先取捨其中一項。` });
+  }
+  // 資金動用彈性 vs 目標年限
+  const flex = Number($("f_flex").value), yrs = val("f_years");
+  if (flex <= 2 && yrs >= 8){
+    out.push({ sev:2, t:"資金動用彈性與目標年限不一致",
+      d:`目標年限設定 ${yrs} 年，但資金動用彈性選的是「${$("f_flex").selectedOptions[0].text}」。若中途真的需要動用，長期規劃會被迫中斷；通常做法是把資金拆成「短期可動用」與「長期不動用」兩部分分開規劃。` });
+  }
+  // 經驗 vs 等級
+  if (t && tierIndex(t.key) >= 2 && val("f_expyears") === 0 && $("f_loss").value !== "是，能接受並續留市場"){
+    out.push({ sev:2, t:"風險等級偏高但尚無實際投資經驗",
+      d:`判定為${t.name}，但投資經驗年數填 0。問卷回答的是「想像中的反應」，實際經歷帳面虧損後的行為常常不同。可考慮先以較小金額實際經歷一次波動。` });
+  }
+  if ($("f_loss").value === "是，之後不敢再投資" && t && tierIndex(t.key) >= 2){
+    out.push({ sev:3, t:"曾因虧損退出市場，但目前判定為較高風險等級",
+      d:"過去的實際行為比問卷更能反映風險承受度。建議把等級往保守方向調整，或先釐清當時虧損的原因（是資產本身，還是投入時機與金額配置）。" });
+  }
+  return out;
+}
+function renderConsistency(){
+  const issues = consistencyIssues();
+  if (!issues.length){ $("consistency").innerHTML = ""; return; }
+  $("consistency").innerHTML = `<div style="margin-top:16px">` + issues.map(f=>`
+    <div class="flag sev-${f.sev}" style="margin-bottom:9px">
+      <span class="fi" style="background:var(${f.sev===3?"--bad":"--mid"})">${f.sev===3?"需釐清":"留意"}</span>
+      <div><div class="ft">${f.t}</div><div class="fd">${f.d}</div></div>
+    </div>`).join("") + `</div>`;
+}
+
+/* ═══════════ 04 財務現況 ═══════════ */
+function meterHTML(o){
+  const clamp = Math.max(0, Math.min(100, o.fill));
+  const marks = (o.marks||[]).map(m=>`<u style="left:${m}%"></u>`).join("");
+  return `<div class="meter">
+    <div class="mh"><span class="mt">${o.title}</span>
+      <span class="badge" style="background:var(--${o.level})">${o.tag}</span>
+      <span class="mv" style="color:var(--${o.level})">${o.value}</span></div>
+    <div class="track">${marks}<i style="width:${clamp}%;background:var(--${o.level})"></i></div>
+    <div class="md">${o.desc}</div>
+  </div>`;
+}
+function renderMeters(){
+  const d = derived();
+  const ms = [];
+
+  // 儲蓄率
+  const sr = d.savingRate*100;
+  ms.push(meterHTML({
+    title:"儲蓄率", value: d.surplus<=0 ? "0%" : pct1(sr),
+    level: sr<=0 ? "bad" : sr<20 ? "mid" : "ok",
+    tag:   sr<=0 ? "無餘裕" : sr<20 ? "偏低" : sr<40 ? "健康" : "很高",
+    fill: Math.max(0, sr/60*100), marks:[33,66],
+    desc:"（收入 － 支出 － 貸款月付）÷ 收入。參考門檻 20%／40%。可投入金額通常比報酬率更能決定累積速度。",
+  }));
+
+  // 緊急預備金
+  const em = d.emMonths;
+  ms.push(meterHTML({
+    title:"緊急預備金覆蓋", value: val("f_exp")>0 ? em.toFixed(1)+" 個月" : "—",
+    level: em<3 ? "bad" : em<6 ? "mid" : "ok",
+    tag:   em<3 ? "不足" : em<6 ? "尚可" : "充足",
+    fill: Math.min(100, em/12*100), marks:[25,50],
+    desc:"可隨時動用資產 ÷ 每月固定支出。參考門檻 3～6 個月。這筆錢的任務是「隨時拿得出來」，不是追求報酬。",
+  }));
+
+  // 負債比
+  const dr = d.debtRatio*100;
+  ms.push(meterHTML({
+    title:"負債比", value: val("f_debt")>0 ? pct1(dr) : "0%",
+    level: dr>=50 ? "bad" : dr>=30 ? "mid" : "ok",
+    tag:   dr>=50 ? "偏高" : dr>=30 ? "留意" : "低",
+    fill: Math.min(100, dr), marks:[30,50],
+    desc: val("f_debtpay")>0
+      ? `負債 ÷ 總資產。另外貸款月付佔收入 ${pct1(d.payRatio*100)}。規劃時應把負債利率與預期報酬率放在一起比較。`
+      : "負債 ÷ 總資產。參考門檻 30%／50%。規劃時應把負債利率與預期報酬率放在一起比較。",
+  }));
+
+  $("meters").innerHTML = ms.join("");
+}
+function renderIncomeBar(){
+  const inc = val("f_inc"), d = derived();
+  if (inc <= 0){
+    $("incomeBar").innerHTML = `<div style="width:100%;background:var(--edge);color:var(--ink-soft)">請先填入每月收入</div>`;
+    $("incomeLegend").innerHTML = ""; return;
+  }
+  const parts = [
+    { label:"固定支出", v: Math.min(val("f_exp"), inc), color:"--a-stock" },
+    { label:"貸款月付", v: Math.max(0, Math.min(d.debtpay, inc - val("f_exp"))), color:"--a-cash" },
+    { label:"可投資餘裕", v: Math.max(0, d.surplus), color:"--a-ins" },
+  ].filter(p=>p.v > 0);
+  const total = parts.reduce((a,p)=>a+p.v,0) || 1;
+  $("incomeBar").innerHTML = parts.map(p=>{
+    const w = p.v/total*100;
+    return `<div style="width:${w}%;background:var(${p.color})" title="${p.label} ${nt(p.v)}">${w>13?pct(w):""}</div>`;
+  }).join("");
+  $("incomeLegend").innerHTML = parts.map(p=>
+    `<span><i style="background:var(${p.color})"></i>${p.label}<b>${nt(p.v)}</b></span>`).join("");
+}
+function renderFinance(){
+  const d = derived();
+  $("k_surplus").textContent = nt(d.surplus);
+  $("k_rate").textContent = val("f_inc") > 0 ? "儲蓄率 " + pct1(d.savingRate*100) : "請先填收入";
+  $("k_annual").textContent = nt(d.annual);
+  $("k_net").textContent    = nt(d.net);
+
+  const rows = [
+    ["年收入合計", d.income,               "--brass",   false],
+    ["年固定支出", val("f_exp")*12,        "--a-stock", false],
+    ["年貸款還款", d.debtpay*12,           "--a-cash",  false],
+    ["年可投入",   Math.max(0,d.annual),   "--a-ins",   false],
+    ["現有總資產", val("f_asset"),         "--a-bond",  false],
+    ["現有負債",   val("f_debt"),          "--a-cash",  true ],
+    ["可規劃資金", Math.max(0,d.net),      "--ink",     false],
+  ].filter(r => r[1] > 0 || r[0]==="可規劃資金" || r[0]==="年可投入");
+  const max = Math.max(...rows.map(r=>r[1]), 1);
+  $("waterfall").innerHTML = rows.map(([k,v,c,muted])=>`
+    <div class="wf-row">
+      <span style="color:var(--ink-soft)">${k}</span>
+      <span class="wf-bar"><i style="width:${(v/max*100).toFixed(1)}%;background:var(${c});opacity:${muted?.45:1}"></i></span>
+      <span class="wf-val">${nt(v)}</span>
+    </div>`).join("");
+
+  const sr = d.savingRate;
+  let msg;
+  if (d.surplus <= 0) msg = "<b>目前支出與還款已吃掉全部收入。</b>在談任何投資工具之前，優先要處理的是現金流本身 —— 沒有可投入的錢，報酬率再高也沒有著力點。";
+  else if (sr < 0.2)  msg = `<b>儲蓄率 ${pct1(sr*100)}，偏低。</b>可投入金額是複利最有效的槓桿，通常比多追求一兩個百分點的報酬率影響更大。值得先檢視支出結構。`;
+  else if (sr < 0.4)  msg = `<b>儲蓄率 ${pct1(sr*100)}，屬於健康區間。</b>每年約 ${nt(d.annual)} 可投入，接下來的問題是這筆錢該放在什麼期間、承受多少波動。`;
+  else                msg = `<b>儲蓄率 ${pct1(sr*100)}，相當高。</b>累積速度不是瓶頸，重點會落在資金的期間配置與風險承受度是否匹配。`;
+  if (val("f_debt") > 0) msg += ` 另有負債 ${nt(val("f_debt"))}，實際規劃時應把負債利率與預期報酬率放在一起比較。`;
+  $("healthNote").innerHTML = msg;
+
+  renderMeters(); renderIncomeBar();
+}
+
+/* ═══════════ 05 需求發現 ═══════════ */
+function gapModel(){
+  const d = derived();
+  const goal = val("f_goal")*10000, yrs = Math.max(1, val("f_years"));
+  const base = Math.max(0, d.net);
+  const contribTotal = Math.max(0, d.annual) * yrs;
+  const covered = Math.min(goal, base + contribTotal);
+  const needReturn = Math.max(0, goal - covered);
+  return { goal, yrs, base:Math.min(base,goal), contrib:Math.max(0,Math.min(contribTotal, goal-Math.min(base,goal))), needReturn, annual:d.annual, net:d.net };
+}
+function renderGapBar(){
+  const g = gapModel();
+  if (g.goal <= 0){ $("gapBar").innerHTML=""; $("gapLegend").innerHTML=""; return; }
+  const parts = [
+    { label:"現有可規劃資金", v:g.base,       color:"--a-bond"  },
+    { label:`${g.yrs} 年累計投入`, v:g.contrib,color:"--a-ins"   },
+    { label:"需靠投資報酬補上", v:g.needReturn,color:"--stamp"   },
+  ].filter(p=>p.v > 0);
+  $("gapBar").innerHTML = parts.map(p=>{
+    const w = p.v/g.goal*100;
+    return `<div style="width:${w}%;background:var(${p.color})" title="${p.label} ${nt(p.v)}">${w>15?pct(w):""}</div>`;
+  }).join("");
+  $("gapLegend").innerHTML = parts.map(p=>
+    `<span><i style="background:var(${p.color})"></i>${p.label}<b>${nt(p.v)}</b></span>`).join("")
+    + `<span><i style="background:transparent;border:1px solid var(--ink-faint)"></i>目標<b>${nt(g.goal)}</b></span>`;
+
+  let note;
+  if (g.annual <= 0) note = "<b>目前沒有可投入資金，缺口無法以現有現金流填補。</b>這種情況下先處理現金流，會比討論任何工具都更有效。";
+  else if (g.needReturn <= 0) note = `<b>即使完全不計投資報酬，光靠現有資金加上 ${g.yrs} 年的投入就足以達成目標。</b>投資報酬在這裡的角色是縮短時間或提高目標，而不是達成的必要條件 —— 這通常代表你可以選擇承受較低的風險。`;
+  else {
+    const share = g.needReturn/g.goal*100;
+    note = `<b>目標中有 ${pct1(share)}（${nt(g.needReturn)}）必須靠投資報酬補上。</b>這個比例愈高，計畫對報酬率假設的依賴就愈重、可承受的失誤空間愈小。要壓低它只有三個方向：拉長年限、提高投入、或下修目標金額。第 06 節可以直接改報酬率看結果如何變動。`;
+  }
+  $("gapNote").innerHTML = note;
+}
+function renderTimeline(){
+  const d = derived(), g = gapModel();
+  const dep = val("f_dep"), depY = val("f_depyears");
+  const items = [];
+
+  items.push({ h:"短期 · 1–3 年", t:"緊急預備金",
+    d:`以 3～6 個月固定支出為參考，約 <span class="tnum">${nt(val("f_exp")*3)}</span> ～ <span class="tnum">${nt(val("f_exp")*6)}</span>。`
+      + (val("f_exp")>0
+         ? `目前可隨時動用的資產為 <span class="tnum">${nt(val("f_liquid"))}</span>，覆蓋 <span class="tnum">${d.emMonths.toFixed(1)}</span> 個月。`
+         : "")
+      + "這筆錢的任務是隨時拿得出來，不是追求報酬，因此不列入上面的可規劃資金討論。" });
+
+  items.push({ h:`中期 · ${g.yrs} 年`, t: txt("f_goalname") || "主要目標",
+    d:`目標 <span class="tnum">${nt(g.goal)}</span>；現有可規劃資金 <span class="tnum">${nt(d.net)}</span>，`
+      + `每年可投入 <span class="tnum">${nt(Math.max(0,d.annual))}</span>。`
+      + (g.needReturn > 0
+         ? `純靠存錢在 ${g.yrs} 年內會差 <span class="tnum">${nt(g.needReturn)}</span>。`
+         : `純靠存錢即可達成。`)
+      + (txt("f_goal2") ? `<br />次要目標：${esc(txt("f_goal2"))}（尚未納入試算）。` : "") });
+
+  items.push({ h:"長期 · 退休與家庭責任", t: dep>0 ? "家庭責任與退休" : "退休準備",
+    d: dep>0
+      ? `有 ${dep} 位扶養對象、預計扶養 ${depY||"—"} 年。若以目前每月固定支出推估，這段期間的家庭生活費約 `
+        + `<span class="tnum">${depY>0 ? nt(val("f_exp")*12*depY) : "需填扶養年數"}</span>`
+        + `。這是「收入若中斷」時會出現的缺口，也是保險型工具通常被放進討論的原因 —— 它處理的是風險，不是報酬。`
+      : `目前無扶養對象，長期規劃的重點多半落在退休金累積本身。可運用的期間較長，理論上能承受的波動也較高，但仍受第 03 節的資金動用彈性限制。` });
+
+  $("timeline").innerHTML = items.map(i=>
+    `<div class="tlitem"><div class="th">${i.h}</div><div class="tt">${esc(i.t)}</div><div class="td">${i.d}</div></div>`).join("");
+}
+function renderFlags(){
+  const d = derived(), g = gapModel(), t = currentTier();
+  const out = [];
+
+  if (d.surplus <= 0)
+    out.push({ sev:3, t:"目前沒有可投入的資金", d:"收入扣掉支出與還款後沒有餘裕。這是整個規劃的前提，優先處理支出結構，會比比較任何商品都更有效。" });
+  else if (d.savingRate < 0.2)
+    out.push({ sev:2, t:`儲蓄率 ${pct1(d.savingRate*100)}，低於 20% 參考值`, d:"每年可投入的金額，對長期累積的影響通常大於多爭取一兩個百分點的報酬率。" });
+
+  if (val("f_exp") > 0 && d.emMonths < 3)
+    out.push({ sev:3, t:`緊急預備金僅 ${d.emMonths.toFixed(1)} 個月`, d:`低於 3 個月的參考門檻。預備金不足時，一旦有突發支出就可能被迫在低點賣出長期部位 —— 這通常比報酬率本身造成更大的損失。建議先補到 ${nt(val("f_exp")*3)}。` });
+
+  if (d.debtRatio >= 0.5)
+    out.push({ sev:3, t:`負債比 ${pct1(d.debtRatio*100)}，高於 50% 參考值`, d:"在負債利率高於預期投資報酬率的情況下，優先償還負債的確定效益，通常高於投資的不確定效益。兩者應放在一起比較。" });
+  else if (d.payRatio >= 0.3)
+    out.push({ sev:2, t:`貸款月付佔收入 ${pct1(d.payRatio*100)}`, d:"還款壓力偏重，會壓縮可投入金額與應變彈性。" });
+
+  if (g.needReturn > 0 && g.goal > 0){
+    const share = g.needReturn/g.goal;
+    if (share > 0.5)
+      out.push({ sev:3, t:`目標有 ${pct1(share*100)} 必須靠投資報酬達成`, d:"對報酬率假設的依賴過重，一旦實際報酬低於假設，缺口會被放大。建議同時檢視「拉長年限」與「下修目標」兩個方向，而不是只往提高報酬率去找答案。" });
+    else if (share > 0.2)
+      out.push({ sev:2, t:`目標有 ${pct1(share*100)} 需靠投資報酬達成`, d:"屬於一般範圍，但仍值得在第 06 節試算不同報酬率假設下的結果差異。" });
+  }
+
+  if (val("f_dep") > 0 && val("f_depyears") > 0)
+    out.push({ sev:2, t:`有 ${val("f_dep")} 位扶養對象，收入中斷風險尚未評估`,
+      d:`預計扶養 ${val("f_depyears")} 年，以目前月支出推估的家庭生活費約 ${nt(val("f_exp")*12*val("f_depyears"))}。累積型工具處理的是「活得久」的問題，這一項處理的是「收入提前中斷」，兩者是不同的需求。` });
+
+  consistencyIssues().forEach(i => out.push(i));
+
+  if (prefer.size > 0 && t){
+    const risky = ["股票","ETF"].filter(p=>prefer.has(p));
+    if (risky.length && tierIndex(t.key) === 0)
+      out.push({ sev:2, t:"偏好商品與風險等級方向不同",
+        d:`你勾選了 ${risky.join("、")}，但問卷判定為保守型（2%）。這不代表不能討論，而是需要先確認：是希望調整配置比重，還是先修正對這些工具波動幅度的預期。` });
+  }
+
+  if (!out.length)
+    out.push({ sev:1, t:"目前沒有偵測到明顯的結構性問題", d:"三項體質指標、缺口比例與風險等級一致性都在參考範圍內。接下來可以直接進入工具認識與試算。" });
+
+  out.sort((a,b)=>b.sev-a.sev);
+  const LBL = {3:"優先處理",2:"值得討論",1:"目前正常"};
+  const CLR = {3:"--bad",2:"--mid",1:"--ok"};
+  $("flags").innerHTML = out.map(f=>`
+    <div class="flag sev-${f.sev}">
+      <span class="fi" style="background:var(${CLR[f.sev]})">${LBL[f.sev]}</span>
+      <div><div class="ft">${f.t}</div><div class="fd">${f.d}</div></div>
+    </div>`).join("");
+  const high = out.filter(f=>f.sev===3).length;
+  $("flagCount").textContent = out[0].sev===1 ? "無" : `共 ${out.length} 項　優先 ${high} 項`;
+}
+
+/* ═══════════ 06 工具 ═══════════ */
+const INSURANCE = [
+  { name:"保誠人壽 鑫傳富外幣終身壽險(115)(定額給付型)", code:"ARLPU015", type:"分紅保險（英式分紅保單）", cur:"美元 USD",
+    what:"終身壽險，保單紅利分為增額分紅保額與額外分紅保額。",
+    rows:[
+      ["給付項目","身故保險金或喪葬費用保險金、完全失能保險金、祝壽保險金"],
+      ["預定利率","2.25%"],
+      ["繳費年期","6 年期：0～74 歲　｜　10 年期：0～70 歲"],
+      ["投保限額","1 萬～300 萬美元"],
+      ["範例（6年期40歲男）","基本保額 300,000 美元；折扣後年繳保費 31,436 美元"],
+      ["110歲生存給付","中分紅假設 5.75%：祝壽金 300,000 ＋ 分紅保額 2,064,543 美元<br />低分紅假設 2.5%：祝壽金 300,000 ＋ 分紅保額 129,944 美元<br />假設無分紅：祝壽金 300,000 ＋ 分紅保額 0 美元"],
+      ["保費效益比","第 1 年 32%／32%（35歲男/女）；第 5 年 60%／60%；第 10 年 99%／93%"],
+    ],
+    risks:["保單紅利為非保證給付項目，保誠人壽不保證給付金額。","保費收付與保險金給付皆以美元計價，兌換新臺幣時需自行承擔匯率風險。","早期解約對保戶不利（保費效益比第 1 年僅約三成）。"],
+    fit:"適合討論長期、且已具備外幣需求或可承擔匯率風險的資產傳承與長期累積。" },
+
+  { name:"全球人壽 豪旺傳家利率變動型終身壽險(定額給付型)", code:"QMW", type:"利率變動型保險（不分紅）", cur:"新臺幣 TWD",
+    what:"利變型終身壽險，宣告利率高於預定利率時產生增值回饋分享金。",
+    rows:[
+      ["給付項目","身故保險金或喪葬費用保險金、完全失能保險金、祝壽保險金"],
+      ["利率","預定利率 1.25%；範例假設宣告利率 2.55%"],
+      ["繳費年期","躉繳：0～83 歲　｜　2 年期：0～81 歲"],
+      ["保額範圍","最低 50 萬元；累積最高 9,000 萬元"],
+      ["回饋金給付","第 1~6 年：抵繳保費或購買增額繳清保險（2 擇 1）；第 7 年起：增額繳清／儲存生息／現金給付（3 擇 1）"],
+      ["躉繳範例（40歲）","基本保額 1,200 萬元；躉繳保費 5,134,380 元；祝壽保險金 13,351,716 元"],
+      ["解約金相對比率","第 1 年 65%／65%（35歲男/女）；第 5 年 76%／76%；第 10 年 81%／82%；第 20 年 75%／76%"],
+      ["轉投保年金","繳費期滿且屆滿第 6 保單年度後，可申請轉入即期年金(QSA)，最高領到 110 歲"],
+    ],
+    risks:["宣告利率並非固定或保證利率，會依公司定期宣告改變，公司不負最低宣告利率保證之責。","部分保單年度身故／完全失能保險金有逐年遞減特性，宣告利率過低時保障可能低於基本保額。","本保險為不分紅保險單，不參加紅利分配。","早期解約對保戶不利。"],
+    fit:"適合討論以新臺幣計價、期望現金流相對可預期的長期累積與退休金轉換。" },
+
+  { name:"安聯人壽 吉利發發變額萬能壽險", code:"VLBY1", type:"投資型保險（變額萬能壽險）", cur:"新臺幣 TWD",
+    what:"保單帳戶價值由要保人自行選擇投資標的累積，投資風險由要保人／受益人自行承擔。",
+    rows:[
+      ["給付項目","身故保險金或喪葬費用保險金或返還保單帳戶價值、完全失能保險金、祝壽保險金"],
+      ["保險型態","甲型：淨危險保額＝基本保額－保單帳戶價值（不得為負）　｜　戊型：取三者最大值"],
+      ["投資標的","共同基金（含貨幣型）、指數股票型基金(ETF)、多幣別停泊帳戶"],
+      ["保單管理費","每月 100 元（累積保費 300 萬以上免收）＋帳戶價值×月費用率（第1~4年 0.16%，第5年起 0%）"],
+      ["申購手續費","共同基金：無　｜　ETF：0.5%"],
+      ["ETF 管理／保管費","國內：管理 0.7%＋保管 0.05%／年　｜　海外：管理 1.2%＋保管 0.1%／年"],
+      ["解約／部分提領費用率","第1年 7%、第2年 6%、第3年 5%、第4年 2%、第5年起 0%"],
+      ["祝壽保險金","保險年齡達 111 歲之保單週年日仍生存，按淨危險保額＋保單帳戶價值給付"],
+    ],
+    risks:["公司不保證投資報酬，保單帳戶價值可能因投資虧損而減損甚至趨近於零，導致保障減少或契約提前終止。","要保人及受益人須直接承擔法律、匯率、市場變動風險及發行／經理機構之信用風險。","第 1~4 年解約或部分提領將被收取較高費用，早期解約不利消費者。"],
+    fit:"適合討論具備投資經驗、能自行承擔市場波動，且希望保障與投資帳戶結合的長期規劃。" },
+
+  { name:"元大人壽 大利元滿變額年金保險", code:"W2", type:"投資型保險（變額年金）", cur:"新臺幣 TWD",
+    what:"年金累積期間帳戶價值依投資績效變動，之後進入年金給付期間。",
+    rows:[
+      ["給付項目","年金給付、未支領之年金餘額、返還保單帳戶價值、加值給付金"],
+      ["年金累積期間","自契約生效日至年金給付開始日前一日，不得低於 6 年"],
+      ["年金給付開始日","被保險人保險年齡須達 50 歲，不得超過 80 歲之保單週年日；未指定者原則以 66 歲為準"],
+      ["保證期間","10 年（不論被保險人生存與否，保證給付 10 年之年金）"],
+      ["加值給付金","第 5 保單週年日起，每年以前 12 個月保單帳戶價值月平均值 × 0.4% 計算，投入貨幣帳戶"],
+      ["保費費用","保險費 × 2.16%"],
+      ["保單管理費","每月 100 元（累積已繳保費 300 萬以上免收）"],
+      ["解約／部分提領費用率","第1年 7%、第2年 6%、第3年 4%、第4年 3%、第5年起 0%"],
+    ],
+    risks:["公司不保證投資報酬，帳戶價值直接反映投資績效。","年金金額於年金給付開始日以當時預定利率及年金生命表計算，非事先保證的固定金額。","年金給付期間要保人不得終止契約，故無解約金；每次提領及提領後帳戶價值需 ≥ 5,000 元。","第 1~4 年解約將被收取較高費用。"],
+    fit:"適合討論退休金的累積與後續轉換為年金給付，需要較長不動用期間。" },
+];
+
+/* ── 股票：上市公司平穩配息投資組合（16 檔） ── */
+const STOCKDATA = [{"sector": "電子", "code": "4904", "name": "遠傳", "sub": "通信網路 · 電信　｜　上市（TWSE）", "desc": "電信服務業者，提供行動通信、寬頻與企業數位服務。", "price": 101, "base": {"year": "2020（基期）", "close": 61.2}, "cyield": 0.035248, "years": [{"y": 2021, "close": 64.6, "cash": 3.25, "tr": 0.10866}, {"y": 2022, "close": 65.9, "cash": 3.25, "tr": 0.070433}, {"y": 2023, "close": 79.8, "cash": 3.25, "tr": 0.260243}, {"y": 2024, "close": 89.4, "cash": 3.25, "tr": 0.161028}, {"y": 2025, "close": 88.3, "cash": 3.56, "tr": 0.027517}], "y10": [4.59, 4.83, 4.73, 4.93, 4.71, 4.99, 3.92, 4.24, 3.76, 4.06], "stat": "最低 3.76%　最高 4.99%　區間 1.23 個百分點　十年平均 4.48%", "pros": ["2021～2024 現金股利連續四年固定 3.25 元，2025 年提高至 3.56 元，金額極度可預期。", "五年含息報酬率全部為正（+2.75%～+26.02%）。"], "risks": ["十年平均殖利率 4.48%，以現價買進僅約 3.52%，落在目標 4~6% 區間之下。", "2025 年股價小跌，該年報酬幾乎全部來自配息。", "電信業受費率管制與資本支出週期影響。"]}, {"sector": "電子", "code": "3045", "name": "台灣大", "sub": "通信網路 · 電信　｜　上市（TWSE）", "desc": "電信服務業者，提供行動通信、寬頻與有線電視服務。", "price": 115.5, "base": {"year": "2020（基期）", "close": 98.9}, "cyield": 0.038961, "years": [{"y": 2021, "close": 100, "cash": 4.2995, "tr": 0.054596}, {"y": 2022, "close": 94.7, "cash": 4.3, "tr": -0.01}, {"y": 2023, "close": 98.6, "cash": 4.3, "tr": 0.086589}, {"y": 2024, "close": 113.5, "cash": 4.3, "tr": 0.194726}, {"y": 2025, "close": 108.5, "cash": 4.5, "tr": -0.004405}], "y10": [4.87, 4.96, 5.02, 4.55, 4.17, 4.24, 3.98, 4.28, 3.71, 3.98], "stat": "最低 3.71%　最高 5.02%　區間 1.31 個百分點　十年平均 4.38%", "pros": ["2021～2024 現金股利連續四年固定 4.30 元，2025 年提高至 4.50 元。", "十年殖利率區間僅 1.31 個百分點。"], "risks": ["有兩個年度含息報酬率為負（2022 年 -1.00%、2025 年 -0.44%）。", "以現價買進殖利率約 3.90%，低於十年平均 4.38%。", "電信業受費率管制與資本支出週期影響。"]}, {"sector": "電子", "code": "2480", "name": "敦陽科", "sub": "資訊服務　｜　上市（TWSE）", "desc": "企業資訊系統整合商，提供伺服器、儲存、網路與資安建置及維護服務。", "price": 155.5, "base": {"year": "2020（基期）", "close": 66.5}, "cyield": 0.04773, "years": [{"y": 2021, "close": 72.8, "cash": 4.3, "tr": 0.159398}, {"y": 2022, "close": 85.9, "cash": 5.62, "tr": 0.257143}, {"y": 2023, "close": 120.5, "cash": 6.26, "tr": 0.475669}, {"y": 2024, "close": 138, "cash": 6.64, "tr": 0.200332}, {"y": 2025, "close": 151, "cash": 7.422, "tr": 0.147986}], "y10": [7.39, 6.59, 6.11, 6.25, 6.12, 6.01, 6.31, 5.03, 5.23, 4.74], "stat": "最低 4.74%　最高 7.39%　區間 2.65 個百分點　十年平均 5.98%", "pros": ["十年平均殖利率 5.98%，為本組合最高，且十年每年皆在 4.7% 以上。", "現金股利由 2021 年 4.30 元逐年增至 2025 年 7.42 元，五年連續調高。", "五年含息報酬率全部為正（+14.80%～+47.57%）。"], "risks": ["2023 年含息報酬率 +47.57%，貼近 +50% 排除線。", "殖利率呈長期下滑趨勢：2016 年 7.39% → 2025 年 4.74%，因股價漲幅大於配息增幅。", "資訊服務業客戶集中於金融與製造業，企業 IT 預算隨景氣調整。", "股價自 2020 年底 66.5 元漲至現價 155.5 元，基期已高。"]}, {"sector": "電子", "code": "2347", "name": "聯強", "sub": "電子通路　｜　上市（TWSE）", "desc": "亞太地區 3C 與零組件通路商，從事品牌產品代理配銷、物流與維修服務。", "price": 86, "base": {"year": "2020（基期）", "close": 47}, "cyield": 0.046512, "years": [{"y": 2021, "close": 66.2, "cash": 3.3, "tr": 0.478723}, {"y": 2022, "close": 59.2, "cash": 5, "tr": -0.030211}, {"y": 2023, "close": 70.2, "cash": 3.5, "tr": 0.244932}, {"y": 2024, "close": 70.8, "cash": 3, "tr": 0.051282}, {"y": 2025, "close": 57.9, "cash": 4, "tr": -0.125706}], "y10": [4.11, 2.91, 5.12, 5.17, 5.64, 5.55, 7.13, 5.52, 3.56, 5.63], "stat": "最低 2.91%　最高 7.13%　區間 4.22 個百分點　十年平均 5.03%", "pros": ["十年平均殖利率 5.03%，落在目標 4~6% 區間內。", "以現價買進殖利率約 4.65%，為本組合中少數現價殖利率仍在 4% 以上者。"], "risks": ["十年殖利率區間 4.22 個百分點，為電子組最不穩定者（2017 年僅 2.91%、2022 年達 7.13%）。", "配息金額波動大：2022 年 5.00 元、2024 年 3.00 元。", "2021 年含息報酬率 +47.87%，貼近 +50% 排除線。", "2025 年含息報酬率 -12.57%，股價由 70.8 元跌至 57.9 元。", "通路業毛利率低，獲利受品牌廠政策與匯率影響。"]}, {"sector": "金融", "code": "2891", "name": "中信金", "sub": "金控（銀行、保險）　｜　上市（TWSE）", "desc": "金融控股公司，旗下涵蓋銀行、人壽、證券等子公司。", "price": 66.5, "base": {"year": "2020（基期）", "close": 19.7}, "cyield": 0.034586, "years": [{"y": 2021, "close": 25.95, "cash": 1.05, "tr": 0.370558}, {"y": 2022, "close": 22.1, "cash": 1.25, "tr": -0.100193}, {"y": 2023, "close": 28.35, "cash": 1, "tr": 0.328054}, {"y": 2024, "close": 39.1, "cash": 1.8, "tr": 0.442681}, {"y": 2025, "close": 50.2, "cash": 2.3, "tr": 0.342711}], "y10": [4.4, 4.83, 5.02, 4.63, 4.78, 4.61, 5.33, 3.82, 4.48, 5.25], "stat": "最低 3.82%　最高 5.33%　區間 1.51 個百分點　十年平均 4.72%", "pros": ["十年殖利率區間 1.51 個百分點，為金融組最穩定者，平均 4.72%。", "股價同期由 19.7 元漲至 50.2 元，兼具配息與股價成長。"], "risks": ["配息金額波動大：2023 年僅 1.00 元、2025 年 2.30 元。", "2024 年含息報酬率 +44.27%，接近 +50% 排除線。", "以現價買進殖利率僅 3.46%，為本組合最低。", "金控獲利與利率、資本市場景氣連動，主管機關對股利發放有監理要求。"]}, {"sector": "金融", "code": "5876", "name": "上海商銀", "sub": "銀行　｜　上市（TWSE）", "desc": "以企業金融與海外分行網絡見長的商業銀行。", "price": 44.5, "base": {"year": "2020（基期）", "close": 41.1}, "cyield": 0.040449, "years": [{"y": 2021, "close": 47.25, "cash": 1.7, "tr": 0.190998}, {"y": 2022, "close": 44.05, "cash": 1.8, "tr": -0.02963}, {"y": 2023, "close": 46.8, "cash": 1.8, "tr": 0.103292}, {"y": 2024, "close": 39.6, "cash": 1.8, "tr": -0.115385}, {"y": 2025, "close": 40.6, "cash": 1.8, "tr": 0.070707}], "y10": [5.14, 4.76, 4.81, 3.48, 4.29, 3.79, 3.52, 3.91, 3.99, 3.88], "stat": "最低 3.48%　最高 5.14%　區間 1.66 個百分點　十年平均 4.16%", "pros": ["2022～2025 現金股利連續四年固定 1.80 元，金額高度可預期。", "五年含息報酬率波動小（-11.54%～+19.10%），為本組合波動最小者之一。"], "risks": ["十年平均殖利率 4.16%，僅略高於 4% 下限；近五年殖利率多在 4% 以下。", "2024 年股價由 46.8 元跌至 39.6 元，該年含息報酬率 -11.54%。", "銀行獲利與利差、放款品質連動。"]}, {"sector": "金融", "code": "6024", "name": "群益期", "sub": "期貨　｜　上市（TWSE）", "desc": "期貨經紀商，主營期貨與選擇權經紀、自營及期貨顧問業務。", "price": 63.1, "base": {"year": "2020（基期）", "close": 38.7}, "cyield": 0.044849, "years": [{"y": 2021, "close": 38.95, "cash": 2.87, "tr": 0.08062}, {"y": 2022, "close": 36.75, "cash": 1.6, "tr": -0.015404}, {"y": 2023, "close": 51.1, "cash": 3.02, "tr": 0.472653}, {"y": 2024, "close": 57.9, "cash": 3.44, "tr": 0.200391}, {"y": 2025, "close": 51, "cash": 2.83, "tr": -0.070294}], "y10": [6.75, 5.64, 4.23, 7.11, 4.74, 6.52, 4.46, 6.73, 5.65, 5.63], "stat": "最低 4.23%　最高 7.11%　區間 2.88 個百分點　十年平均 5.75%", "pros": ["十年平均殖利率 5.75%，為本組合次高，且十年每年皆在 4.2% 以上。", "以現價買進殖利率約 4.49%，仍在目標區間內。"], "risks": ["十年殖利率區間 2.88 個百分點，配息金額波動大（2022 年 1.60 元、2024 年 3.44 元）。", "2023 年含息報酬率 +47.27%，貼近 +50% 排除線。", "2025 年含息報酬率 -7.03%。", "期貨經紀商獲利與市場成交量高度連動，市場冷清時手續費收入直接減少。", "公司規模較小，股票流動性低於大型金融股。"]}, {"sector": "金融", "code": "2820", "name": "華票", "sub": "票券　｜　上市（TWSE）", "desc": "票券金融公司，主營短期票券簽證、承銷、經紀自營及債券業務。", "price": 16.55, "base": {"year": "2020（基期）", "close": 14.9}, "cyield": 0.04713, "years": [{"y": 2021, "close": 17.2, "cash": 0.87, "tr": 0.212752}, {"y": 2022, "close": 14.5, "cash": 0.9, "tr": -0.104651}, {"y": 2023, "close": 15.1, "cash": 0.5, "tr": 0.075862}, {"y": 2024, "close": 15.05, "cash": 0.73, "tr": 0.045033}, {"y": 2025, "close": 16.9, "cash": 0.78, "tr": 0.174751}], "y10": [6.61, 5.37, 4.95, 5.27, 4.65, 5.12, 5.39, 3.22, 4.68, 5], "stat": "最低 3.22%　最高 6.61%　區間 3.39 個百分點　十年平均 5.03%", "pros": ["十年平均殖利率 5.03%，以現價買進約 4.71%，兩者皆落在目標區間。", "股價絕對金額低（16.55 元），單股投入門檻小。"], "risks": ["十年殖利率區間 3.39 個百分點，2023 年僅 3.22%。", "配息金額波動大：2022 年 0.90 元、2023 年僅 0.50 元。", "票券業獲利與短期利率走勢高度連動，升降息循環直接影響利差。", "公司規模小，股票流動性偏低。"]}, {"sector": "傳產", "code": "9917", "name": "中保科", "sub": "保全服務（TWSE 歸類其他業）　｜　上市（TWSE）", "desc": "提供電子保全、系統整合與智慧生活／物聯網服務。", "price": 106, "base": {"year": "2020（基期）", "close": 88.7}, "cyield": 0.049057, "years": [{"y": 2021, "close": 104, "cash": 5, "tr": 0.228861}, {"y": 2022, "close": 100, "cash": 5, "tr": 0.009615}, {"y": 2023, "close": 117, "cash": 5, "tr": 0.22}, {"y": 2024, "close": 123.5, "cash": 5.2, "tr": 0.1}, {"y": 2025, "close": 108, "cash": 5.2, "tr": -0.083401}], "y10": [4.17, 3.8, 4.42, 4.45, 4.47, 5.13, 4.74, 4.22, 3.84, 4.39], "stat": "最低 3.80%　最高 5.13%　區間 1.33 個百分點　十年平均 4.36%", "pros": ["十年殖利率區間僅 1.33 個百分點，為全組合最穩定者之一。", "2021～2023 現金股利固定 5.00 元，2024～2025 提高至 5.20 元，未曾減少。", "保全服務為訂閱制收入，現金流受景氣影響小。"], "risks": ["十年平均殖利率 4.36%，接近 4% 下限。", "2025 年股價由 123.5 元跌至 108 元，該年含息報酬率 -8.34%。", "TWSE 官方產業別為「其他業」，非傳統製造業，分類時需說明。"]}, {"sector": "傳產", "code": "2015", "name": "豐興", "sub": "鋼鐵　｜　上市（TWSE）", "desc": "電爐鋼廠，生產鋼筋、型鋼與鋼胚，供應營建與基礎建設。", "price": 64.2, "base": {"year": "2020（基期）", "close": 71.1}, "cyield": 0.054517, "years": [{"y": 2021, "close": 83.5, "cash": 3.5, "tr": 0.223629}, {"y": 2022, "close": 63.7, "cash": 5, "tr": -0.177246}, {"y": 2023, "close": 69.1, "cash": 4, "tr": 0.147567}, {"y": 2024, "close": 69.6, "cash": 3.5, "tr": 0.057887}, {"y": 2025, "close": 61.3, "cash": 3.5, "tr": -0.068966}], "y10": [5.94, 5.61, 6, 6.36, 5.47, 4.67, 5.21, 5.52, 4.81, 4.86], "stat": "最低 4.67%　最高 6.36%　區間 1.69 個百分點　十年平均 5.45%", "pros": ["十年平均殖利率 5.45%，且十年每年皆在 4.6% 以上，未有任何一年落到 4% 以下。", "以現價買進殖利率約 5.45%，為本組合中最接近目標上緣者。", "十年殖利率區間 1.69 個百分點，在高殖利率股中相對穩定。"], "risks": ["2022 年含息報酬率 -17.72%，為本組合五年中的較大跌幅。", "股價長期呈緩跌：2021 年底 83.5 元 → 現價 64.2 元。", "鋼鐵業具景氣循環特性，獲利與營建需求、廢鋼與電價成本連動。"]}, {"sector": "傳產", "code": "9937", "name": "全國", "sub": "油電燃氣（加油站零售）　｜　上市（TWSE）", "desc": "經營全國加油站連鎖通路，從事油品與車用相關商品零售。", "price": 55.1, "base": {"year": "2020（基期）", "close": 50.6}, "cyield": 0.038113, "years": [{"y": 2021, "close": 49, "cash": 2.3, "tr": 0.013834}, {"y": 2022, "close": 51.5, "cash": 2.1, "tr": 0.093878}, {"y": 2023, "close": 70.3, "cash": 2.1, "tr": 0.405825}, {"y": 2024, "close": 63.1, "cash": 2.1, "tr": -0.072546}, {"y": 2025, "close": 57.1, "cash": 2.1, "tr": -0.061807}], "y10": [3.78, 4.94, 4.96, 4.6, 4.23, 4.66, 4.23, 3.09, 3.18, 3.14], "stat": "最低 3.09%　最高 4.96%　區間 1.87 個百分點　十年平均 4.08%", "pros": ["2022～2025 現金股利連續四年固定 2.10 元。", "十年殖利率區間 1.87 個百分點。"], "risks": ["近三年殖利率明顯下滑：2023～2025 分別為 3.09%、3.18%、3.14%，皆低於 4%；十年平均 4.08% 主要靠前期撐起。", "以現價買進殖利率僅約 3.81%，未達目標 4% 下限。", "2023 年含息報酬率 +40.58%，2024、2025 連續兩年為負。", "加油站業務受油價、電動車滲透率長期趨勢影響。"]}, {"sector": "傳產", "code": "8926", "name": "台汽電", "sub": "油電燃氣（民營發電）　｜　上市（TWSE）", "desc": "投資與經營民營汽電共生／發電廠，並提供電廠營運維護與技術服務。", "price": 56.7, "base": {"year": "2020（基期）", "close": 38.7}, "cyield": 0.037037, "years": [{"y": 2021, "close": 37.9, "cash": 1.9, "tr": 0.028424}, {"y": 2022, "close": 32.45, "cash": 1.75, "tr": -0.097625}, {"y": 2023, "close": 40.25, "cash": 0.8976, "tr": 0.342255}, {"y": 2024, "close": 41.7, "cash": 1.93, "tr": 0.083975}, {"y": 2025, "close": 40.85, "cash": 2.1, "tr": 0.029976}], "y10": [5.18, 5.06, 4.85, 5.44, 4.11, 5.02, 4.67, 1.67, 4.03, 4.7], "stat": "最低 1.67%　最高 5.44%　區間 3.77 個百分點　十年平均 4.47%", "pros": ["十年平均殖利率 4.47%，落在目標區間。", "五年含息報酬率四年為正，最低僅 -9.76%。"], "risks": ["十年殖利率區間 3.77 個百分點，為傳產組最不穩定者。", "2023 年殖利率僅 1.67%，因當年部分盈餘改以股票股利（0.5984 股）發放，現金股利降至 0.8976 元。", "以現價買進殖利率約 3.70%，未達目標 4% 下限。", "發電業受電價政策、燃料成本與主管機關管制影響。"]}, {"sector": "生技", "code": "4104", "name": "佳醫", "sub": "醫材與醫療通路　｜　上市（TWSE）", "desc": "製造與經銷血液透析醫材、手術設備、造口用品，並經營洗腎中心通路。", "price": 71.1, "base": {"year": "2020（基期）", "close": 56.1}, "cyield": 0.053446, "years": [{"y": 2021, "close": 57.6, "cash": 3.3, "tr": 0.085561}, {"y": 2022, "close": 67.6, "cash": 3.5, "tr": 0.234375}, {"y": 2023, "close": 88.4, "cash": 3.5, "tr": 0.424852}, {"y": 2024, "close": 86, "cash": 3.65, "tr": 0.062783}, {"y": 2025, "close": 81.6, "cash": 3.8, "tr": 0.040465}], "y10": [4.66, 5.18, 5.53, 5.48, 5.53, 5.95, 5.33, 3.58, 4.02, 4.31], "stat": "最低 3.58%　最高 5.95%　區間 2.37 個百分點　十年平均 4.96%", "pros": ["十年平均殖利率 4.96%，為生技組最高。", "現金股利由 2021 年 3.30 元逐年微增至 2025 年 3.80 元，未曾減少，2023 年起另配 0.50 股股票股利。", "以現價買進殖利率約 5.35%，落在目標區間內。", "洗腎為長期慢性病治療，需求穩定且受健保給付支撐。"], "risks": ["2023 年含息報酬率 +42.49%，為生技組最大單年漲幅。", "十年殖利率區間 2.37 個百分點，2023 年降至 3.58%。", "2024、2025 連續兩年股價下跌。", "獲利受健保給付政策調整影響。"]}, {"sector": "生技", "code": "1720", "name": "生達", "sub": "學名藥　｜　上市（TWSE）", "desc": "學名藥廠，製造與銷售人用藥品及健康食品。", "price": 56.1, "base": {"year": "2020（基期）", "close": 37.7}, "cyield": 0.048128, "years": [{"y": 2021, "close": 43.1, "cash": 1.5, "tr": 0.183024}, {"y": 2022, "close": 61.5, "cash": 1.8, "tr": 0.468677}, {"y": 2023, "close": 65.9, "cash": 2.5, "tr": 0.112195}, {"y": 2024, "close": 61.9, "cash": 2.5, "tr": -0.022762}, {"y": 2025, "close": 58.9, "cash": 2.7, "tr": -0.004847}], "y10": [4.34, 4.44, 4.62, 4.46, 3.5, 4.52, 5.33, 3.94, 3.63, 4.81], "stat": "最低 3.50%　最高 5.33%　區間 1.83 個百分點　十年平均 4.36%", "pros": ["十年殖利率區間 1.83 個百分點，為生技組最穩定者。", "現金股利由 2021 年 1.50 元增至 2025 年 2.70 元，五年間未曾減少。", "以現價買進殖利率約 4.81%，落在目標區間內。"], "risks": ["2022 年含息報酬率 +46.87%，貼近 +50% 排除線。", "十年平均殖利率 4.36%，其中 2020 年僅 3.50%、2024 年 3.63%。", "2024、2025 連續兩年含息報酬率為負（-2.28%、-0.48%）。", "學名藥廠獲利受健保藥價調整與同業競爭影響。"]}, {"sector": "生技", "code": "1731", "name": "美吾華", "sub": "醫療用品通路與個人護理　｜　上市（TWSE）", "desc": "醫療用品經銷與個人清潔保養品產銷，並轉投資醫療事業。", "price": 21, "base": {"year": "2020（基期）", "close": 17.45}, "cyield": 0.057143, "years": [{"y": 2021, "close": 19.55, "cash": 1, "tr": 0.17765}, {"y": 2022, "close": 19.75, "cash": 1.17, "tr": 0.070077}, {"y": 2023, "close": 22.45, "cash": 1.1, "tr": 0.192405}, {"y": 2024, "close": 22.9, "cash": 1.15, "tr": 0.071269}, {"y": 2025, "close": 21.75, "cash": 1.2, "tr": 0.002183}], "y10": [3.83, 4.12, 3.66, 3.93, 5.03, 6.14, 4.5, 4.39, 5.17, 5.6], "stat": "最低 3.66%　最高 6.14%　區間 2.48 個百分點　十年平均 4.64%", "pros": ["五年含息報酬率全部為正（+0.22%～+19.24%），為全組合唯一五年全正且無單年超過 +20% 者。", "以現價買進殖利率約 5.71%，為本組合次高。", "現金股利五年間在 1.00～1.20 元之間，波動小。"], "risks": ["十年殖利率區間 2.48 個百分點，前期（2016～2019）多在 4% 以下，平均 4.64% 主要靠近五年撐起。", "公司規模小，股票流動性偏低，大額買賣可能影響成交價。", "2025 年含息報酬率僅 +0.22%，幾乎全部來自配息。"]}, {"sector": "航運", "code": "2608", "name": "嘉里大榮", "sub": "陸運物流／宅配　｜　上市（TWSE）", "desc": "公路貨運與宅配物流業者，經營零擔／整車貨運、宅配、倉儲與配送。", "price": 28.6, "base": {"year": "2020（基期）", "close": 44.8}, "cyield": 0.057692, "years": [{"y": 2021, "close": 44.95, "cash": 1.68, "tr": 0.040848}, {"y": 2022, "close": 37.8, "cash": 1.65, "tr": -0.122358}, {"y": 2023, "close": 38.4, "cash": 1.65, "tr": 0.059524}, {"y": 2024, "close": 38.7, "cash": 2.6, "tr": 0.075521}, {"y": 2025, "close": 33.15, "cash": 1.65, "tr": -0.100775}], "y10": [4.16, 3.83, 4.14, 4.2, 3.62, 3.43, 4.04, 4.34, 6.52, 4.65], "stat": "最低 3.43%　最高 6.52%　區間 3.09 個百分點　十年平均 4.29%", "pros": ["航運類股中唯一通過全部條件者。做的是國內公路宅配，營收不隨國際運價暴衝，2021 年航運股狂飆時它只有 +4.08%。", "十年配息未中斷、無配股、無減資，現金股利長期維持在 1.65～1.72 元。", "以現價買進殖利率約 5.77%，為本組合最高。"], "risks": ["股價長期下跌：2020 年底 44.8 元 → 現價 28.6 元，五年跌幅約 36%。配息穩定但本金在縮水。", "五年含息報酬率兩年為負（2022 年 -12.24%、2025 年 -10.08%）。", "本檔殖利率採「年收盤平均價」為分母計算，與其他 15 檔採「當年股價」的口徑不同，數值不可直接橫向比較。", "2024 年殖利率 6.52% 為當年配發 2.60 元的一次性較高配息所致，非常態。", "國內物流業面臨人力成本上升與電商配送競爭。"]}];
+const SECTORS = [
+  { k:"電子", v:"--a-stock", note:"4 檔。遠傳、台灣大在 TWSE 官方分類屬「電子類-通信網路業」，但營運性質接近公用事業，與敦陽科（資訊服務）、聯強（電子通路）的景氣連動性不同，配置時不宜視為同質。" },
+  { k:"金融", v:"--a-bond",  note:"4 檔。中信金為金控，上海商銀為銀行，群益期為期貨商，華票為票券公司 —— 四者獲利來源不同，但都受利率環境影響，仍屬同向風險。" },
+  { k:"傳產", v:"--brass",   note:"4 檔。涵蓋保全、鋼鐵、加油站零售、民營發電。其中中保科 TWSE 官方分類為「其他業」。" },
+  { k:"生技", v:"--a-ins",   note:"3 檔，未達 4 檔。主因是台灣生技績優配息股大量集中在上櫃（太醫 4126、東洋 4105 配息與殖利率都合格，純因上櫃被剔除）。" },
+  { k:"航運", v:"--a-cash",  note:"僅 1 檔。2021 年航運大多頭，海運個股該年含息報酬率普遍在 +67%～+315%，全數超過 +50% 上限；且 2016～2020 產業低迷期，長榮、陽明、華航、長榮航等多有配息中斷。" },
+];
+const SCREEN = [
+  "市場別：僅限上市（TWSE），排除上櫃與興櫃。以證交所 STOCK_DAY 官方系統能否取得日成交資料為驗證。",
+  "配息連續性：2016～2025 十個年度每年皆配發現金股利，不得有任何一年中斷或為 0。",
+  "殖利率水準：十年平均現金殖利率落在 4%～6% 之間。",
+  "波動限制：2021～2025 每一年的含息報酬率都不低於 -30%，也不高於 +50%。",
+  "穩定度排序：同產業內以十年殖利率區間（最高－最低）由小到大優先。",
+  "含息報酬率定義：（當年底收盤價 ×（1＋股票股利÷10）＋ 當年現金股利）÷ 前一年底收盤價 － 1。",
+];
+const CAVEATS = [
+  "<b>產業檔數不平均，這是篩選的結果不是疏漏。</b>航運只有 1 檔、生技只有 3 檔。硬要湊到 3～4 檔就必須放寬標準，那會讓整份名單失去意義。",
+  "<b>以現價買進的殖利率，與十年平均不同。</b>16 檔現價殖利率介於 3.46%～5.77%，等權重約 4.6%；但中信金、遠傳、台汽電、全國、台灣大五檔的現價殖利率已低於 4%。",
+  "<b>殖利率口徑不完全一致。</b>電子、金融、生技組採「股利所屬年度」，傳產組採「發放年度」，嘉里大榮採「年收盤平均價」為分母，其數值不可與其他 15 檔直接並列。",
+  "<b>配息穩定不等於本金安全。</b>嘉里大榮十年配息從未中斷，但股價由 2020 年底 44.8 元跌到現價 28.6 元，五年跌約 36%。領到的息可能被本金的損失抵銷。",
+  "<b>這是事後回看的篩選。</b>條件是先知道 2016～2025 發生了什麼，再回頭挑出符合條件的股票，不具備預測能力。過去十年配息不中斷，不保證第十一年不中斷。",
+  "<b>小型股的流動性風險。</b>群益期、華票、美吾華、嘉里大榮的規模與成交量明顯小於大型權值股，大額買賣可能影響成交價。",
+];
+const NOT_INCLUDED = ["股利再投入（假設配息全部領出使用）","股利成長（以固定金額計算）","股價變動（只算配息現金流）",
+  "股利所得稅、二代健保補充保費、手續費與證交稅","整張交易的取整問題","配息中斷風險"];
+
+const divStats = s => {
+  const cs = s.years.map(y=>y.cash);
+  return { min:Math.min(...cs), avg:cs.reduce((a,b)=>a+b,0)/cs.length, last:cs[cs.length-1] };
+};
+
+let stockSector = "全部";
+let stockPick   = "2480";
+let portAmount  = 3000000;
+const portW = { "電子":25, "金融":25, "傳產":25, "生技":18.75, "航運":6.25 };
+
+/* ── ETF ── */
+const ETFS = [
+  { code:"0050", name:"元大台灣50", full:"元大台灣卓越50證券投資信託基金", kind:"原型股票指數 ETF（被動、完全複製）",
+    what:"追蹤臺灣市值最大的 50 家上市公司，買一檔等於一次持有整個台股大型股市場。",
+    rows:[
+      ["追蹤指數","富時臺灣證券交易所臺灣50指數"],
+      ["成立／上市","2003/06/25　／　2003/06/30"],
+      ["基金規模","23,791.79 億元（約 2.38 兆）　資料日 2026/09/03"],
+      ["受益人數","295.6 萬人（2026/05/29）"],
+      ["淨值／市價","106.66 ／ 106.80，折溢價 +0.13%（2026/09/02）"],
+      ["收益分配","半年配（每年 6/30、12/31 評價，1 月與 7 月除息）"],
+      ["近 12 個月配息率","1.51%（2026/09/03）"],
+      ["經理費","階梯式：1,000 億以下 0.15%／1,000–5,000 億 0.10%／5,000 億–1 兆 0.08%／逾 1 兆 0.05%；實際加權後約 0.0725%"],
+      ["保管費","1 兆以下 0.03%／逾 1 兆 0.025%"],
+    ],
+    conflict:"元大投信官網「基本資訊」頁仍顯示經理費 0.32%、保管費 0.035%，與階梯費率明顯不一致，疑為舊版頁面未更新。對客戶說明費用前，必須向公開說明書覆核，暫不採用 0.32%。",
+    perf:[["一個月","+3.31%","+4.82%"],["六個月","+31.73%","+32.56%"],["一年","+106.49%","+108.33%"],
+          ["三年","+262.25%","+264.49%"],["五年","+249.42%","+247.80%"],["十年","+736.03%","+735.97%"],
+          ["成立至今","+2,300.37%","+2,295.34%"]],
+    perfNote:"資料日 2026/08/31。以上為<b>累積報酬，非年化報酬</b>。近一年逾 100% 屬台股極端多頭期間的表現，不可作為預期報酬的錨點。五年低於三年是區間起點效應，非計算錯誤。風險指標（一年）：Alpha 0.1752、Beta 1.0078、R² 0.9961。",
+    div:[["2026/07/21",0.60],["2026/01/22",1.00],["2025/07/21",0.36],["2025/01/17",2.70],
+         ["2024/07/16",1.00],["2024/01/17",3.00],["2023/07/18",1.90],["2023/01/30",2.60],
+         ["2022/07/18",1.80],["2022/01/21",3.20],["2021/07/21",0.35],["2021/01/22",3.05]],
+    splitDate:"2025/06/18",
+    pros:["規模 2.38 兆、受益人 295.6 萬人，流動性與知名度都是台股 ETF 之最。",
+          "階梯式費率隨規模下降，實際加權後經理費約 0.0725%，明顯低於主動型基金。",
+          "半年配息，配息時間固定在 1 月與 7 月，現金流時點可預期。"],
+    risks:["完全跟隨大盤，市場下跌時淨值同步下跌，沒有防禦設計。",
+           "成分股集中於半導體與電子業，產業分散程度低於名稱給人的印象。",
+           "近 12 個月配息率 1.51%，不適合以配息現金流為主要目標。",
+           "官方 RR 風險等級本次未取得，需向元大官方文件確認。"],
+    fit:"適合討論長期、以「參與整體市場成長」為目標的資產累積，而不是每年領息。" },
+
+  { code:"00631L", name:"元大台灣50正2", full:"元大 ETF 傘型證券投資信託基金之台灣50單日正向2倍證券投資信託基金",
+    kind:"槓桿型 ETF（策略交易型）",
+    what:"以「臺灣50指數單日報酬的 2 倍」為追蹤目標。它追的是單日，不是一段期間。",
+    rows:[
+      ["追蹤指數","臺灣50指數<b>單日</b>正向 2 倍報酬"],
+      ["成立／上市","2014/10/23　／　2014/10/31"],
+      ["基金規模","2,616.32 億元（2026/09/02）"],
+      ["淨值／市價","35.85 ／ 35.93，折溢價 +0.22%（2026/09/02）"],
+      ["經理費／保管費","1.00% ／ 0.04%；總管理費用 1.16%（含 0.16% 非管理費用）"],
+      ["收益分配","無配息"],
+      ["風險等級","RR5（最高級）"],
+      ["年化標準差","62.11%（2026/09/02）"],
+      ["交易資格","僅符合證交所訂適格條件之投資人始得交易"],
+    ],
+    warning:"本基金為策略交易型產品且投資具有槓桿操作風險，故本基金不適合長期持有",
+    perf:[["一個月","+7.19%","+7.16%"],["六個月","+47.05%","+47.21%"],["一年","+199.70%","+199.74%"],
+          ["三年","+511.44%","+510.79%"],["五年","+511.21%","+511.50%"],["十年","+3,205.06%","+3,194.04%"],
+          ["成立至今","+3,815.35%","+3,851.20%"]],
+    perfNote:"資料日 2026/08/27，累積報酬非年化。這段期間台股處於多頭，槓桿在單一方向的行情中會放大結果；同樣的機制在下跌與盤整時會反向作用。",
+    pros:["多頭趨勢明確且持有期間短時，單日 2 倍的槓桿會放大報酬。",
+          "以 ETF 形式取得槓桿，不需自行融資或維持保證金。"],
+    risks:["<b>只追蹤「單日」2 倍，不是「期間」2 倍。</b>持有超過一天後，實際報酬會因每日重設槓桿而偏離 2 倍 —— 這是數學上的必然，不是管理失誤。",
+           "<b>波動耗損</b>：指數上下震盪但最後回到原點時，槓桿型商品的淨值仍會下跌。",
+           "年化標準差 62.11%，遠高於原型 ETF，帳面腰斬是可能發生的情境。",
+           "總管理費用 1.16%，長期持有的成本拖累明顯高於 0050。",
+           "無配息，不適合以現金流為目標的規劃。"],
+    fit:"屬於短期策略交易工具，與長期理財規劃的目標不同。若客戶提到它，重點應放在說明「單日 2 倍」的機制與波動耗損，而不是比較歷史報酬。" },
+];
+let etfPick = "0050";
+
+/* ── tabs ── */
+const TABS = [["ins","保險 · 4 檔"],["stock","股票 · 16 檔"],["etf","ETF · 2 檔"]];
+let activeTab = "ins";
+$("toolTabs").innerHTML = TABS.map(([k,l])=>
+  `<button class="tab" type="button" role="tab" aria-selected="${k===activeTab}" data-tab="${k}">${l}</button>`).join("");
+$("toolTabs").addEventListener("click", e=>{
+  const b = e.target.closest(".tab"); if(!b) return;
+  activeTab = b.dataset.tab;
+  $("toolTabs").querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", String(t.dataset.tab===activeTab)));
+  renderTools();
+});
+
+function renderTools(){
+  if (activeTab === "ins") renderInsurance();
+  else if (activeTab === "stock") renderStocks();
+  else renderETF();
+}
+
+function renderInsurance(){
+  $("toolBody").innerHTML = INSURANCE.map(p=>`
+    <article class="prod">
+      <h4>${p.name}</h4>
+      <div class="meta">${p.code}　·　${p.type}　·　${p.cur}</div>
+      <p style="margin:0 0 12px;font-size:13px">${p.what}</p>
+      <dl class="dl">${p.rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      <div class="prodhd">風險與限制</div>
+      <ul class="risklist">${p.risks.map(r=>`<li>${r}</li>`).join("")}</ul>
+      <div class="note" style="margin-top:12px"><b>適合討論的需求：</b>${p.fit}</div>
+    </article>`).join("") +
+    `<p class="srcline">資料來源：使用者提供之保單條款樣張與商品簡介／DM 節錄，資料日期依提供當時。實際給付、費用與條件請以正式保單條款為準。</p>`;
+}
+
+/* ═══ 股票 ═══ */
+function renderStocks(){
+  const list = STOCKDATA.filter(s => stockSector==="全部" || s.sector===stockSector);
+  $("toolBody").innerHTML = `
+    <div class="brief">
+      <h4>這份名單回答什麼問題</h4>
+      <p>「如果不想積極操作，只靠資產配置領配息，可以放什麼、每年大概領多少。」它<b>不回答</b>「總報酬最高的組合是什麼」，也不回答「什麼時候該買賣」。</p>
+      <p class="metaline">母體：全體台灣上市（TWSE）公司　｜　五大產業各取 3～4 檔　｜　目標配息 4～6%　｜　資料日 2026/09/02、股價基準 2026/09/01 收盤　｜　16 檔入選</p>
+      <div class="screengrid">${SCREEN.map((s,i)=>`<div class="screen"><b>${String(i+1).padStart(2,"0")}</b><span>${s}</span></div>`).join("")}</div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:26px">十年逐年現金殖利率 <small>線愈平＝配息愈可預期</small></h3>
+    <div class="chipsrow" id="secFilter">${["全部",...SECTORS.map(s=>s.k)].map(k=>
+      `<button class="chip" type="button" aria-pressed="${k===stockSector}" data-s="${k}">${k}</button>`).join("")}</div>
+    <figure>
+      <div class="chartwrap" id="yieldWrap">
+        <svg id="yieldChart" viewBox="0 0 760 300" role="img" aria-label="十六檔個股十年現金殖利率折線圖"></svg>
+        <div class="tip" id="yieldTip"></div>
+      </div>
+      <figcaption>單位 %。灰色橫帶為目標區間 4～6%。點下方表格的任一列可highlight該檔。殖利率口徑各組不同（見下方第三點），橫向比較請留意。</figcaption>
+    </figure>
+
+    <h3 class="subhead" style="margin-top:26px">16 檔一覽 <small>點列查看個股明細</small></h3>
+    <div class="tablewrap">
+      <table id="stockTable">
+        <thead><tr><th>代號</th><th>名稱</th><th>細產業</th><th class="num">9/1 收盤</th>
+          <th class="num">現價殖利率</th><th class="num">十年平均</th><th class="num">十年區間</th></tr></thead>
+        <tbody>${list.map(s=>{
+          const st = parseStat(s.stat);
+          return `<tr data-code="${s.code}" class="${s.code===stockPick?"hit":""}">
+            <td>${s.code}</td><td><b>${s.name}</b></td><td>${s.sub||""}</td>
+            <td class="num">${s.price}</td>
+            <td class="num" style="color:${s.cyield<0.04?"var(--bad)":"var(--ink)"}">${(s.cyield*100).toFixed(2)}%</td>
+            <td class="num">${st.avg}%</td><td class="num">${st.range}</td></tr>`;
+        }).join("")}</tbody>
+      </table>
+    </div>
+    <p class="srcline">現價殖利率＝2025 年現金股利 ÷ 2026/09/01 收盤。紅字代表已低於 4% 目標下限。十年區間單位為百分點。</p>
+
+    <div id="stockDetail"></div>
+
+    <h3 class="subhead" style="margin-top:30px">配置試算 <small>只算配息現金流，不含股價漲跌</small></h3>
+    <div class="calcbox">
+      <div class="grid g3" style="margin-bottom:6px">
+        <div class="field"><label for="p_amt">投入總金額 NT$</label>
+          <input id="p_amt" type="number" min="0" step="100000" value="${portAmount}" /></div>
+      </div>
+      <div class="sliders" id="sliders">${SECTORS.map(s=>{
+        const n = STOCKDATA.filter(x=>x.sector===s.k).length;
+        return `<div class="slider">
+          <label for="w_${s.k}"><i style="background:var(${s.v})"></i>${s.k}<em>${n} 檔</em>
+            <b id="wv_${s.k}">${portW[s.k].toFixed(1)}%</b></label>
+          <input id="w_${s.k}" type="range" min="0" max="50" step="1.25" value="${portW[s.k]}" data-s="${s.k}" />
+        </div>`; }).join("")}</div>
+      <div class="stats" style="margin-top:18px" id="portStats"></div>
+      <div class="tablewrap"><table id="portTable" style="min-width:520px">
+        <thead><tr><th>產業</th><th class="num">檔數</th><th class="num">配置比重</th><th class="num">投入金額</th><th class="num">年配息（2025 實配）</th></tr></thead>
+        <tbody></tbody></table></div>
+      <div class="note warn" id="portWarn"></div>
+      <div class="note"><b>這份試算沒有計入：</b>${NOT_INCLUDED.join("、")}。實際入袋金額會低於本表。</div>
+    </div>
+
+    <h3 class="subhead" style="margin-top:30px">使用這份組合前必須知道的六件事</h3>
+    <ol class="caveats">${CAVEATS.map(c=>`<li>${c}</li>`).join("")}</ol>
+    <p class="srcline">資料來源：年底收盤價與最新股價為臺灣證券交易所 STOCK_DAY 官方日成交資料；現金／股票股利以玩股網除權息紀錄與 Yahoo 股市股利政策頁交叉比對；十年逐年殖利率另以財報狗交叉比對。所有報酬率皆由原始股價與股利計算。<br />
+    本組合 16 檔等權重的加權買進殖利率約 4.6%，落在統一規範的穩健型（4%）與積極型（6%）之間；但 4.6% 是<b>配息</b>而非<b>總報酬</b>，股價下跌時總報酬會低於此數，對客戶說明時務必分開講。</p>`;
+
+  $("secFilter").addEventListener("click", e=>{
+    const b=e.target.closest(".chip"); if(!b) return;
+    stockSector=b.dataset.s; renderStocks();
+  });
+  $("stockTable").addEventListener("click", e=>{
+    const tr=e.target.closest("tr[data-code]"); if(!tr) return;
+    stockPick=tr.dataset.code;
+    $("stockTable").querySelectorAll("tr[data-code]").forEach(x=>x.classList.toggle("hit", x.dataset.code===stockPick));
+    renderStockDetail(); drawYield();
+  });
+  $("p_amt").addEventListener("input", ()=>{ portAmount=Number($("p_amt").value)||0; renderPort(); });
+  $("sliders").addEventListener("input", e=>{
+    const r=e.target.closest('input[type="range"]'); if(!r) return;
+    portW[r.dataset.s]=Number(r.value);
+    $("wv_"+r.dataset.s).textContent = Number(r.value).toFixed(1)+"%";
+    renderPort();
+  });
+  renderStockDetail(); drawYield(); renderPort();
+}
+function parseStat(s){
+  const m = String(s||"").match(/最低\s*([\d.]+)%\s*最高\s*([\d.]+)%\s*區間\s*([\d.]+)\s*個百分點\s*十年平均\s*([\d.]+)%/);
+  return m ? { min:m[1], max:m[2], range:m[3], avg:m[4] } : { min:"—",max:"—",range:"—",avg:"—" };
+}
+function renderStockDetail(){
+  const s = STOCKDATA.find(x=>x.code===stockPick) || STOCKDATA[0];
+  const st = parseStat(s.stat), ds = divStats(s);
+  const sec = SECTORS.find(x=>x.k===s.sector);
+  const maxTr = Math.max(...s.years.map(y=>Math.abs(y.tr)));
+  $("stockDetail").innerHTML = `
+    <article class="prod" style="margin-top:18px">
+      <h4>${s.code}　${s.name}</h4>
+      <div class="meta">${s.sub}　·　${s.sector}　·　上市（TWSE）　·　9/1 收盤 ${s.price}</div>
+      <p style="margin:0 0 14px;font-size:13px">${s.desc}</p>
+
+      <div class="prodhd">逐年數據</div>
+      <div class="tablewrap"><table style="min-width:520px">
+        <thead><tr><th>年度</th><th class="num">年底收盤</th><th class="num">現金股利</th><th class="num">含息報酬率</th><th>報酬走勢</th></tr></thead>
+        <tbody>
+          <tr><td>${s.base?s.base.year:"2020（基期）"}</td><td class="num">${s.base?s.base.close:"—"}</td><td class="num">—</td><td class="num">—</td><td></td></tr>
+          ${s.years.map(y=>{
+            const w = Math.abs(y.tr)/maxTr*50, pos = y.tr>=0;
+            return `<tr><td>${y.y}</td><td class="num">${y.close}</td><td class="num">${y.cash}</td>
+              <td class="num" style="color:${pos?"var(--ok)":"var(--bad)"}">${(y.tr*100).toFixed(2)}%</td>
+              <td style="text-align:left"><span class="tr-track"><i style="left:50%;width:${pos?w:0}%;background:var(--ok);${pos?"":"display:none"}"></i><i style="right:50%;width:${pos?0:w}%;background:var(--bad);${pos?"display:none":""}"></i></span></td></tr>`;
+          }).join("")}
+        </tbody></table></div>
+
+      <div class="prodhd" style="margin-top:16px">十年逐年現金殖利率（%）</div>
+      <div class="tablewrap"><table style="min-width:520px">
+        <thead><tr>${[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025].map(y=>`<th class="num">${y}</th>`).join("")}</tr></thead>
+        <tbody><tr>${s.y10.map(v=>`<td class="num">${v}</td>`).join("")}</tr></tbody></table></div>
+      <p class="srcline">最低 ${st.min}%　最高 ${st.max}%　區間 ${st.range} 個百分點　十年平均 ${st.avg}%　｜　現價殖利率 ${(s.cyield*100).toFixed(2)}%</p>
+      <p class="srcline">近五年現金股利：最低 ${ds.min} 元　平均 ${ds.avg.toFixed(2)} 元　2025 實配 ${ds.last} 元</p>
+
+      <div class="prodhd" style="margin-top:16px">可能優點</div>
+      <ul class="risklist" style="color:var(--ink)">${s.pros.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <div class="prodhd" style="margin-top:14px">風險與限制</div>
+      <ul class="risklist">${s.risks.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <div class="note" style="margin-top:12px"><b>所屬產業的組合說明：</b>${sec?sec.note:""}</div>
+    </article>`;
+}
+function drawYield(){
+  const svg = $("yieldChart"); if(!svg) return;
+  const W=760,H=300,P={t:16,r:14,b:28,l:40};
+  const iw=W-P.l-P.r, ih=H-P.t-P.b;
+  const YRS=[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+  const lo=1.5, hi=7.6;
+  const x=i=>P.l+i/(YRS.length-1)*iw;
+  const y=v=>P.t+ih-((v-lo)/(hi-lo))*ih;
+  const edge=cssv("--edge"), faint=cssv("--ink-faint"), ink=cssv("--ink");
+  let g="";
+  for(let v=2; v<=7; v++){
+    g+=`<line x1="${P.l}" y1="${y(v)}" x2="${W-P.r}" y2="${y(v)}" stroke="${edge}" stroke-width="1"/>`
+     + `<text x="${P.l-8}" y="${y(v)+4}" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="${faint}">${v}</text>`;
+  }
+  const band=`<rect x="${P.l}" y="${y(6)}" width="${iw}" height="${y(4)-y(6)}" fill="${ink}" opacity=".07"/>`;
+  const xl=YRS.map((yr,i)=>`<text x="${x(i)}" y="${H-9}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="${faint}">${String(yr).slice(2)}</text>`).join("");
+  const shown = STOCKDATA.filter(s => stockSector==="全部" || s.sector===stockSector);
+  const lines = shown.map(s=>{
+    const sec=SECTORS.find(x=>x.k===s.sector);
+    const on = s.code===stockPick;
+    const d = s.y10.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    return `<path d="${d}" fill="none" stroke="var(${sec.v})" stroke-width="${on?2.6:1.2}"
+      opacity="${on?1:(stockPick&&shown.some(z=>z.code===stockPick)?.32:.75)}" stroke-linejoin="round" data-code="${s.code}"><title>${s.name}</title></path>`;
+  }).join("");
+  const pick = shown.find(s=>s.code===stockPick);
+  const dots = pick ? pick.y10.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="var(${SECTORS.find(z=>z.k===pick.sector).v})"/>`).join("")
+    + `<text x="${x(9)-4}" y="${y(pick.y10[9])-10}" text-anchor="end" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="${ink}">${pick.name}</text>` : "";
+  svg.innerHTML = `${band}${g}${lines}${dots}
+    <line x1="${P.l}" y1="${P.t}" x2="${P.l}" y2="${H-P.b}" stroke="${edge}"/>${xl}`;
+  const legend = SECTORS.map(s=>`<span><i style="background:var(${s.v})"></i>${s.k}</span>`).join("");
+  if(!$("yieldWrap").nextElementSibling || !$("yieldWrap").parentElement.querySelector(".legend")){
+    const div=document.createElement("div"); div.className="legend"; div.innerHTML=legend;
+    $("yieldWrap").parentElement.insertBefore(div, $("yieldWrap").nextSibling);
+  }
+}
+function renderPort(){
+  const total = SECTORS.reduce((a,s)=>a+portW[s.k],0) || 1;
+  let sumMin=0,sumAvg=0,sumLast=0,rows="";
+  SECTORS.forEach(s=>{
+    const w = portW[s.k]/total;
+    const picks = STOCKDATA.filter(x=>x.sector===s.k);
+    const amt = portAmount*w;
+    let last=0;
+    picks.forEach(p=>{
+      const per = amt/picks.length, shares = p.price>0 ? per/p.price : 0, ds = divStats(p);
+      sumMin += shares*ds.min; sumAvg += shares*ds.avg; last += shares*ds.last;
+    });
+    sumLast += last;
+    rows += `<tr><td><span class="dotk" style="background:var(${s.v})"></span>${s.k}</td><td class="num">${picks.length}</td>
+      <td class="num">${(w*100).toFixed(1)}%</td><td class="num">${nt(amt)}</td><td class="num">${nt(last)}</td></tr>`;
+  });
+  $("portTable").querySelector("tbody").innerHTML = rows;
+  const yieldPct = portAmount>0 ? sumLast/portAmount*100 : 0;
+  $("portStats").innerHTML = `
+    <div class="stat hero-stat"><div class="k">每年可領配息（2025 實配）</div><div class="v num">${nt(sumLast)}</div><div class="s">加權買進殖利率 ${yieldPct.toFixed(2)}%</div></div>
+    <div class="stat"><div class="k">平均每月現金流</div><div class="v num">${nt(sumLast/12)}</div><div class="s">配息全部領出，不再投入</div></div>
+    <div class="stat"><div class="k">若配息回到五年最低</div><div class="v num">${nt(sumMin)}</div><div class="s">與 2025 情境差 ${nt(sumLast-sumMin)}</div></div>
+    <div class="stat"><div class="k">依五年平均股利</div><div class="v num">${nt(sumAvg)}</div><div class="s">三情境皆為實際配發過的金額</div></div>`;
+  const eq = SECTORS.every(s=>Math.abs(portW[s.k]/total - STOCKDATA.filter(x=>x.sector===s.k).length/16) < 0.001);
+  $("portWarn").innerHTML = eq
+    ? "目前為 16 檔等權重（各 6.25%）。<b>航運僅 1 檔、生技僅 3 檔，等權重會使這兩個產業的單一個股權重相對過高。</b>建議依可選標的數調降這兩類的總權重。"
+    : `目前配置：${SECTORS.map(s=>`${s.k} ${(portW[s.k]/total*100).toFixed(1)}%`).join("　")}。<b>比重合計已自動正規化為 100%。</b>調整時請留意單一產業與單一個股的權重上限。`;
+}
+
+/* ═══ ETF ═══ */
+function renderETF(){
+  const e = ETFS.find(x=>x.code===etfPick);
+  const maxDiv = Math.max(...e.div ? e.div.map(d=>adjDiv(d)) : [1]);
+  $("toolBody").innerHTML = `
+    <div class="chipsrow" id="etfPickRow">${ETFS.map(x=>
+      `<button class="chip" type="button" aria-pressed="${x.code===etfPick}" data-c="${x.code}">${x.code}　${x.name}</button>`).join("")}</div>
+
+    <div class="note warn" style="margin-top:0">0050 是原型指數 ETF，00631L 是槓桿型策略交易工具。<b>兩者不是同類商品，歷史報酬不宜並列比較。</b></div>
+
+    <article class="prod" style="margin-top:16px">
+      <h4>${e.code}　${e.name}</h4>
+      <div class="meta">${e.full}　·　${e.kind}</div>
+      <p style="margin:0 0 14px;font-size:13px">${e.what}</p>
+      <dl class="dl">${e.rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+
+      ${e.warning ? `<div class="note warn" style="margin-top:14px"><b>公開說明書警語（原文）：</b>「${e.warning}」</div>` : ""}
+      ${e.conflict ? `<div class="note warn" style="margin-top:14px"><b>⚠ 資料矛盾，尚未定稿：</b>${e.conflict}</div>` : ""}
+
+      ${e.div ? `
+      <div class="prodhd" style="margin-top:18px">配息紀錄（已還原分割）</div>
+      <div class="divchart">${e.div.slice().reverse().map(d=>{
+        const v = adjDiv(d), raw = d[1], split = d[0] < e.splitDate;
+        return `<div class="divbar" title="${d[0]}　原始 ${raw} 元${split?"（分割前，已 ÷4 還原）":""}">
+          <i style="height:${v/maxDiv*100}%;background:var(${split?"--a-bond":"--a-ins"})"></i>
+          <span class="dv">${v.toFixed(2)}</span><span class="dl2">${d[0].slice(2,7)}</span></div>`;
+      }).join("")}</div>
+      <p class="srcline"><b>0050 於 ${e.splitDate} 執行 1 拆 4 分割。</b>圖中分割前的配息（藍色）已除以 4 還原為同一基準，括號內為原始金額；若不還原直接畫圖會嚴重誤導。資料來源：ETF 資訊網。</p>` : ""}
+
+      <div class="prodhd" style="margin-top:18px">歷史績效（累積報酬）</div>
+      <div class="tablewrap"><table style="min-width:420px">
+        <thead><tr><th>期間</th><th class="num">市價報酬</th><th class="num">淨值報酬</th></tr></thead>
+        <tbody>${e.perf.map(([k,a,b])=>`<tr><td>${k}</td><td class="num">${a}</td><td class="num">${b}</td></tr>`).join("")}</tbody>
+      </table></div>
+      <p class="srcline">${e.perfNote}</p>
+
+      <div class="prodhd" style="margin-top:16px">可能優點</div>
+      <ul class="risklist" style="color:var(--ink)">${e.pros.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <div class="prodhd" style="margin-top:14px">風險與限制</div>
+      <ul class="risklist">${e.risks.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <div class="note" style="margin-top:12px"><b>適合討論的需求：</b>${e.fit}</div>
+    </article>
+
+    <div class="brief" style="margin-top:18px">
+      <h4>目前仍缺、尚未補值的資料</h4>
+      <ul class="risklist">
+        <li>0050 的年化標準差與最大回檔：本次未取得可具名來源。</li>
+        <li>兩檔的前十大成分股與權重。</li>
+        <li>0050 分割還原後的長期價格序列（五年價格走勢圖尚無法正確繪製）。</li>
+        <li>00631L 的每日追蹤誤差統計與年度別報酬 —— 這是實證「長期偏離 2 倍」最有力的素材。</li>
+        <li>兩檔的公開說明書費用條款，用以解決 0050 經理費 0.32% 與 0.0725% 的矛盾。</li>
+      </ul>
+    </div>
+    <p class="srcline">資料整理日 2026/09/03。來源：元大投信官網、ETF 資訊網、MoneyDJ、玩股網、鉅亨網 2026/06/01、經濟日報。過去績效不代表未來表現。</p>`;
+
+  $("etfPickRow").addEventListener("click", ev=>{
+    const b=ev.target.closest(".chip"); if(!b) return;
+    etfPick=b.dataset.c; renderETF();
+  });
+}
+function adjDiv(d){ return d[0] < "2025/06/18" ? d[1]/4 : d[1]; }
+
+/* ═══════════ 07 試算 ═══════════ */
+function schedule(){
+  const rate = val("f_rate"), years = Math.max(1, Math.min(40, val("f_years")));
+  const start = val("f_start"), contrib = val("f_contrib"), age = val("f_age");
+  const r = rate/100/12, g12 = Math.pow(1+r,12);
+  const due = r === 0 ? 12 : ((g12-1)/r)*(1+r);
+  const rows = []; let bal = start;
+  for (let i=0;i<years;i++){
+    const s = bal, e = s*g12 + (contrib/12)*due;
+    rows.push({ y:i, age:age+i, start:s, contrib, gain:e-s-contrib, end:e });
+    bal = e;
+  }
+  return rows;
+}
+function renderPlan(){
+  const t = currentTier();
+  $("rateHint").textContent = t
+    ? `${tierByRate(val("f_rate")).name}（規範分界 3／5／8）`
+    : "尚未判定等級，可直接輸入";
+
+  const rows = schedule(), goal = val("f_goal")*10000;
+  const hit = rows.findIndex(r => r.end >= goal);
+  const last = rows[rows.length-1];
+  const principal = val("f_start") + val("f_contrib")*rows.length;
+
+  if (hit >= 0){
+    $("mileK").textContent = "預估達成目標";
+    $("mileV").textContent = rows[hit].age + " 歲";
+    $("mileS").textContent = `第 ${hit+1} 年 · ${nt(rows[hit].end)}`;
+  } else {
+    $("mileK").textContent = "目標未達成";
+    $("mileV").textContent = wan(goal - last.end) + " 缺口";
+    $("mileS").textContent = `${rows.length} 年內未達 ${wan(goal)}`;
+  }
+  $("endV").textContent = nt(last.end);
+  $("endS").textContent = `第 ${rows.length} 年末 · ${last.age} 歲`;
+  $("pcpV").textContent = nt(principal);
+  $("gainV").textContent = nt(last.end - principal);
+
+  $("cashflow").querySelector("tbody").innerHTML = rows.map((r,i)=>`
+    <tr class="${i===hit?"hit":""}">
+      <td>${r.y}</td><td>${r.age}</td><td>${nt(r.start)}</td>
+      <td>${nt(r.contrib)}</td><td>${nt(r.gain)}</td>
+      <td>${nt(r.end)}${i===hit?'<span class="tag">達成</span>':""}</td>
+    </tr>`).join("");
+
+  drawGrowth(rows, goal);
+  drawDonut();
+  renderSummary(rows, goal, hit);
+}
+function drawGrowth(rows, goal){
+  const svg = $("growth"), W = 720, H = 260, P = { t:18, r:16, b:32, l:62 };
+  const iw = W-P.l-P.r, ih = H-P.t-P.b;
+  const maxY = Math.max(goal, ...rows.map(r=>r.end)) * 1.08 || 1;
+  const x = i => P.l + (rows.length<=1 ? iw/2 : i/(rows.length-1)*iw);
+  const y = v => P.t + ih - (v/maxY)*ih;
+
+  const ink=cssv("--stamp"), soft=cssv("--ink-soft"), faint=cssv("--ink-faint"),
+        edge=cssv("--edge"), stamp=cssv("--brass"), brass=cssv("--brass");
+
+  const ticks = 4, gl = [];
+  for (let i=0;i<=ticks;i++){
+    const v = maxY/ticks*i, yy = y(v);
+    gl.push(`<line x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}" stroke="${edge}" stroke-width="1"/>`);
+    gl.push(`<text x="${P.l-9}" y="${yy+4}" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="${faint}">${v>=10000?Math.round(v/10000)+"萬":Math.round(v)}</text>`);
+  }
+  const step = Math.max(1, Math.ceil(rows.length/8));
+  const xl = rows.filter((_,i)=>i%step===0 || i===rows.length-1).map(r=>
+    `<text x="${x(r.y)}" y="${H-10}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="${faint}">${r.age}</text>`).join("");
+
+  const line = rows.map((r,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(r.end).toFixed(1)}`).join(" ");
+  const area = `${line} L${x(rows.length-1).toFixed(1)},${y(0)} L${x(0).toFixed(1)},${y(0)} Z`;
+  const gy = y(goal);
+  const endI = rows.length-1;
+
+  svg.innerHTML = `
+    <title>資產成長曲線</title>
+    <defs><linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${brass}" stop-opacity=".42"/>
+      <stop offset="100%" stop-color="${brass}" stop-opacity=".03"/>
+    </linearGradient></defs>
+    ${gl.join("")}
+    <path d="${area}" fill="url(#gfill)"/>
+    <path d="${line}" fill="none" stroke="${ink}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    ${gy>P.t&&gy<H-P.b ? `<line x1="${P.l}" y1="${gy}" x2="${W-P.r}" y2="${gy}" stroke="${stamp}" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="${W-P.r}" y="${gy-7}" text-anchor="end" font-family="JetBrains Mono" font-size="10.5" fill="${stamp}">目標 ${wan(goal)}</text>` : ""}
+    <line x1="${P.l}" y1="${P.t}" x2="${P.l}" y2="${H-P.b}" stroke="${edge}"/>
+    ${xl}
+    <circle cx="${x(endI)}" cy="${y(rows[endI].end)}" r="4.5" fill="${ink}" stroke="${cssv("--card")}" stroke-width="2"/>
+    <g id="ghover" opacity="0">
+      <line id="gline" y1="${P.t}" y2="${H-P.b}" stroke="${soft}" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle id="gdot" r="5" fill="${stamp}" stroke="${cssv("--card")}" stroke-width="2"/>
+    </g>
+    <rect x="${P.l}" y="${P.t}" width="${iw}" height="${ih}" fill="transparent" id="ghit"/>`;
+
+  const tip = $("growthTip");
+  const hover = svg.querySelector("#ghover"), gline = svg.querySelector("#gline"), gdot = svg.querySelector("#gdot");
+  svg.querySelector("#ghit").addEventListener("mousemove", ev=>{
+    const b = svg.getBoundingClientRect(), sx = (ev.clientX-b.left)/b.width*W;
+    let i = Math.round((sx-P.l)/iw*(rows.length-1));
+    i = Math.max(0, Math.min(rows.length-1, i));
+    const r = rows[i];
+    hover.setAttribute("opacity","1");
+    gline.setAttribute("x1", x(i)); gline.setAttribute("x2", x(i));
+    gdot.setAttribute("cx", x(i)); gdot.setAttribute("cy", y(r.end));
+    tip.style.opacity = "1";
+    tip.innerHTML = `${r.age} 歲（第 ${r.y+1} 年）<br>期末 ${nt(r.end)}<br>當年收益 ${nt(r.gain)}`;
+    const px = x(i)/W*b.width, py = y(r.end)/H*b.height;
+    tip.style.left = Math.min(Math.max(px-tip.offsetWidth/2, 4), b.width-tip.offsetWidth-4) + "px";
+    tip.style.top  = Math.max(py-tip.offsetHeight-12, 4) + "px";
+  });
+  svg.querySelector("#ghit").addEventListener("mouseleave", ()=>{
+    hover.setAttribute("opacity","0"); tip.style.opacity = "0";
+  });
+}
+function drawDonut(){
+  const t = currentTier() || tierByRate(val("f_rate"));
+  const data = ASSETS.map(a=>({ ...a, p:t.alloc[a.k] })).filter(d=>d.p>0);
+  const svg = $("donut"), cx=80, cy=80, R=64, r0=40, gap=0.022;
+  let a0 = -Math.PI/2, paths = "";
+  data.forEach(d=>{
+    const sweep = d.p/100*Math.PI*2, a1 = a0 + sweep - gap;
+    const large = (a1-a0) > Math.PI ? 1 : 0;
+    const p = (rad,ang)=>[cx+rad*Math.cos(ang), cy+rad*Math.sin(ang)];
+    const [x1,y1]=p(R,a0),[x2,y2]=p(R,a1),[x3,y3]=p(r0,a1),[x4,y4]=p(r0,a0);
+    paths += `<path d="M${x1} ${y1} A${R} ${R} 0 ${large} 1 ${x2} ${y2} L${x3} ${y3} A${r0} ${r0} 0 ${large} 0 ${x4} ${y4} Z"
+      style="fill:var(${d.v})" data-l="${d.label}" data-p="${d.p}"><title>${d.label} ${d.p}%</title></path>`;
+    a0 += sweep;
+  });
+  svg.innerHTML = `<title>資產配置比例</title>${paths}
+    <text x="${cx}" y="${cy-2}" text-anchor="middle" font-family="JetBrains Mono" font-size="18" font-weight="700" fill="${cssv("--ink")}">${t.rate}%</text>
+    <text x="${cx}" y="${cy+14}" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="${cssv("--ink-faint")}">${t.name}</text>`;
+
+  const tip = $("donutTip");
+  svg.querySelectorAll("path").forEach(p=>{
+    p.addEventListener("mousemove", ev=>{
+      const b = svg.getBoundingClientRect();
+      tip.style.opacity="1"; tip.textContent = `${p.dataset.l} ${p.dataset.p}%`;
+      tip.style.left = (ev.clientX-b.left-tip.offsetWidth/2) + "px";
+      tip.style.top  = (ev.clientY-b.top-tip.offsetHeight-10) + "px";
+    });
+    p.addEventListener("mouseleave", ()=>{ tip.style.opacity="0"; });
+  });
+
+  $("donutLegend").innerHTML = ASSETS.map(a=>
+    `<span><i style="background:var(${a.v})"></i>${a.label}<b style="margin-left:auto">${t.alloc[a.k]}%</b></span>`).join("");
+}
+function renderSummary(rows, goal, hit){
+  const d = derived(), t = currentTier(), avg = answeredAvg();
+  const cur = tierByRate(val("f_rate"));
+  const g = gapModel();
+  const lines = [
+    ["報告對象", esc(txt("f_name") || "—") + `　${$("f_sex").value}　${$("f_marry").value}` ],
+    ["起始年齡", val("f_age") + " 歲" + (val("f_dep")>0 ? `　扶養 ${val("f_dep")} 人` : "")],
+    ["現有資產", nt(val("f_asset")) + (val("f_debt")>0 ? "（負債 " + nt(val("f_debt")) + "）" : "")],
+    ["每年可投入", nt(val("f_contrib"))],
+    ["財務體質", `儲蓄率 ${pct1(d.savingRate*100)}　緊急預備金 ${d.emMonths.toFixed(1)} 個月　負債比 ${pct1(d.debtRatio*100)}`],
+    ["目標金額", nt(goal) + "（" + esc(txt("f_goalname")||"主要目標") + "）" + (txt("f_goal2") ? `；次要：${esc(txt("f_goal2"))}` : "")],
+    ["缺口結構", g.needReturn>0 ? `需靠投資報酬補上 ${nt(g.needReturn)}（占目標 ${pct1(g.needReturn/g.goal*100)}）` : "純靠現有資金與年投入即可達成"],
+    ["風險等級", t ? `${t.name}${avg!==null&&!manualTier?`（問卷平均 ${avg.toFixed(2)} 分）`:"（手動指定）"}` : "尚未判定"],
+    ["自評等級", $("f_self").value ? TIERS[tierIndex($("f_self").value)].name : "尚未自評"],
+    ["偏好商品", prefer.size ? [...prefer].join("、") : "未指定"],
+    ["假設報酬率", val("f_rate") + "%　→　" + cur.name + "（依統一規範 2/4/6/10% 四點）"],
+    ["試算結果", hit>=0 ? `預估第 ${hit+1} 年（${rows[hit].age} 歲）達成目標` : `${rows.length} 年內未達成，期末 ${nt(rows[rows.length-1].end)}`],
+    ["資產配置", "暫定示意，尚未定案"],
+    ["填寫人／顧問", esc(txt("f_advisor") || "—")],
+  ];
+  $("summary").querySelector("tbody").innerHTML = lines.map(([k,v])=>
+    `<tr><td style="color:var(--ink-soft);width:120px">${k}</td><td style="text-align:left;white-space:normal">${v}</td></tr>`).join("");
+}
+
+/* ═══════════ 03 tier 卡片 ═══════════ */
+function renderTier(){
+  const t = currentTier(), avg = answeredAvg();
+  document.querySelectorAll(".tierchip").forEach(c=>
+    c.setAttribute("aria-pressed", String(!!t && c.dataset.tier===t.key)));
+  if (!t){
+    $("tierName").textContent = "未作答";
+    $("tierRate").textContent = "—";
+    $("tierDesc").textContent = "完成上面五題後，這裡會顯示你的風險等級與對應的參考報酬率。你也可以直接點下面四格手動指定。";
+  } else {
+    $("tierName").textContent = t.name;
+    $("tierRate").textContent = t.rate + "%";
+    const src = manualTier ? "手動指定" : `問卷平均 ${avg.toFixed(2)} 分 / 4`;
+    $("tierDesc").innerHTML = `${t.desc}<br /><span style="font-family:var(--mono);font-size:12px;color:var(--ink-faint)">${src} → 參考報酬率 ${t.rate}%</span>`;
+  }
+  renderConsistency();
+}
+
+/* ═══════════ 總繪製 ═══════════ */
+function renderAll(){
+  renderFillState(); renderTier(); renderFinance();
+  renderGapBar(); renderTimeline(); renderFlags(); renderPlan();
+}
+syncDerived();
+renderTools();
+renderAll();
+addEventListener("resize", ()=>{ renderPlan(); });
+</script>
+</body>
+</html>
